@@ -1,2 +1,17 @@
 == Alpha
 
+mkdir <application_name>
+git init
+touch README
+git commit -a -m 'initial commit'
+# git remote add origin path/to/origin
+# git push -u origin master
+git remote add alpha git@github.com:activefx/alpha.git
+git checkout -b alpha
+git pull alpha master
+git checkout master
+git merge alpha
+rake development:install
+git commit -a -m 'installed alpha'
+# git push origin master
+
