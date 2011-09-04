@@ -8,8 +8,8 @@ gem 'rails', '3.1.0'
 gem 'mongoid', '~> 2.2'
 gem 'bson_ext', '~> 1.3'
 
-# To Add:
-# gem 'devise'
+
+# TODO gem 'devise'
 # gem 'mongoid_spatial'
 # gem 'rails-backbone'
 # gem 'haml'
