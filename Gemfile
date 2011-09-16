@@ -8,11 +8,13 @@ gem 'rails', '3.1.0'
 gem 'mongoid', '~> 2.2'
 gem 'bson_ext', '~> 1.3'
 
+gem 'devise'
 
 # TODO gem 'devise'
 # gem 'mongoid_spatial'
 # gem 'rails-backbone'
-# gem 'haml'
+gem 'haml'
+gem 'simple_form'
 # gem 'compass'
 # gem 'jasmine'
 # gem 'mongoid-rspec'
@@ -30,6 +32,11 @@ end
 
 gem 'therubyracer', :require => 'v8'
 gem 'jquery-rails'
+
+group :development do
+  gem 'hpricot'
+  gem 'ruby_parser'
+end
 
 group :development, :test do
   gem 'simplecov'
