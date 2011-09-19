@@ -14,28 +14,9 @@ class User
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :omniauthable
 
+  # Devise extensions must be included after devise
+  # modules have been defined for the class
   include Extensions::ForDevise
-
-
-
-
-  #protected
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 end
 

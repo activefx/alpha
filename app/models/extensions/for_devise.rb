@@ -10,13 +10,13 @@ module Extensions
         # Define class methods
         define_singleton_method(:"#{method_name}?") { deviseable?(method_name) }
         # Define instance methods
-        define_method(:"#{method_name}?") { self.class.deviseable?(method_name) }
+        define_method(:"#{method_name}?") { deviseable?(method_name) }
       end
 
       # Define Mongoid indexes for Devise
-      index :email, :unique => true if database_authenticatable?
-      index :confirmation_token, :unique => true if confirmable?
-      index :unlock_token, :unique => true if has_unlock_token?
+      index :email,               :unique => true if database_authenticatable?
+      index :confirmation_token,  :unique => true if confirmable?
+      index :unlock_token,        :unique => true if has_unlock_token?
 
     end
 
@@ -39,6 +39,12 @@ module Extensions
     end
 
     module InstanceMethods
+
+      protected
+
+      def deviseable?(method_name)
+        devise_modules.include?(method_name)
+      end
 
     end
 
