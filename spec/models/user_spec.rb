@@ -5,6 +5,7 @@ describe User do
   it { should be_mongoid_document }
   it { should be_timestamped_document }
   it { should have_field(:created_by_omniauth).of_type(Boolean).with_default_value_of(false) }
+  it { Factory.build(:user).should be_valid }
 
   it_should_behave_like "a devise model"
 

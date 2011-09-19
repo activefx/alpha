@@ -14,13 +14,10 @@ gem 'oa-oauth', '~> 0.3.0.rc3', :require => 'omniauth/oauth'
 
 # gem 'mongoid_spatial'
 # gem 'rails-backbone'
+# gem 'jasmine'
+
 gem 'haml'
 gem 'simple_form'
-# gem 'compass'
-# gem 'jasmine'
-# gem 'mongoid-rspec'
-# gem 'capybara'
-
 
 
 # Gems used only for assets and not required
@@ -29,6 +26,8 @@ group :assets do
   gem 'sass-rails', '  ~> 3.1.0'
   gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
+  gem 'compass', '~> 0.11.5'
+  gem 'compass_twitter_bootstrap', :git => 'git://github.com/vwall/compass-twitter-bootstrap.git'
 end
 
 gem 'therubyracer', :require => 'v8'
@@ -43,6 +42,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'launchy'
   gem 'factory_girl', '~> 2.1'
   gem 'rspec-rails', '~> 2.6'
   gem 'rspec-instafail'
@@ -53,6 +53,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'guard-compass', :git => 'git://github.com/oliamb/guard-compass.git'
   gem 'rb-inotify', '>= 0.5.1'
   gem 'libnotify', '~> 0.1.3'
   gem 'ruby-debug19', :require => 'ruby-debug'

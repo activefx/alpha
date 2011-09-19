@@ -100,5 +100,18 @@ shared_examples_for "a devise model" do
     it { should_not allow_mass_assignment_of(:last_sign_in_ip => "last_sign_in_ip") }
   end
 
+  # validatable
+
+  if subject.call.validatable?
+    if subject.call.database_authenticatable?
+      it { should validate_presence_of(:email) }
+      it { should validate_uniqueness_of(:email) }
+      it { should validate_format_of(:email) }
+      it { should validate_presence_of(:password) }
+      it { should validate_confirmation_of(:password) }
+      it { should validate_length_of(:password).within(subject.class.password_length) }
+    end
+  end
+
 end
 

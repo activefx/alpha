@@ -13,7 +13,7 @@ def setup_environment
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
 
-  start_simplecov
+  start_simplecov unless spork?
 
   if spork?
     ENV['DRB'] = 'true'
