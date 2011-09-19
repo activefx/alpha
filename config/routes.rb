@@ -1,5 +1,10 @@
 Alpha::Application.routes.draw do
-  devise_for :actors
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  namespace :users do
+    resources :authentications
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

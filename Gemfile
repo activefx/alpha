@@ -9,8 +9,9 @@ gem 'mongoid', '~> 2.2'
 gem 'bson_ext', '~> 1.3'
 
 gem 'devise'
+gem 'omniauth', '~> 0.3.0.rc3', :git => 'git://github.com/intridea/omniauth.git', :ref => '70e7552'
+gem 'oa-oauth', '~> 0.3.0.rc3', :require => 'omniauth/oauth'
 
-# TODO gem 'devise'
 # gem 'mongoid_spatial'
 # gem 'rails-backbone'
 gem 'haml'
@@ -19,7 +20,7 @@ gem 'simple_form'
 # gem 'jasmine'
 # gem 'mongoid-rspec'
 # gem 'capybara'
-# gem 'database_cleaner'
+
 
 
 # Gems used only for assets and not required
@@ -39,13 +40,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'simplecov'
+  gem 'simplecov', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'factory_girl', '~> 2.1'
   gem 'rspec-rails', '~> 2.6'
   gem 'rspec-instafail'
-  gem 'mongoid-rspec'
+  gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
   gem 'fuubar'
   gem 'database_cleaner'
   gem 'spork', '0.9.0.rc9'

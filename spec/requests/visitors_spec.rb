@@ -10,20 +10,20 @@ describe "Visitors" do
       page.status_code.should be(200)
     end
 
-    it "has a sign in link" do
-      visit root_path
-      click_link "Sign In"
-      page.should have_field("login")
-      page.should have_field("password")
-    end
+#    it "has a sign in link" do
+#      visit root_path
+#      click_link "Sign In"
+#      page.should have_field("login")
+#      page.should have_field("password")
+#    end
 
-    it "has a sign up link" do
-      visit root_path
-      click_link "Sign Up"
-      page.should have_field("email")
-      page.should have_field("password")
-      page.should have_field("password_confirmation")
-    end
+#    it "has a sign up link" do
+#      visit root_path
+#      click_link "Sign Up"
+#      page.should have_field("email")
+#      page.should have_field("password")
+#      page.should have_field("password_confirmation")
+#    end
 
   end
 

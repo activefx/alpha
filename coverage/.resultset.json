@@ -1,0 +1,75 @@
+{
+  "/home/ms/.rvm/gems/ruby-1.9.2-p0/bin/spork ": {
+    "coverage": {
+    },
+    "timestamp": 1316456054
+  },
+  "RSpec": {
+    "coverage": {
+      "/home/ms/rails/civvic/alpha/lib/tasks/coverage.rake": [
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/ms/rails/civvic/alpha/lib/tasks/development.rake": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1316389934
+  },
+  "/home/ms/.rvm/gems/ruby-1.9.2-p0/bin/rake coverage": {
+    "coverage": {
+    },
+    "timestamp": 1316389819
+  }
+}

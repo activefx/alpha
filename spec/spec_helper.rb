@@ -1,8 +1,8 @@
 require 'rubygems'
-require 'simplecov'
 
-def setup_simplecov
-  SimpleCov.start 'rails'
+def start_simplecov
+  require 'simplecov'
+  SimpleCov.start 'rails' unless ENV["SKIP_COV"]
 end
 
 def spork?
@@ -12,7 +12,8 @@ end
 def setup_environment
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
-  setup_simplecov unless ["SKIP_COV"]
+
+  start_simplecov
 
   if spork?
     ENV['DRB'] = 'true'
@@ -59,9 +60,10 @@ def each_run
   ActiveSupport::Dependencies.clear if spork?
 
   FactoryGirl.definition_file_paths = [
-          File.join(Rails.root, 'spec', 'factories')
+    File.join(Rails.root, 'spec', 'factories')
   ]
   FactoryGirl.find_definitions
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
