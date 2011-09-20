@@ -18,7 +18,7 @@ describe "Visitors" do
 
     it "see a sign up link" do
       visit root_path
-      click_link "Sign Up"
+      click_link "Register"
       page.has_field?("Email")
       page.has_field?("Password")
       page.has_field?("Password Confirmation")

@@ -17,8 +17,9 @@ gem 'oa-oauth', '~> 0.3.0.rc3', :require => 'omniauth/oauth'
 # gem 'jasmine'
 
 gem 'haml'
+gem 'sass'
 gem 'simple_form'
-
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,8 +27,8 @@ group :assets do
   gem 'sass-rails', '  ~> 3.1.0'
   gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
-  gem 'compass', '~> 0.11.5'
-  gem 'compass_twitter_bootstrap', :git => 'git://github.com/vwall/compass-twitter-bootstrap.git'
+  #gem 'compass', '~> 0.11.5'
+  #gem 'compass_twitter_bootstrap', :git => 'git://github.com/vwall/compass-twitter-bootstrap.git'
 end
 
 gem 'therubyracer', :require => 'v8'
@@ -53,7 +54,6 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'guard-compass', :git => 'git://github.com/oliamb/guard-compass.git'
   gem 'rb-inotify', '>= 0.5.1'
   gem 'libnotify', '~> 0.1.3'
   gem 'ruby-debug19', :require => 'ruby-debug'

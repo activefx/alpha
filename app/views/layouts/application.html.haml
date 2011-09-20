@@ -3,19 +3,17 @@
   %head
     %title Alpha
     %head
-    = stylesheet_link_tag "screen.css", :media => "screen, projection"
-    = stylesheet_link_tag "print.css", :media => "print"
-    /[if IE]
-      = stylesheet_link_tag "ie.css", :media => "screen, projection"
+    = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
     .topbar
       .fill
         .container
-          %h3= link_to "Alpha", root_path
-          %ul
+          = link_to "Alpha", root_path, :class => "brand"
+          %ul.nav
             %li= link_to "Sign In", new_user_session_path
-            %li= link_to "Sign Up", new_user_registration_path
-    = yield
+            %li= link_to "Register", new_user_registration_path
+    .content
+      = yield
 
