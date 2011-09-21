@@ -18,7 +18,7 @@ gem 'oa-oauth', '~> 0.3.0.rc3', :require => 'omniauth/oauth'
 
 gem 'haml'
 gem 'sass'
-gem 'simple_form'
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Gems used only for assets and not required
@@ -27,8 +27,7 @@ group :assets do
   gem 'sass-rails', '  ~> 3.1.0'
   gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
-  #gem 'compass', '~> 0.11.5'
-  #gem 'compass_twitter_bootstrap', :git => 'git://github.com/vwall/compass-twitter-bootstrap.git'
+  gem 'yui-compressor'
 end
 
 gem 'therubyracer', :require => 'v8'
