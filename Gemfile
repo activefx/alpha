@@ -20,6 +20,7 @@ gem 'haml'
 gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

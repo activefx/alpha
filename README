@@ -1,5 +1,12 @@
 == Alpha
 
+git clone git://github.com:activefx/alpha.git
+rename alpha <new_application_name>
+git remote rename origin alpha
+bundle install
+rake development:install
+git commit -a -m 'installed alpha'
+
 mkdir <application_name>
 git init
 touch README
