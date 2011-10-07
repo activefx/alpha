@@ -22,3 +22,7 @@ rake development:install
 git commit -a -m 'installed alpha'
 # git push origin master
 
+
+== Features
+Support for css asset compression via the YUI compressor and javascript compression via uglifier in the production environment
+
