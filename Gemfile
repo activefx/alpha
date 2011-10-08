@@ -1,26 +1,43 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+# General
+gem 'multi_json'
+
+# Database
 gem 'mongoid', '~> 2.2'
 gem 'bson_ext', '~> 1.3'
+gem 'geocoder'
+gem 'mongoid_spacial'
 
+# Authentication / Authorization
 gem 'devise'
-gem 'omniauth', '~> 0.3.0.rc3', :git => 'git://github.com/intridea/omniauth.git', :ref => '70e7552'
-gem 'oa-oauth', '~> 0.3.0.rc3', :require => 'omniauth/oauth'
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git', :branch => '0-3-stable'
+gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
+#OA_VERSION = '1.0.0.alpha'
+#gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
+#gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
+#gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
+#gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
 
-# gem 'mongoid_spatial'
-# gem 'rails-backbone'
-# gem 'jasmine'
-
+# Views
 gem 'haml'
 gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
+
+# Javascript
+gem 'therubyracer', :require => 'v8'
+gem 'jquery-rails'
+# gem 'rails-backbone'
+
+# Utilities
+gem 'whenever', :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,9 +47,6 @@ group :assets do
   gem 'uglifier'
   gem 'yui-compressor'
 end
-
-gem 'therubyracer', :require => 'v8'
-gem 'jquery-rails'
 
 group :development do
   gem 'hpricot'
@@ -50,14 +64,14 @@ group :development, :test do
   gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
   gem 'fuubar'
   gem 'database_cleaner'
-  gem 'spork', '0.9.0.rc9'
-  gem 'jasmine'
+  gem 'spork', '>= 0.9.0.rc9'
+  #gem 'jasmine'
   gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
-  gem 'guard-jasmine'
+  gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
   gem 'guard-sass'
   gem 'guard-uglify'
   gem 'guard-process'
@@ -67,6 +81,6 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
-
+# Deployment
 gem 'capistrano'
 

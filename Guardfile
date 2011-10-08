@@ -42,6 +42,12 @@ end
 
 guard 'coffeescript', :input => 'app/assets/javascripts', :output => 'public/javascripts'
 
+guard 'jasmine' do
+  watch(%r{app/assets/javascripts/(.+)\.(js\.coffee|js)}) { |m| "spec/javascripts/#{m[1]}_spec.#{m[2]}" }
+  watch(%r{spec/javascripts/(.+)_spec\.(js\.coffee|js)})  { |m| "spec/javascripts/#{m[1]}_spec.#{m[2]}" }
+  watch(%r{spec/javascripts/spec\.(js\.coffee|js)})       { "spec/javascripts" }
+end
+
 #JASMINE_HOST = '127.0.0.1'
 #JASMINE_PORT = '8888'
 #JASMINE_URL = "http://#{JASMINE_HOST}:#{JASMINE_PORT}/jasmine"

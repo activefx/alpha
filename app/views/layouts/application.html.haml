@@ -4,10 +4,9 @@
     %title Alpha
     %head
     = stylesheet_link_tag "application"
-    = stylesheet_link_tag params[:controller]
     = javascript_include_tag "application"
-    = javascript_include_tag params[:controller]
     = csrf_meta_tags
+    = yield :head
   %body
     .topbar
       .fill
