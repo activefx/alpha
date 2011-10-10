@@ -7,23 +7,3 @@ bundle install
 rake development:install
 git commit -a -m 'installed alpha'
 
-mkdir <application_name>
-git init
-touch README
-git commit -a -m 'initial commit'
-# git remote add origin path/to/origin
-# git push -u origin master
-git remote add alpha git@github.com:activefx/alpha.git
-git checkout -b alpha
-git pull alpha master
-git checkout master
-git merge alpha
-rake development:install
-git commit -a -m 'installed alpha'
-# git push origin master
-
-
-== Features
-Support for css asset compression via the YUI compressor and javascript compression via uglifier in the production environment
-https://github.com/stouset/twitter_bootstrap_form_for
-

@@ -30,15 +30,12 @@ def setup_environment
   require 'factory_girl'
   FactoryGirl.find_definitions
 
-  # require 'macros'
-
   Rails.backtrace_cleaner.remove_silencers!
 
   require 'database_cleaner'
 
   DatabaseCleaner.orm = "mongoid"
   DatabaseCleaner.strategy = :truncation
-
 
   RSpec.configure do |config|
 
