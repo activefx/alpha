@@ -25,4 +25,5 @@ git commit -a -m 'installed alpha'
 
 == Features
 Support for css asset compression via the YUI compressor and javascript compression via uglifier in the production environment
+https://github.com/stouset/twitter_bootstrap_form_for
 

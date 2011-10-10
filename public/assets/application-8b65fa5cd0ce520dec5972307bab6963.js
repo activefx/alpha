@@ -9378,42 +9378,6 @@ window.jQuery = window.$ = jQuery;
     });
   });
 }).call(this);
-var CreditCard = {
-  cleanNumber: function(number) {
-    return number.replace(/[- ]/g, "");
-  },
-
-  validNumber: function(number) {
-    var total = 0;
-    number = this.cleanNumber(number);
-    for (var i=number.length-1; i >= 0; i--) {
-      var n = parseInt(number[i]);
-      if ((i+number.length) % 2 == 0) {
-        n = n*2 > 9 ? n*2 - 9 : n*2;
-      }
-      total += n;
-    };
-    return total % 10 == 0;
-  }
-};
-
-(function($){
-  $.fn.validateCreditCardNumber = function() {
-    return this.each(function() {
-      $(this).blur(function() {
-        if (!CreditCard.validNumber(this.value)) {
-          $("#" + this.id + "_error").text("Invalid credit card number.");
-        } else {
-          $("#" + this.id + "_error").text("");
-        }
-      });
-    });
-  };
-})(jQuery);
-
-(function() {
-
-}).call(this);
 /* ==========================================================
  * bootstrap-alerts.js v1.3.0
  * http://twitter.github.com/bootstrap/javascript.html#alerts
@@ -9435,7 +9399,7 @@ var CreditCard = {
 
 
 
-(function( $ ){
+!function( $ ){
 
   /* CSS TRANSITION SUPPORT (https://gist.github.com/373874)
    * ======================================================= */
@@ -9455,11 +9419,11 @@ var CreditCard = {
      if ( $.support.transition ) {
        transitionEnd = "TransitionEnd"
        if ( $.browser.webkit ) {
-        transitionEnd = "webkitTransitionEnd"
+       	transitionEnd = "webkitTransitionEnd"
        } else if ( $.browser.mozilla ) {
-        transitionEnd = "transitionend"
+       	transitionEnd = "transitionend"
        } else if ( $.browser.opera ) {
-        transitionEnd = "oTransitionEnd"
+       	transitionEnd = "oTransitionEnd"
        }
      }
 
@@ -9518,8 +9482,7 @@ var CreditCard = {
     new Alert($('body'), '.alert-message[data-alert] .close')
   })
 
-})( window.jQuery || window.ender )
-;
+}( window.jQuery || window.ender );
 /* ============================================================
  * bootstrap-dropdown.js v1.3.0
  * http://twitter.github.com/bootstrap/javascript.html#dropdown
@@ -9541,7 +9504,7 @@ var CreditCard = {
 
 
 
-(function( $ ){
+!function( $ ){
 
   var d = 'a.menu, .dropdown-toggle'
 
@@ -9570,8 +9533,7 @@ var CreditCard = {
     })
   }
 
-})( window.jQuery || window.ender )
-;
+}( window.jQuery || window.ender );
 /* =========================================================
  * bootstrap-modal.js v1.3.0
  * http://twitter.github.com/bootstrap/javascript.html#modal
@@ -9593,7 +9555,7 @@ var CreditCard = {
 
 
 
-(function( $ ){
+!function( $ ){
 
  /* CSS TRANSITION SUPPORT (https://gist.github.com/373874)
   * ======================================================= */
@@ -9613,11 +9575,11 @@ var CreditCard = {
     if ( $.support.transition ) {
       transitionEnd = "TransitionEnd"
       if ( $.browser.webkit ) {
-        transitionEnd = "webkitTransitionEnd"
+      	transitionEnd = "webkitTransitionEnd"
       } else if ( $.browser.mozilla ) {
-        transitionEnd = "transitionend"
+      	transitionEnd = "transitionend"
       } else if ( $.browser.opera ) {
-        transitionEnd = "oTransitionEnd"
+      	transitionEnd = "oTransitionEnd"
       }
     }
 
@@ -9660,11 +9622,13 @@ var CreditCard = {
             .appendTo(document.body)
             .show()
 
-          setTimeout(function () {
-            that.$element
-              .addClass('in')
-              .trigger('shown')
-          }, 0)
+          if ($.support.transition && that.$element.hasClass('fade')) {
+            that.$element[0].offsetWidth // force reflow
+          }
+
+          that.$element
+            .addClass('in')
+            .trigger('shown')
         })
 
         return this
@@ -9707,6 +9671,8 @@ var CreditCard = {
     var that = this
       , animate = this.$element.hasClass('fade') ? 'fade' : ''
     if ( this.isShown && this.settings.backdrop ) {
+      var doAnimate = $.support.transition && animate
+
       this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
         .appendTo(document.body)
 
@@ -9714,12 +9680,15 @@ var CreditCard = {
         this.$backdrop.click($.proxy(this.hide, this))
       }
 
-      setTimeout(function () {
-        that.$backdrop && that.$backdrop.addClass('in')
-        $.support.transition && that.$backdrop.hasClass('fade') ?
-          that.$backdrop.one(transitionEnd, callback) :
-          callback()
-      }, 0)
+      if ( doAnimate ) {
+        this.$backdrop[0].offsetWidth // force reflow
+      }
+
+      this.$backdrop.addClass('in')
+
+      doAnimate ?
+        this.$backdrop.one(transitionEnd, callback) :
+        callback()
 
     } else if ( !this.isShown && this.$backdrop ) {
       this.$backdrop.removeClass('in')
@@ -9740,13 +9709,13 @@ var CreditCard = {
   function escape() {
     var that = this
     if ( this.isShown && this.settings.keyboard ) {
-      $('body').bind('keyup.modal', function ( e ) {
+      $(document).bind('keyup.modal', function ( e ) {
         if ( e.which == 27 ) {
           that.hide()
         }
       })
     } else if ( !this.isShown ) {
-      $('body').unbind('keyup.modal')
+      $(document).unbind('keyup.modal')
     }
   }
 
@@ -9803,258 +9772,7 @@ var CreditCard = {
     })
   })
 
-})( window.jQuery || window.ender )
-;
-/* ===========================================================
- * bootstrap-popover.js v1.3.0
- * http://twitter.github.com/bootstrap/javascript.html#popover
- * ===========================================================
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =========================================================== */
-
-
-
-(function( $ ) {
-
-  var Popover = function ( element, options ) {
-    this.$element = $(element)
-    this.options = options
-    this.enabled = true
-    this.fixTitle()
-  }
-
-  /* NOTE: POPOVER EXTENDS BOOTSTRAP-TWIPSY.js
-     ========================================= */
-
-  Popover.prototype = $.extend({}, $.fn.twipsy.Twipsy.prototype, {
-
-    setContent: function () {
-      var $tip = this.tip()
-      $tip.find('.title')[this.options.html ? 'html' : 'text'](this.getTitle())
-      $tip.find('.content p')[this.options.html ? 'html' : 'text'](this.getContent())
-      $tip[0].className = 'popover'
-    }
-
-  , getContent: function () {
-      var contentvar
-       , $e = this.$element
-       , o = this.options
-
-      if (typeof this.options.content == 'string') {
-        content = $e.attr(o.content)
-      } else if (typeof this.options.content == 'function') {
-        content = this.options.content.call(this.$element[0])
-      }
-      return content
-    }
-
-  , tip: function() {
-      if (!this.$tip) {
-        this.$tip = $('<div class="popover" />')
-          .html('<div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
-      }
-      return this.$tip
-    }
-
-  })
-
-
- /* POPOVER PLUGIN DEFINITION
-  * ======================= */
-
-  $.fn.popover = function (options) {
-    if (typeof options == 'object') options = $.extend({}, $.fn.popover.defaults, options)
-    $.fn.twipsy.initWith.call(this, options, Popover, 'popover')
-    return this
-  }
-
-  $.fn.popover.defaults = $.extend({} , $.fn.twipsy.defaults, { content: 'data-content', placement: 'right'})
-
-})( window.jQuery || window.ender )
-;
-/* =============================================================
- * bootstrap-scrollspy.js v1.3.0
- * http://twitter.github.com/bootstrap/javascript.html#scrollspy
- * =============================================================
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============================================================== */
-
-
-
-!function ( $ ) {
-
-  var $window = $(window)
-
-  function ScrollSpy( topbar, selector ) {
-    var processScroll = $.proxy(this.processScroll, this)
-    this.$topbar = $(topbar)
-    this.selector = selector || 'li > a'
-    this.refresh()
-    this.$topbar.delegate(this.selector, 'click', processScroll)
-    $window.scroll(processScroll)
-    this.processScroll()
-  }
-
-  ScrollSpy.prototype = {
-
-      refresh: function () {
-        this.targets = this.$topbar.find(this.selector).map(function () {
-          var href = $(this).attr('href')
-          return /^#\w/.test(href) && $(href).length ? href : null
-        })
-
-        this.offsets = $.map(this.targets, function (id) {
-          return $(id).offset().top
-        })
-      }
-
-    , processScroll: function () {
-        var scrollTop = $window.scrollTop() + 10
-          , offsets = this.offsets
-          , targets = this.targets
-          , activeTarget = this.activeTarget
-          , i
-
-        for (i = offsets.length; i--;) {
-          activeTarget != targets[i]
-            && scrollTop >= offsets[i]
-            && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-            && this.activateButton( targets[i] )
-        }
-      }
-
-    , activateButton: function (target) {
-        this.activeTarget = target
-
-        this.$topbar
-          .find(this.selector).parent('.active')
-          .removeClass('active')
-
-        this.$topbar
-          .find(this.selector + '[href="' + target + '"]')
-          .parent('li')
-          .addClass('active')
-      }
-
-  }
-
-  /* SCROLLSPY PLUGIN DEFINITION
-   * =========================== */
-
-  $.fn.scrollSpy = function( options ) {
-    var scrollspy = this.data('scrollspy')
-
-    if (!scrollspy) {
-      return this.each(function () {
-        $(this).data('scrollspy', new ScrollSpy( this, options ))
-      })
-    }
-
-    if ( options === true ) {
-      return scrollspy
-    }
-
-    if ( typeof options == 'string' ) {
-      scrollspy[options]()
-    }
-
-    return this
-  }
-
-  $(document).ready(function () {
-    $('body').scrollSpy('[data-scrollspy] li > a')
-  })
-
-}( window.jQuery || window.ender )
-;
-/* ========================================================
- * bootstrap-tabs.js v1.3.0
- * http://twitter.github.com/bootstrap/javascript.html#tabs
- * ========================================================
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ======================================================== */
-
-
-
-(function( $ ){
-
-  function activate ( element, container ) {
-    container.find('.active').removeClass('active')
-    element.addClass('active')
-  }
-
-  function tab( e ) {
-    var $this = $(this)
-      , href = $this.attr('href')
-      , $ul = $(e.liveFired)
-      , $controlled
-
-    if (/^#\w+/.test(href)) {
-      e.preventDefault()
-
-      if ($this.hasClass('active')) {
-        return
-      }
-
-      $href = $(href)
-
-      activate($this.parent('li'), $ul)
-      activate($href, $href.parent())
-    }
-  }
-
-
- /* TABS/PILLS PLUGIN DEFINITION
-  * ============================ */
-
-  $.fn.tabs = $.fn.pills = function ( selector ) {
-    return this.each(function () {
-      $(this).delegate(selector || '.tabs li > a, .pills > li > a', 'click', tab)
-    })
-  }
-
-  $(document).ready(function () {
-    $('body').tabs('ul[data-tabs] li > a, ul[data-pills] > li > a')
-  })
-
-})( window.jQuery || window.ender )
-;
+}( window.jQuery || window.ender );
 /* ==========================================================
  * bootstrap-twipsy.js v1.3.0
  * http://twitter.github.com/bootstrap/javascript.html#twipsy
@@ -10077,7 +9795,7 @@ var CreditCard = {
 
 
 
-(function( $ ) {
+!function( $ ) {
 
  /* CSS TRANSITION SUPPORT (https://gist.github.com/373874)
   * ======================================================= */
@@ -10097,11 +9815,11 @@ var CreditCard = {
     if ( $.support.transition ) {
       transitionEnd = "TransitionEnd"
       if ( $.browser.webkit ) {
-        transitionEnd = "webkitTransitionEnd"
+      	transitionEnd = "webkitTransitionEnd"
       } else if ( $.browser.mozilla ) {
-        transitionEnd = "transitionend"
+      	transitionEnd = "transitionend"
       } else if ( $.browser.opera ) {
-        transitionEnd = "oTransitionEnd"
+      	transitionEnd = "oTransitionEnd"
       }
     }
 
@@ -10362,8 +10080,255 @@ var CreditCard = {
     return $.metadata ? $.extend({}, options, $(ele).metadata()) : options
   }
 
-})( window.jQuery || window.ender )
-;
+}( window.jQuery || window.ender );
+/* ===========================================================
+ * bootstrap-popover.js v1.3.0
+ * http://twitter.github.com/bootstrap/javascript.html#popover
+ * ===========================================================
+ * Copyright 2011 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =========================================================== */
+
+
+
+!function( $ ) {
+
+  var Popover = function ( element, options ) {
+    this.$element = $(element)
+    this.options = options
+    this.enabled = true
+    this.fixTitle()
+  }
+
+  /* NOTE: POPOVER EXTENDS BOOTSTRAP-TWIPSY.js
+     ========================================= */
+
+  Popover.prototype = $.extend({}, $.fn.twipsy.Twipsy.prototype, {
+
+    setContent: function () {
+      var $tip = this.tip()
+      $tip.find('.title')[this.options.html ? 'html' : 'text'](this.getTitle())
+      $tip.find('.content p')[this.options.html ? 'html' : 'text'](this.getContent())
+      $tip[0].className = 'popover'
+    }
+
+  , getContent: function () {
+      var content
+       , $e = this.$element
+       , o = this.options
+
+      if (typeof this.options.content == 'string') {
+        content = $e.attr(o.content)
+      } else if (typeof this.options.content == 'function') {
+        content = this.options.content.call(this.$element[0])
+      }
+      return content
+    }
+
+  , tip: function() {
+      if (!this.$tip) {
+        this.$tip = $('<div class="popover" />')
+          .html('<div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
+      }
+      return this.$tip
+    }
+
+  })
+
+
+ /* POPOVER PLUGIN DEFINITION
+  * ======================= */
+
+  $.fn.popover = function (options) {
+    if (typeof options == 'object') options = $.extend({}, $.fn.popover.defaults, options)
+    $.fn.twipsy.initWith.call(this, options, Popover, 'popover')
+    return this
+  }
+
+  $.fn.popover.defaults = $.extend({} , $.fn.twipsy.defaults, { content: 'data-content', placement: 'right'})
+
+}( window.jQuery || window.ender );
+/* =============================================================
+ * bootstrap-scrollspy.js v1.3.0
+ * http://twitter.github.com/bootstrap/javascript.html#scrollspy
+ * =============================================================
+ * Copyright 2011 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================== */
+
+
+
+!function ( $ ) {
+
+  var $window = $(window)
+
+  function ScrollSpy( topbar, selector ) {
+    var processScroll = $.proxy(this.processScroll, this)
+    this.$topbar = $(topbar)
+    this.selector = selector || 'li > a'
+    this.refresh()
+    this.$topbar.delegate(this.selector, 'click', processScroll)
+    $window.scroll(processScroll)
+    this.processScroll()
+  }
+
+  ScrollSpy.prototype = {
+
+      refresh: function () {
+        this.targets = this.$topbar.find(this.selector).map(function () {
+          var href = $(this).attr('href')
+          return /^#\w/.test(href) && $(href).length ? href : null
+        })
+
+        this.offsets = $.map(this.targets, function (id) {
+          return $(id).offset().top
+        })
+      }
+
+    , processScroll: function () {
+        var scrollTop = $window.scrollTop() + 10
+          , offsets = this.offsets
+          , targets = this.targets
+          , activeTarget = this.activeTarget
+          , i
+
+        for (i = offsets.length; i--;) {
+          activeTarget != targets[i]
+            && scrollTop >= offsets[i]
+            && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+            && this.activateButton( targets[i] )
+        }
+      }
+
+    , activateButton: function (target) {
+        this.activeTarget = target
+
+        this.$topbar
+          .find(this.selector).parent('.active')
+          .removeClass('active')
+
+        this.$topbar
+          .find(this.selector + '[href="' + target + '"]')
+          .parent('li')
+          .addClass('active')
+      }
+
+  }
+
+  /* SCROLLSPY PLUGIN DEFINITION
+   * =========================== */
+
+  $.fn.scrollSpy = function( options ) {
+    var scrollspy = this.data('scrollspy')
+
+    if (!scrollspy) {
+      return this.each(function () {
+        $(this).data('scrollspy', new ScrollSpy( this, options ))
+      })
+    }
+
+    if ( options === true ) {
+      return scrollspy
+    }
+
+    if ( typeof options == 'string' ) {
+      scrollspy[options]()
+    }
+
+    return this
+  }
+
+  $(document).ready(function () {
+    $('body').scrollSpy('[data-scrollspy] li > a')
+  })
+
+}( window.jQuery || window.ender );
+/* ========================================================
+ * bootstrap-tabs.js v1.3.0
+ * http://twitter.github.com/bootstrap/javascript.html#tabs
+ * ========================================================
+ * Copyright 2011 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ======================================================== */
+
+
+
+!function( $ ){
+
+  function activate ( element, container ) {
+    container.find('.active').removeClass('active')
+    element.addClass('active')
+  }
+
+  function tab( e ) {
+    var $this = $(this)
+      , href = $this.attr('href')
+      , $ul = $this.closest('ul')
+      , $controlled
+
+    if (/^#\w+/.test(href)) {
+      e.preventDefault()
+
+      if ($this.hasClass('active')) {
+        return
+      }
+
+      $href = $(href)
+
+      activate($this.parent('li'), $ul)
+      activate($href, $href.parent())
+    }
+  }
+
+
+ /* TABS/PILLS PLUGIN DEFINITION
+  * ============================ */
+
+  $.fn.tabs = $.fn.pills = function ( selector ) {
+    return this.each(function () {
+      $(this).delegate(selector || '.tabs li > a, .pills > li > a', 'click', tab)
+    })
+  }
+
+  $(document).ready(function () {
+    $('body').tabs('ul[data-tabs] li > a, ul[data-pills] > li > a')
+  })
+
+}( window.jQuery || window.ender );
+
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
 // be included in the compiled file accessible from http://example.com/assets/application.js

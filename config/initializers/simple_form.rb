@@ -14,6 +14,14 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :label_wrapped, :class => "clearfix", :error_class => :error do |b|
+    b.use :placeholder
+    b.use :tag => 'div', :class => 'input inputs-list' do |div|
+      div.use :label_nested_input
+      div.use :error, :tag => :span, :class => :'help-inline'
+    end
+  end
+
   # Method used to tidy up errors.
   # config.error_method = :first
 

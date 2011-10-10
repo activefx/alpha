@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -42,8 +42,8 @@ gem 'whenever', :require => false
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '  ~> 3.1.0'
-  gem 'coffee-rails', '~> 3.1.0'
+  gem 'sass-rails', '  ~> 3.1.2'
+  gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier'
   gem 'yui-compressor'
 end
@@ -51,6 +51,7 @@ end
 group :development do
   gem 'hpricot'
   gem 'ruby_parser'
+  gem 'letter_opener', :git => 'git://github.com/ryanb/letter_opener.git'
 end
 
 group :development, :test do
@@ -65,17 +66,20 @@ group :development, :test do
   gem 'fuubar'
   gem 'database_cleaner'
   gem 'spork', '>= 0.9.0.rc9'
-  #gem 'jasmine'
-  gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
+  gem 'jasmine'
+  #gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
   gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
-  gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
+  #gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
+  gem 'guard-jasmine-headless-webkit' #, :git => 'git://github.com/johnbintz/guard-jasmine-headless-webkit.git'
   gem 'guard-sass'
   gem 'guard-uglify'
   gem 'guard-process'
-  gem 'guard-rails-assets'
+  gem 'guard-rails-assets' #, :git => 'git://github.com/dnagir/guard-rails-assets.git'
+  #gem 'guard-rails-assets', :git => 'git://github.com/mcolyer/guard-rails-assets.git', :branch => 'patch-1', :ref => '73d35d98de3b4c1f510ed666f9a16c869c2567c6'
+  gem 'jasmine-headless-webkit'
   gem 'rb-inotify', '>= 0.5.1'
   gem 'libnotify', '~> 0.1.3'
   gem 'ruby-debug19', :require => 'ruby-debug'

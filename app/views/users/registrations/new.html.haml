@@ -6,7 +6,7 @@
   .inputs
     = f.input :email, :required => true, :autofocus => true
     = f.input :password, :required => true
-    = f.input :password_confirmation, :required => true
+    = f.input :password_confirmation, :label => "Confirm password", :required => true
 
   .actions
     = f.button :submit, "Sign up"

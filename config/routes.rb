@@ -1,8 +1,8 @@
 Alpha::Application.routes.draw do
 
-  if ["development", "test"].include? Rails.env
-    mount Jasminerice::Engine => "/jasmine"
-  end
+#  if ["development", "test"].include? Rails.env
+#    mount Jasminerice::Engine => "/jasmine"
+#  end
 
   devise_for :users  #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
