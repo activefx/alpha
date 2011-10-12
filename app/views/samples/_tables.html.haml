@@ -1,0 +1,93 @@
+/ Tables
+%section#tables
+  .page-header
+    %h1
+      Tables
+      %small
+        For, you guessed it, tabular data
+  .row
+    %div{:class => "span4 columns"}
+      %h2
+        Building tables
+      %p
+        %code
+          &lt;table&gt;
+        %code
+          &lt;thead&gt;
+        %code
+          &lt;tbody&gt;
+        %code
+          &lt;tr&gt;
+        %code
+          &lt;th&gt;
+        %code
+          &lt;td&gt;
+        %code
+          &lt;colspan&gt;
+        %code
+          &lt;caption&gt;
+      %p
+        Tables are great&mdash;for a lot of things. Great tables, however, need a bit of markup love to be useful, scalable, and readable (at the code level). Here are a few tips to help.
+      %p
+        Always wrap your column headers in a 
+        %code
+          &lt;thead&gt;
+        such that hierarchy is 
+        %code
+          &lt;thead&gt; 
+        > 
+        %code
+          &lt;tr&gt; 
+        > 
+        %code
+          &lt;th&gt; 
+        \.
+      %p
+        Similar to the column headers, all your table's body content should be wrapped in a 
+        %code
+          &lt;tbody&gt; 
+        so your hierarchy is
+        %code
+          &lt;tbody&gt; 
+        > 
+        %code
+          &lt;tr&gt; 
+        > 
+        %code
+          &lt;td&gt; 
+        \.
+    %div{:class=>"span12 columns"}
+      %h3
+        例）デフォルトテーブルスタイル
+      %p
+        ふつうにテーブルタグでくるるだけで良い感じにボーダースタイル表示してくれます。
+      %table
+        %thead
+          %tr
+            %th= "#"
+            %th= "FirstName"
+            %th= "LastName"
+            %th= "Language"
+        %tbody
+          - 3.times do |i|
+            %tr
+              %td= i+1
+              %td= "hiroshi"
+              %td= "asakura"
+              %td= "japanese"
+
+
+%table.zebra-striped
+  %thead
+    %tr
+      %th= "#"
+      %th= "FirstName"
+      %th= "LastName"
+      %th= "Language"
+  %tbody
+    - 5.times do |i|
+      %tr
+        %td= i
+        %td= "hiroshi"
+        %td= "asakura"
+        %td= "japanese"

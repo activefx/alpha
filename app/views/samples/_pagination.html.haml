@@ -1,0 +1,11 @@
+%h2= "Pagination"
+
+.pagination
+  %ul
+    %li.prev_disabled= link_to "Previous", "#"
+    %li.active= link_to 1, "#"
+    %li= link_to 2, "#"
+    %li= link_to 3, "#"
+    %li= link_to 4, "#"
+    %li= link_to 5, "#"
+    %li.next= link_to raw("Next &rarr;"), "#"

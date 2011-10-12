@@ -1,0 +1,22 @@
+%h2= "Alerts & Errors"
+
+.span12_columns
+  .alert-message
+    = link_to "×", "#", :class => "close"
+    %p
+      %strong= "Holy guacamole!"
+      = "Best check yo self, you’re not looking too good."
+  %div{:class => "alert-message error"}
+    = link_to "×", "#", :class => "close"
+    %p
+      %strong= "Oh snap!"
+      = "Change this and that and try again."
+  %div{:class => "alert-message success"}
+    = link_to "×", "#", :class => "close"
+    %p
+      %strong= "Well done!"
+      = "You successfully read this alert message."
+  %div{:class => "alert-message info"}
+    = link_to "×", "#", :class => "close"
+    %p
+      %strong= "Heads up!"

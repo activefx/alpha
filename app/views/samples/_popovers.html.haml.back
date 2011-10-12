@@ -1,0 +1,24 @@
+/ Popovers
+%section.popovers
+  .page-header
+    %h1
+      Popovers 
+      %small
+        Components for displaying content in modals, tooltips, and popovers
+  .row
+    %div{:class => "span4 columns"}
+      %h2
+        Popovers
+      %p
+        Use popovers to provide subtextual information to a page without affecting layout.
+    %div{:class => "span12 columns"}
+      %div{:class => "well popover-well"}
+        .popover-wrapper
+          %div{:class => "popover left"}
+            .arrow
+            .inner
+              %h3.title= "Popover Title"
+              .content
+                %p= "Etiam porta sem malesuada magna mollis euismod. Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."
+          = image_tag("bird.png", :class => "large-bird", :width => "220px", :height=> "145px")
+

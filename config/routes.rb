@@ -4,6 +4,8 @@ Alpha::Application.routes.draw do
 #    mount Jasminerice::Engine => "/jasmine"
 #  end
 
+  resources :samples, :only => [ :index ]
+
   devise_for :users  #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   namespace :users do
@@ -11,6 +13,9 @@ Alpha::Application.routes.draw do
   end
 
   devise_for :administrators
+
+  match '/user' => "welcome#index", :as => :user_root
+  match '/administrator' => "welcome#index", :as => :administrator_root
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -2,14 +2,13 @@
 %html
   %head
     %title Alpha
-    %head
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield :head
   %body
     .topbar
-      .fill
+      .topbar-inner
         .container
           = link_to "Alpha", root_path, :class => "brand"
           %ul.nav
