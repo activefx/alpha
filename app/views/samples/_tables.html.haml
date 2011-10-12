@@ -1,93 +1,96 @@
-/ Tables
 %section#tables
   .page-header
-    %h1
-      Tables
-      %small
-        For, you guessed it, tabular data
+    %h1 Tables <small>For, you guessed it, tabular data</small>
   .row
-    %div{:class => "span4 columns"}
-      %h2
-        Building tables
-      %p
-        %code
-          &lt;table&gt;
-        %code
-          &lt;thead&gt;
-        %code
-          &lt;tbody&gt;
-        %code
-          &lt;tr&gt;
-        %code
-          &lt;th&gt;
-        %code
-          &lt;td&gt;
-        %code
-          &lt;colspan&gt;
-        %code
-          &lt;caption&gt;
-      %p
-        Tables are great&mdash;for a lot of things. Great tables, however, need a bit of markup love to be useful, scalable, and readable (at the code level). Here are a few tips to help.
-      %p
-        Always wrap your column headers in a 
-        %code
-          &lt;thead&gt;
-        such that hierarchy is 
-        %code
-          &lt;thead&gt; 
-        > 
-        %code
-          &lt;tr&gt; 
-        > 
-        %code
-          &lt;th&gt; 
-        \.
-      %p
-        Similar to the column headers, all your table's body content should be wrapped in a 
-        %code
-          &lt;tbody&gt; 
-        so your hierarchy is
-        %code
-          &lt;tbody&gt; 
-        > 
-        %code
-          &lt;tr&gt; 
-        > 
-        %code
-          &lt;td&gt; 
-        \.
-    %div{:class=>"span12 columns"}
-      %h3
-        例）デフォルトテーブルスタイル
-      %p
-        ふつうにテーブルタグでくるるだけで良い感じにボーダースタイル表示してくれます。
+    .span4
+      %h2 Building tables
+    .span12
+      %h3 Example: Default table styles
+      %p All tables will be automatically styled with only the essential borders to ensure readability and maintain structure. No need to add extra classes or attributes.
       %table
         %thead
           %tr
-            %th= "#"
-            %th= "FirstName"
-            %th= "LastName"
-            %th= "Language"
+            %th #
+            %th First Name
+            %th Last Name
+            %th Language
         %tbody
-          - 3.times do |i|
-            %tr
-              %td= i+1
-              %td= "hiroshi"
-              %td= "asakura"
-              %td= "japanese"
+          %tr
+            %td 1
+            %td Some
+            %td One
+            %td English
+          %tr
+            %td 2
+            %td Joe
+            %td Sixpack
+            %td English
+          %tr
+            %td 3
+            %td Stu
+            %td Dent
+            %td Code
+      %h3 Example: Zebra-striped
+      %p Get a little fancy with your tables by adding zebra-striping&mdash;just add the <code>.zebra-striped</code> class.
+      %table.zebra-striped
+        %thead
+          %tr
+            %th #
+            %th First Name
+            %th Last Name
+            %th Language
+        %tbody
+          %tr
+            %td 1
+            %td Some
+            %td One
+            %td English
+          %tr
+            %td 2
+            %td Joe
+            %td Sixpack
+            %td English
+          %tr
+            %td 3
+            %td Stu
+            %td Dent
+            %td Code
+      %p <strong>Note:</strong> Zebra-striping is a progressive enhancement not available for older browsers like IE8 and below.
+      %h3 Example: Zebra-striped w/ TableSorter.js
+      %p Taking the previous example, we improve the usefulness of our tables by providing sorting functionality via <a href="http://jquery.com">jQuery</a> and the <a href="http://tablesorter.com/docs/">Tablesorter</a> plugin. <strong>Click any column’s header to change the sort.</strong>
+      %table.zebra-striped#sortTableExample
+        %thead
+          %tr
+            %th #
+            %th.yellow First Name
+            %th.blue Last Name
+            %th.green Language
+        %tbody
+          %tr
+            %td 1
+            %td Your
+            %td One
+            %td English
+          %tr
+            %td 2
+            %td Joe
+            %td Sixpack
+            %td English
+          %tr
+            %td 3
+            %td Stu
+            %td Dent
+            %td Code
 
+      %pre.prettyprint
+        :preserve
+          &lt;script src="js/jquery/jquery.tablesorter.min.js"&gt;&lt;/script&gt;
+          &lt;script &gt;
+            $(function() {
+              $("table#sortTableExample").tablesorter({ sortList: [[1,0]] });
+            });
+          &lt;/script&gt;
+          &lt;table class="zebra-striped"&gt;
+            ...
+          &lt;/table&gt;
 
-%table.zebra-striped
-  %thead
-    %tr
-      %th= "#"
-      %th= "FirstName"
-      %th= "LastName"
-      %th= "Language"
-  %tbody
-    - 5.times do |i|
-      %tr
-        %td= i
-        %td= "hiroshi"
-        %td= "asakura"
-        %td= "japanese"

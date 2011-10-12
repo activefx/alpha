@@ -7,9 +7,11 @@
     = stylesheet_link_tag    "prettify"
     = javascript_include_tag "application"
     = javascript_include_tag "prettify"
+    = javascript_include_tag "http://autobahn.tablesorter.com/jquery.tablesorter.min.js"
     = csrf_meta_tags
     %script
       $(function () { prettyPrint() })
+      $(function() { $("table#sortTableExample").tablesorter({ sortList: [[1,0]] }); })
   %body
     .topbar
       .topbar-inner
@@ -29,6 +31,7 @@
       = render 'samples/overview'
       = render 'samples/grid'
       = render 'samples/typography'
+      = render 'samples/tables'
       // tabs and ppills
       //= render :template => 'samples/tabs_and_pills'
       / layouts
