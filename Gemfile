@@ -25,6 +25,7 @@ gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
 #gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
 
 # Views
+gem 'kaminari'
 gem 'haml'
 gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'

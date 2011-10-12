@@ -30,3 +30,41 @@
           = user.submit 'Sign up'
           = button_tag  'Cancel', :type => 'reset', :class => 'btn'
 
+  .row
+    .span4
+      %h2 Buttons
+      %p As a convention, buttons are used for actions while links are used for objects. For instance, "Download" could be a button and "recent activity" could be a link.
+      %p All buttons default to a light gray style, but a number of functional classes can be applied for different color styles. These classes include a blue <code>.primary</code> class, a light-blue <code>.info</code> class, a green <code>.success</code> class, and a red <code>.danger</code> class.
+    .span12
+      %h3 Example buttons
+      %p Button styles can be applied to anything with the <code>.btn</code> applied. Typically you’ll want to apply these to only <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, and select <code>&lt;input&gt;</code> elements. Here’s how it looks:
+      .well{ :style => "padding: 14px 19px;" }
+        %button.btn.primary Primary
+        &nbsp;
+        %button.btn Default
+        &nbsp;
+        %button.btn.info Info
+        &nbsp;
+        %button.btn.success Success
+        &nbsp;
+        %button.btn.danger Danger
+      %h3 Alternate sizes
+      %p Fancy larger or smaller buttons? Have at it!
+      .well
+        = link_to "Primary action", "#", :class => "btn large primary"
+        = link_to "Action", "#", :class => "btn large"
+      .well{ :style => "padding: 16px 19px;" }
+        = link_to "Primary action", "#", :class => "btn small primary"
+        = link_to "Action", "#", :class => "btn small"
+      %h3 Disabled state
+      %p For buttons that are not active or are disabled by the app for one reason or another, use the disabled state. That’s <code>.disabled</code> for links and <code>:disabled</code> for <code>&lt;button&gt;</code> elements.
+      %h4 Links
+      .well
+        = link_to "Primary action", "#", :class => "btn large primary disabled"
+        = link_to "Action", "#", :class => "btn large disabled"
+      %h4 Buttons
+      .well
+        %button.btn.large.primary.disabled{ :disabled => "disabled" } Primary action
+        &nbsp;
+        %button.btn.large.disabled Action
+
