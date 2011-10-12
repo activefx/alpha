@@ -5,7 +5,7 @@ module ApplicationHelper
     return if flash.empty?
     flash.collect do |type, message|
       content_tag(:div, :class => "alert-message #{flash_type(type)}") do
-        link_to("x", "#", :class => 'close') +
+        link_to("&times;".html_safe, "#", :class => 'close') +
         content_tag(:p, message)
       end
     end.join("\n").html_safe

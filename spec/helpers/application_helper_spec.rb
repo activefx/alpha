@@ -26,7 +26,7 @@ describe ApplicationHelper do
 
       it "renders one flash message" do
         should have_selector('div', :id => 'alert-message error')
-        should have_selector("a", :class => "close", :content => "x")
+        should have_selector("a", :class => "close", :content => "&times;")
         should have_selector("p", :content => "Error!")
       end
 
@@ -50,7 +50,7 @@ describe ApplicationHelper do
       it "renders a list with flash messages" do
         flashes.each do |type, message|
           should have_selector('div', :id => "alert-message #{type}")
-          should have_selector("a", :class => "close", :content => "x")
+          should have_selector("a", :class => "close", :content => "&times;")
           should have_selector("p", :content => message)
         end
       end
@@ -77,7 +77,7 @@ describe ApplicationHelper do
                        when "alert" then "warning"
                        end
           should have_selector('div', :id => "alert-message #{flash_type}")
-          should have_selector("a", :class => "close", :content => "x")
+          should have_selector("a", :class => "close", :content => "&times;")
           should have_selector("p", :content => message)
         end
       end
