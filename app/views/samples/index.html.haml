@@ -4,18 +4,20 @@
     %title Bootstrap, from Twitter
     = stylesheet_link_tag    "application"
     = stylesheet_link_tag    "docs"
+    = stylesheet_link_tag    "prettify"
     = javascript_include_tag "application"
+    = javascript_include_tag "prettify"
     = csrf_meta_tags
+    %script
+      $(function () { prettyPrint() })
   %body
     .topbar
       .topbar-inner
         .container
           %a= link_to "Bootstrap", samples_path, :class => 'brand'
           %ul.nav
-            %li= link_to "Overview", "#masthead"
-            %li= link_to "About", "#about"
+            %li= link_to "Overview", "#overview"
             %li= link_to "Grid", "#grid-system"
-            %li= link_to "Layouts", "#layouts"
             %li= link_to "Typography", "#typography"
             %li= link_to "Tables", "#tables"
             %li= link_to "Forms", "#forms"
@@ -24,7 +26,9 @@
             %li= link_to "Popovers", "#popovers"
             %li= link_to "Less", "#less"
     .container
+      = render 'samples/overview'
       = render 'samples/grid'
+      = render 'samples/typography'
       // tabs and ppills
       //= render :template => 'samples/tabs_and_pills'
       / layouts
