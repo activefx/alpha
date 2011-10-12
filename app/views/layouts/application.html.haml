@@ -2,12 +2,15 @@
 %html
   %head
     %title Alpha
+    // HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      %script{ :src => "http://html5shim.googlecode.com/svn/trunk/html5.js" }
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield :head
   %body
-    .topbar
+    .topbar{ "data-dropdown" => "dropdown" }
       .topbar-inner
         .container
           = link_to "Alpha", root_path, :class => "brand"

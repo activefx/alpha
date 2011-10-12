@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  # warning, error, success, info
+  # warning/alert, error, success, info/notice
   def flash_messages
     return if flash.empty?
     flash.collect do |type, message|

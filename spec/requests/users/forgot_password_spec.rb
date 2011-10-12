@@ -22,7 +22,7 @@ describe "User forget password" do
       fill_in "New password", :with => "password"
       fill_in "Confirm your new password", :with => "password"
       click_button "Change my password"
-      current_path.should == root_path
+      current_path.should == user_root_path
       page.has_content? "Your password was changed successfully. You are now signed in."
     end
 
