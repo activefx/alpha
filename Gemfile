@@ -7,6 +7,7 @@ gem 'rails', '3.1.0'
 
 # General
 gem 'multi_json'
+gem 'configatron'
 
 # Database
 gem 'mongoid', '~> 2.2'
