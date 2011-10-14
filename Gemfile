@@ -32,6 +32,7 @@ gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
+gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 
 # Javascript
 gem 'therubyracer', :require => 'v8'
