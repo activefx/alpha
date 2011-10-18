@@ -15,9 +15,12 @@
         .container
           = link_to "Alpha", root_path, :class => "brand"
           %ul.nav
-            %li= link_to "Sign In", new_user_session_path
-            %li= link_to "Register", new_user_registration_path
+            = login_status
     .container
-      = flash_messages
-      = yield
+      .row
+        .span16
+          = flash_messages
+          = yield
+      %footer
+        %p= "&copy; #{Time.now.year}".html_safe
 
