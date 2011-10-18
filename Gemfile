@@ -45,6 +45,7 @@ gem 'whenever', :require => false
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'compass', :git => 'https://github.com/chriseppstein/compass.git'
   gem 'sass-rails', '  ~> 3.1.2'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier'
