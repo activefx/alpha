@@ -1,11 +1,17 @@
-= simple_form_for(@<%= singular_table_name %>) do |f|
-  = f.error_notification %>
+= form_for @<%= singular_table_name %> do |f|
+  -if @<%= singular_table_name %>.errors.any?
+    .alert-message.block-message.error
+      %p= "#{pluralize(@<%= singular_table_name %>.errors.count, "error")} prohibited this <%= singular_table_name %> from being saved:"
 
-  .inputs
-    <%- attributes.each do |attribute| -%>
-      = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
-    <%- end -%>
+      %ul
+        - @<%= singular_table_name %>.errors.full_messages.each do |msg|
+          %li= msg
 
+<% for attribute in attributes -%>
+  .clearfix
+    = f.label :<%= attribute.name %>
+    .input
+      = f.<%= attribute.field_type %> :<%= attribute.name %>, :class => "<%= [:datetime_select, :date_select].include?(attribute.field_type) ? 'small' : 'xxlarge' %>"
+<% end -%>
   .actions
-    = f.button :submit
-
+    = f.submit :class => 'btn primary'

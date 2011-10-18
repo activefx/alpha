@@ -1,0 +1,45 @@
+%section#media
+  .page-header
+    %h1
+      Media
+      %small Displaying images and videos
+  .row
+    .span4
+      %h2 Media grid
+      %p Display thumbnails of varying sizes on pages with a low HTML footprint and minimal styles.
+    .span12
+      %h3 Example thumbnails
+      %p Thumbnails in the <code>.media-grid</code> can be any size, but they work best when mapped directly to the built-in Bootstrap grid system. Image widths like 90, 210, and 330 combine with a few pixels of padding to equal the <code>.span2</code>, <code>.span4</code>, and <code>.span6</code> column sizes.      <h4>Large</h4>
+      %h4 Large
+      %ul.media-grid
+        %li= link_to image_tag("http://placehold.it/330x230", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/330x230", :class => "thumbnail", :alt => ""), "#"
+      %h4 Medium
+      %ul.media-grid
+        %li= link_to image_tag("http://placehold.it/210x150", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/210x150", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/210x150", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/210x150", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/210x150", :class => "thumbnail", :alt => ""), "#"
+      %h4 Small
+      %ul.media-grid
+        %li= link_to image_tag("http://placehold.it/90x90", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/90x90", :class => "thumbnail", :alt => ""), "#"
+        %li= link_to image_tag("http://placehold.it/90x90", :class => "thumbnail", :alt => ""), "#"
+      %h4 Coding them
+      %p Media grids are easy to use and rather simple on the markup side. Their dimensions are purely based on the size of the images included.
+      %pre.prettyprint
+        :preserve
+          &lt;ul class="media-grid"&gt;
+            &lt;li&gt;
+              &lt;a href="#"&gt;
+                &lt;img class="thumbnail" src="http://placehold.it/330x230" alt=""&gt;
+              &lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="#"&gt;
+                &lt;img class="thumbnail" src="http://placehold.it/330x230" alt=""&gt;
+              &lt;/a&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+

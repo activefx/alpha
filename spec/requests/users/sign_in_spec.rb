@@ -11,7 +11,7 @@ describe "User sign in" do
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
     click_button "Sign in"
-    current_path.should == root_path
+    current_path.should == user_root_path
     page.has_content? "Signed in successfully"
   end
 

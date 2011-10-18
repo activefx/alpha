@@ -6,7 +6,7 @@ describe ApplicationHelper do
 
     context "when there is no flash messages" do
 
-      it "should return nothing" do
+      it "returns nothing" do
         helper.flash_messages.should be_nil
       end
 
@@ -24,9 +24,9 @@ describe ApplicationHelper do
 
       subject { helper.flash_messages }
 
-      it "should render one flash message" do
+      it "renders one flash message" do
         should have_selector('div', :id => 'alert-message error')
-        should have_selector("a", :class => "close", :content => "x")
+        should have_selector("a", :class => "close", :content => "&times;")
         should have_selector("p", :content => "Error!")
       end
 
@@ -47,15 +47,43 @@ describe ApplicationHelper do
 
       subject { helper.flash_messages }
 
-      it "should render a list with flash messages" do
+      it "renders a list with flash messages" do
         flashes.each do |type, message|
           should have_selector('div', :id => "alert-message #{type}")
-          should have_selector("a", :class => "close", :content => "x")
+          should have_selector("a", :class => "close", :content => "&times;")
           should have_selector("p", :content => message)
         end
       end
 
     end
+
+    context "when using alert and notice flashes" do
+
+      let(:flashes) do
+        { :notice => 'Notice!',
+          :alert => 'Alert!' }
+      end
+
+      before do
+        flashes.each { |type, message| flash[type] = message }
+      end
+
+      subject { helper.flash_messages }
+
+      it "converts to the appropriate css class" do
+        flashes.each do |type, message|
+          flash_type = case type.to_s
+                       when "notice" then "info"
+                       when "alert" then "warning"
+                       end
+          should have_selector('div', :id => "alert-message #{flash_type}")
+          should have_selector("a", :class => "close", :content => "&times;")
+          should have_selector("p", :content => message)
+        end
+      end
+
+    end
+
 
   end
 

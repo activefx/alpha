@@ -1,0 +1,158 @@
+%section#navigation
+  .page-header
+    %h1 Navigation
+  %h2 Fixed topbar
+  .topbar-wrapper{ :style => "z-index: 5;" }
+    .topbar{ "data-dropdown" => "dropdown" }
+      .topbar-inner
+        .container
+          %h3
+            %a{ :href => "#"} Project Name
+          %ul.nav
+            %li.active
+              %a{ :href => "#"} Home
+            %li
+              %a{ :href => "#"} Link
+            %li
+              %a{ :href => "#"} Link
+            %li
+              %a{ :href => "#"} Link
+            %li.dropdown
+              %a.dropdown-toggle{ :href => "#" } Dropdown
+              %ul.dropdown-menu
+                %li
+                  %a{ :href => "#" } Secondary link
+                %li
+                  %a{ :href => "#" } Something else here
+                %li.divider
+                %li
+                  %a{ :href => "#" } Another link
+          %form.pull-left{ :action => "" }
+            %input{ :type => "text", :placeholder => "Search" }
+          %ul.nav.secondary-nav
+            %li.dropdown
+              %a.dropdown-toggle{ :href => "#" } Dropdown
+              %ul.dropdown-menu
+                %li
+                  %a{ :href => "#" } Secondary link
+                %li
+                  %a{ :href => "#" } Something else here
+                %li.divider
+                %li
+                  %a{ :href => "#" } Another link
+
+  .row
+    .span5
+      %h4 What is it
+      %p Our topbar is a fixed bar that houses a website’s logo or name, primary navigation, and search form.
+    .span5
+      %h4 Customizable
+      %p All elements within, and the entire topbar as well, are optional. You can choose to include a logo/name, nav, search, and a secondary nav&mdash;or any combination of that.
+    .span6
+      %h4 Dropdowns included
+      %p As part of the main navigation, we’ve included the ability for you to add dropdowns to your nav. Check out the secondary nav above (right aligned) to see how it’s done. Dropdowns <code>li</code> tags also support <code>.active</code> for showing current page selection.
+  %p <strong>Note:</strong> When using the topbar on any page, be sure to account for the overlap it causes by adding <code>padding-top: 40px;</code> to your <code>body</code>.
+
+  %br
+
+  .row
+    .span4
+      %h2 Tabs and pills
+    .span12
+      %ul.tabs
+        %li.active
+          %a{ :href => "#" } Home
+        %li
+          %a{ :href => "#" } Profile
+        %li
+          %a{ :href => "#" } Messages
+        %li
+          %a{ :href => "#" } Settings
+        %li
+          %a{ :href => "#" } Contact
+        %li.dropdown{ "data-dropdown" => "dropdown" }
+          %a.dropdown-toggle{ :href => "#" } Dropdown
+          %ul.dropdown-menu
+            %li
+              %a{ :href => "#" } Secondary link
+            %li
+              %a{ :href => "#" } Something else here
+            %li.divider
+            %li
+              %a{ :href => "#" } Another link
+      %pre.prettyprint
+        :preserve
+          &lt;ul class="tabs"&gt;
+            &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Messages&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+      %ul.pills
+        %li.active
+          %a{ :href => "#" } Home
+        %li
+          %a{ :href => "#" } Profile
+        %li
+          %a{ :href => "#" } Messages
+        %li
+          %a{ :href => "#" } Settings
+        %li
+          %a{ :href => "#" } Contact
+      %pre.prettyprint
+        :preserve
+          &lt;ul class="pills"&gt;
+            &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Messages&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+
+  .row
+    .span4
+      %h2 Breadcrumbs
+    .span12
+      %ul.breadcrumb
+        %li.active Home
+      %ul.breadcrumb
+        %li
+          %a{ :href => "#" } Home
+          %span.divider /
+        %li.active Middle page
+      %ul.breadcrumb
+        %li
+          %a{ :href => "#" } Home
+          %span.divider /
+        %li
+          %a{ :href => "#" } Middle page
+          %span.divider /
+        %li.active Another one
+      %ul.breadcrumb
+        %li
+          %a{ :href => "#" } Home
+          <span class="divider">/</span></li>
+        %li
+          %a{ :href => "#" } Middle page
+          <span class="divider">/</span></li>
+        %li
+          %a{ :href => "#" } Another one
+          <span class="divider">/</span></li>
+        %li.active You are here
+      %pre.prettyprint
+        :preserve
+          &lt;ul class="breadcrumb"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt; &lt;span class="divider"&gt;/&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Middle page&lt;/a&gt; &lt;span class="divider"&gt;/&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Another one&lt;/a&gt; &lt;span class="divider"&gt;/&lt;/span&gt;&lt;/li&gt;
+            &lt;li class="active"&gt;You are here&lt;/li&gt;
+          &lt;/ul&gt;
+
+  .row
+    .span4
+      %h2 Pagination
+    .span12
+      %h3 Kaminari
+      %p Use <a href="http://github.com/amatsuda/kaminari">Kaminari</a> for pagination, the Twitter Bootstrap pagination views are located in app/views/kaminari.
+

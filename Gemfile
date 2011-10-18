@@ -7,6 +7,7 @@ gem 'rails', '3.1.0'
 
 # General
 gem 'multi_json'
+gem 'configatron'
 
 # Database
 gem 'mongoid', '~> 2.2'
@@ -25,11 +26,13 @@ gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
 #gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
 
 # Views
+gem 'kaminari'
 gem 'haml'
 gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
+gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 
 # Javascript
 gem 'therubyracer', :require => 'v8'

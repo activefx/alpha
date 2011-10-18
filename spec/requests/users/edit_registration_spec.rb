@@ -24,7 +24,6 @@ describe "User edit registration" do
 
   it "allows for canceling the account" do
     click_link "Cancel my account"
-    #page.driver.browser.switch_to.alert.accept
     current_path.should == root_path
     page.has_content? "Your account was successfully cancelled."
     login_user(@user)
