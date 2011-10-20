@@ -16,14 +16,14 @@ gem 'geocoder'
 gem 'mongoid_spacial'
 
 # Authentication / Authorization
-gem 'devise'
-gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git', :branch => '0-3-stable'
-gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
-#OA_VERSION = '1.0.0.alpha'
-#gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
-#gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
-#gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
-#gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
+gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
+#gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git', :branch => '0-3-stable'
+#gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
+OA_VERSION = '1.0.0.beta1'
+gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
+gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
+gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
+gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
 
 # Views
 gem 'kaminari'
