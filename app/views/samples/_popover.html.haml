@@ -1,0 +1,102 @@
+%section#popover
+  .page-header
+    %h1 Popovers <small>bootstrap-popover.js</small>
+  .row
+    .span4
+      %p The popover plugin provides a simple interface for adding popovers to your application. It extends the <a href="#twipsy">bootstrap-twipsy.js</a> plugin, so be sure to grab that file as well when including popovers in your project!
+      %p
+        %span.label.notice Notice
+        You must include the bootstrap-twipsy.js file <strong>before</strong> bootstrap-popover.js.
+    .span12
+      %h3 Using bootstrap-popover.js
+      %pre.prettyprint
+        :preserve
+          $('#example').popover(options)
+      %h3 Options
+      %table.zebra-striped
+        %thead
+          %tr
+            %th{ :style => "width: 100px;" } Name
+            %th{ :style => "width: 100px;" } type
+            %th{ :style => "width: 50px;" } default
+            %th description
+        %tbody
+          %tr
+            %td animate
+            %td boolean
+            %td true
+            %td apply a css fade transition to the tooltip
+          %tr
+            %td delayIn
+            %td number
+            %td 0
+            %td delay before showing tooltip (ms)
+          %tr
+            %td delayOut
+            %td number
+            %td 0
+            %td delay before hiding tooltip (ms)
+          %tr
+            %td fallback
+            %td string
+            %td ''
+            %td text to use when no tooltip title is present
+          %tr
+            %td placement
+            %td string
+            %td 'right'
+            %td how to position the tooltip - above | below | left | right
+          %tr
+            %td html
+            %td boolean
+            %td false
+            %td allows html content within tooltip
+          %tr
+            %td live
+            %td boolean
+            %td false
+            %td use event delegation instead of individual event handlers
+          %tr
+            %td offset
+            %td number
+            %td 0
+            %td pixel offset of tooltip from target element
+          %tr
+            %td title
+            %td string, function
+            %td 'title'
+            %td attribute or method for retrieving title text
+          %tr
+            %td content
+            %td string, function
+            %td 'data-content'
+            %td attribute or method for retrieving content text
+          %tr
+            %td trigger
+            %td string
+            %td 'hover'
+            %td how tooltip is triggered - hover | focus | manual
+      %h3 Methods
+      %h4 $().popover(options)
+      %p Initializes popovers for an element collection.
+      %h4 .popover('show')
+      %p Reveals an elements popover.
+      <pre class="prettyprint linenums">$('#element').popover('show')</pre>
+      %h4 .popover('hide')
+      %p Hides an elements popover.
+      %pre.prettyprint
+        :preserve
+          $('#element').popover('hide')
+      %h3 Demo
+      %a.btn.danger{ :href => "#", :rel => "popover", :title => "A Title", "data-content" => "And here's some amazing content. It's very engaging. right?" } hover for popover
+      :javascript
+        $(function () {
+          $("a[rel=popover]")
+            .popover({
+              offset: 10
+            })
+            .click(function(e) {
+              e.preventDefault()
+            })
+        })
+

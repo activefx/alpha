@@ -1,0 +1,50 @@
+%section#alert
+  .page-header
+    %h1 Alerts <small>bootstrap-alerts.js</small>
+  .row
+    .span4
+      %p The alert plugin is a super tiny class for adding close functionality to alerts.
+    .span12
+      %h3 Using bootstrap-alerts.js
+      %pre.prettyprint
+        :preserve
+          $(".alert-message").alert()
+      %h3 Markup
+      %p Just add a <code>data-alert</code> attribute to your alert messages to automatically give them close functionality.
+      %h3 Options
+      %table.zebra-striped
+        %thead
+          %tr
+            %th{ :style => "width: 100px;" } Name
+            %th{ :style => "width: 100px;" } type
+            %th{ :style => "width: 50px;" } default
+            %th description
+        %tbody
+          %tr
+            %td selector
+            %td string
+            %td '.close'
+            %td What selector to target for closing an alert.
+      %h3 Methods
+      %h4 $().alert()
+      %p Wraps all alerts with close functionality. To have your alerts animate out when closed, make sure they have the <code>.fade</code> and <code>.in</code> class already applied to them.
+      %h4 .alert('close')
+      %p Closes an alert.
+      %pre.prettyprint
+        :preserve
+          $(".alert-message").alert('close')
+      %h3 Demo
+      .alert-message.warning.fade.in{ "data-alert" => "alert" }
+        %a.close{ :href => "#" } &times;
+        %p
+          %strong Holy guacamole!
+          Best check yo self, you’re not looking too good.
+      .alert-message.block-message.error.fade.in{ "data-alert" => "alert" }
+        %a.close{ :href => "#" } &times;
+        %p
+          %strong Oh snap! You got an error!
+          Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+        .alert-actions
+          %a.btn.small{ :href => "#" } Take this action
+          %a.btn.small{ :href => "#" } Or do this
+

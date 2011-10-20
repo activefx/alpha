@@ -13,8 +13,8 @@
     = javascript_include_tag "http://autobahn.tablesorter.com/jquery.tablesorter.min.js"
     = csrf_meta_tags
     %script
-      $(function () { prettyPrint() })
-      $(function() { $("table#sortTableExample").tablesorter({ sortList: [[1,0]] }); })
+      $(function () { prettyPrint() });
+      $(function() { $("table#sortTableExample").tablesorter({ sortList: [[1,0]] }); });
   %body
     .topbar{ "data-dropdown" => "dropdown" }
       .topbar-inner
@@ -50,5 +50,17 @@
       = render 'samples/navigation'
       = render 'samples/alerts'
       = render 'samples/popovers'
-      = render 'samples/modal'
+      #bootstrap-js
+        = render 'samples/modal'
+        = render 'samples/dropdown'
+        = render 'samples/scrollspy'
+        = render 'samples/tabs'
+        = render 'samples/twipsy'
+        = render 'samples/popover'
+        = render 'samples/alert'
+    %footer.footer
+      .container
+        %p.pull-right
+          %a{ :href => "#" } Back to top
+        %p Footer goes here
 
