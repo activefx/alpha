@@ -1,3 +1,6 @@
+require 'rbconfig'
+HOST_OS = RbConfig::CONFIG['host_os']
+
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
@@ -10,8 +13,8 @@ gem 'multi_json'
 gem 'configatron'
 
 # Database
-gem 'mongoid', '~> 2.2'
-gem 'bson_ext', '~> 1.3'
+gem 'mongoid', '~> 2.3'
+gem 'bson_ext', '~> 1.4'
 gem 'geocoder'
 gem 'mongoid_spacial'
 
@@ -35,7 +38,9 @@ gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_boot
 gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 
 # Javascript
-gem 'therubyracer', :require => 'v8'
+if HOST_OS =~ /linux/i
+  gem 'therubyracer', :require => 'v8'
+end
 gem 'jquery-rails'
 # gem 'rails-backbone'
 
@@ -56,6 +61,7 @@ group :development do
   gem 'hpricot'
   gem 'ruby_parser'
   gem 'letter_opener', :git => 'git://github.com/ryanb/letter_opener.git'
+  gem 'rails-footnotes'
 end
 
 group :development, :test do
@@ -85,8 +91,18 @@ group :development, :test do
   gem 'guard-rails-assets' #, :git => 'git://github.com/dnagir/guard-rails-assets.git'
   #gem 'guard-rails-assets', :git => 'git://github.com/mcolyer/guard-rails-assets.git', :branch => 'patch-1', :ref => '73d35d98de3b4c1f510ed666f9a16c869c2567c6'
   gem 'jasmine-headless-webkit'
-  gem 'rb-inotify', '>= 0.5.1'
-  gem 'libnotify', '~> 0.1.3'
+  case HOST_OS
+  when /darwin/i
+    gem 'rb-fsevent'
+    gem 'growl'
+  when /linux/i
+    gem 'rb-inotify', '>= 0.5.1'
+    gem 'libnotify', '~> 0.1.3'
+  when /mswin|windows/i
+    gem 'rb-fchange'
+    gem 'win32console'
+    gem 'rb-notifu'
+  end
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
