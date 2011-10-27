@@ -4,6 +4,11 @@ guard 'bundler' do
   watch('Gemfile')
 end
 
+guard 'rails', :port => 3000, :start_on_start => true, :debugger => true do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
+
 # bundle exec rake assets:precompile RAILS_ENV=development
 
 guard 'sass', :input => 'app/assets/stylesheets', :noop => true

@@ -73,6 +73,7 @@ group :development, :test do
   gem 'jasmine'
   #gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
   gem 'guard-bundler'
+  gem 'guard-rails'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
