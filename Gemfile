@@ -3,7 +3,7 @@ HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -20,9 +20,7 @@ gem 'mongoid_spacial'
 
 # Authentication / Authorization
 gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
-#gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git', :branch => '0-3-stable'
-#gem 'oa-oauth', '~> 0.3.0', :require => 'omniauth/oauth'
-OA_VERSION = '1.0.0.beta1'
+OA_VERSION = '1.0.0.rc2'
 gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
 gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
