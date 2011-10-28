@@ -26,6 +26,7 @@ OA_VERSION = '1.0.0.beta1'
 gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
 gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
+gem 'omniauth-openid', OA_VERSION, :git => 'git://github.com/intridea/omniauth-openid.git'
 gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
 
 # Views
