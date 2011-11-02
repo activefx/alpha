@@ -1,3 +1,41 @@
+#class User
+#  include Mongoid::Document
+#  include Mongoid::Timestamps
+#  include OauthProvider::User
+
+#  field :username,      type: String, index: true
+#  field :name,          type: String
+#  field :first_name,    type: String
+#  field :last_name,     type: String
+#  field :nickname,      type: String
+#  field :bio,           type: String
+#  field :image_url,     type: String
+#  field :location_name, type: String
+#  field :verified,      type: Boolean
+
+#  # Include default devise modules. Others available are:
+#  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+#  devise :database_authenticatable, :registerable,
+#         :recoverable, :rememberable, :trackable, :validatable
+
+#  has_many :authentications
+
+#  after_save :save_authentications
+
+#  # called by devise
+#  def password_required?
+#    (authentications.empty? || !password.blank?) && super
+#  end
+
+#  protected
+
+#  # save any unsaved authentications
+#  # HACK: Mongoid should be doing this but it's not as of 2.2.0
+#  def save_authentications
+#    authentications.each {|auth| auth.save! if auth.new_record? }
+#  end
+#end
+
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -18,132 +56,132 @@ class User
   # modules have been defined for the class
   include Extensions::ForDevise
 
-  has_many :user_tokens, autosave: true
+#  has_many :user_tokens, autosave: true
 
-  class << self
+#  class << self
 
-    # Configure authentication_keys here instead of devise.rb initialzer so we don't overwrite standard devise models
-    def authentication_keys
-      [:login]
-    end
+#    # Configure authentication_keys here instead of devise.rb initialzer so we don't overwrite standard devise models
+#    def authentication_keys
+#      [:login]
+#    end
 
-    # Find user by email or username.
-    # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
-    def find_for_database_authentication(conditions)
-      login = conditions.delete(:login)
-      self.any_of({ :username => login }, { :email => login }).first
-    end
+#    # Find user by email or username.
+#    # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
+#    def find_for_database_authentication(conditions)
+#      login = conditions.delete(:login)
+#      self.any_of({ :username => login }, { :email => login }).first
+#    end
 
-    def find_by_email(email)
-      where(:email => email).first
-    end
+#    def find_by_email(email)
+#      where(:email => email).first
+#    end
 
-    def find_by_reset_password_token(reset_password_token)
-      where(:reset_password_token => reset_password_token).first
-    end
+#    def find_by_reset_password_token(reset_password_token)
+#      where(:reset_password_token => reset_password_token).first
+#    end
 
+
+##    def new_with_session(params, session)
+##      super.tap do |user|
+##        if data = session[:omniauth]
+##          omniauth_params = {:provider => data['provider'], :uid => data['uid']}
+##          if credentials = data['credentials']
+##            omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
+##            omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
+##          end
+##          token = self.user_tokens.build( omniauth_params )
+##          token.save #(:validate => false) if (t[:id].blank? rescue true)
+##          token
+##        end
+##      end
+##    end
 
 #    def new_with_session(params, session)
 #      super.tap do |user|
-#        if data = session[:omniauth]
-#          omniauth_params = {:provider => data['provider'], :uid => data['uid']}
-#          if credentials = data['credentials']
-#            omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
-#            omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
-#          end
-#          token = self.user_tokens.build( omniauth_params )
-#          token.save #(:validate => false) if (t[:id].blank? rescue true)
-#          token
+#        if omniauth = session[:omniauth]
+#          user.apply_omniauth(omniauth)
+#          user.valid?
 #        end
 #      end
 #    end
 
-    def new_with_session(params, session)
-      super.tap do |user|
-        if omniauth = session[:omniauth]
-          user.apply_omniauth(omniauth)
-          user.valid?
-        end
-      end
-    end
+#    # Find or initialize a user if no UserToken was found
+#    def omniauth_find_or_initialize(omniauth)
+#      email = omniauth.recursive_find_by_key("email")
+#      if email.blank?
+#        user = User.new
+#      else
+#        user = User.find_or_initialize_by(:email => email)
+#      end
+#      user.apply_omniauth_initialization if user.new_record?
+#      user.apply_omniauth(omniauth)
+#      return user
+#    end
 
-    # Find or initialize a user if no UserToken was found
-    def omniauth_find_or_initialize(omniauth)
-      email = omniauth.recursive_find_by_key("email")
-      if email.blank?
-        user = User.new
-      else
-        user = User.find_or_initialize_by(:email => email)
-      end
-      user.apply_omniauth_initialization if user.new_record?
-      user.apply_omniauth(omniauth)
-      return user
-    end
+#  end
 
-  end
+#  def third_party_authentications
+#    user_tokens.collect{|t| t.provider.to_sym}
+#  end
 
-  def third_party_authentications
-    user_tokens.collect{|t| t.provider.to_sym}
-  end
+#  def available_third_party_authentications
+#    User.omniauth_providers - third_party_authentications
+#  end
 
-  def available_third_party_authentications
-    User.omniauth_providers - third_party_authentications
-  end
+#  # Alternatively, you could overwrite Devise's password_required? method
+#  def apply_omniauth_initialization
+#    pass = Devise.friendly_token[0,20]
+#    self.password = pass
+#    self.password_confirmation = pass
+#    self.created_by_omniauth = true
+#  end
 
-  # Alternatively, you could overwrite Devise's password_required? method
-  def apply_omniauth_initialization
-    pass = Devise.friendly_token[0,20]
-    self.password = pass
-    self.password_confirmation = pass
-    self.created_by_omniauth = true
-  end
+#  def provider(name)
+#    self.user_tokens.find_by_provider(name.to_s)
+#  end
 
-  def provider(name)
-    self.user_tokens.find_by_provider(name.to_s)
-  end
+#  def apply_omniauth(omniauth)
+#    return if omniauth['provider'].blank? || omniauth['uid'].blank?
+#    #add some info about the user
+#    self.apply_user_info(omniauth, omniauth['provider'])
+#    # Build the user token
+#    omniauth_params = self.build_omniauth_params(omniauth)
+#    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
+#      token.update_attributes(omniauth_params)
+#    else
+#      if self.new_record?
+#        self.user_tokens.build(omniauth_params)
+#      else
+#        self.user_tokens.create(omniauth_params)
+#      end
+#    end
+#  end
 
-  def apply_omniauth(omniauth)
-    return if omniauth['provider'].blank? || omniauth['uid'].blank?
-    #add some info about the user
-    self.apply_user_info(omniauth, omniauth['provider'])
-    # Build the user token
-    omniauth_params = self.build_omniauth_params(omniauth)
-    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
-      token.update_attributes(omniauth_params)
-    else
-      if self.new_record?
-        self.user_tokens.build(omniauth_params)
-      else
-        self.user_tokens.create(omniauth_params)
-      end
-    end
-  end
+#  # Custom logic for adding user information from third party authentications
+#  def apply_user_info(omniauth, provider = nil)
+#    if omniauth_username = omniauth.recursive_find_by_key('nickname')
+#      # set username to third party nickname if available
+#      self.username = omniauth_username if self.username.blank?
+#    end
+#    if omniauth_email = omniauth.recursive_find_by_key('email')
+#      self.email = omniauth_email if self.email.blank?
+#      # otherwise just set username to email addre
+#      self.username = omniauth_email if self.username.blank?
+#    end
+#  end
 
-  # Custom logic for adding user information from third party authentications
-  def apply_user_info(omniauth, provider = nil)
-    if omniauth_username = omniauth.recursive_find_by_key('nickname')
-      # set username to third party nickname if available
-      self.username = omniauth_username if self.username.blank?
-    end
-    if omniauth_email = omniauth.recursive_find_by_key('email')
-      self.email = omniauth_email if self.email.blank?
-      # otherwise just set username to email addre
-      self.username = omniauth_email if self.username.blank?
-    end
-  end
-
-  def build_omniauth_params(omniauth)
-    omniauth_params = {:provider => omniauth['provider'].to_s, :uid => omniauth['uid'].to_s}
-    unless omniauth['credentials'].blank?
-      credentials = omniauth['credentials']
-      omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
-      omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
-    end
-    # Store all of the data for debugging and development
-    extra = omniauth['extra'].try(:except, 'access_token')
-    omniauth_params.merge!(:omniauth => extra) unless extra.blank?
-    return omniauth_params
-  end
+#  def build_omniauth_params(omniauth)
+#    omniauth_params = {:provider => omniauth['provider'].to_s, :uid => omniauth['uid'].to_s}
+#    unless omniauth['credentials'].blank?
+#      credentials = omniauth['credentials']
+#      omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
+#      omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
+#    end
+#    # Store all of the data for debugging and development
+#    extra = omniauth['extra'].try(:except, 'access_token')
+#    omniauth_params.merge!(:omniauth => extra) unless extra.blank?
+#    return omniauth_params
+#  end
 
 #  def apply_omniauth(omniauth)
 #    #add some info about the user
@@ -284,4 +322,114 @@ class User
 
 
 end
+
+
+
+# https://github.com/shingara/base_app_mongoid/blob/master/app/models/user.rb
+#  class User
+#    include Mongoid::Document
+
+#    # Include default devise modules. Others available are:
+#    # :token_authenticatable, :confirmable, :lockable and :timeoutable
+#    devise :database_authenticatable, :registerable,
+#           :recoverable, :rememberable, :trackable,
+#           :omniauthable
+
+#    field :login, :type => String
+
+#    validates_presence_of :login
+#    validates_uniqueness_of :login, :email, :allow_blank => true
+#    validates_format_of :email,
+#      :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i,
+#      :allow_blank => true
+#    validates_presence_of :password, :if => :password_required?
+#    validates_confirmation_of :password
+#    validates_length_of :password, :minimum => 4, :allow_blank => true
+
+#    attr_accessible :login, :email, :password, :password_confirmation, :remember_me
+
+#    embeds_many :user_tokens
+
+#    validates_uniqueness_of :login
+#    validates_presence_of :login
+
+#    ##
+#    # Methode use by Devise to find user by conditions.
+#    # We accept authentication by email or login
+#    #
+#    # Method use by Devise
+#    #
+#    def self.find_for_database_authentication(conditions)
+#      self.where({ :login => conditions[:email] }).first ||
+#        self.where({ :email => conditions[:email] }).first
+#    end
+
+#    ##
+#    # Allow to authenticate by ominauth and create user_token
+#    #
+#    # Method use by Devise
+#    #
+#    def self.new_with_session(params, session)
+#      super.tap do |user|
+#        if data = session[:omniauth]
+#          user.user_tokens.build(:provider => data['provider'], :uid => data['uid'])
+#        end
+#      end
+#    end
+
+#    def apply_omniauth(omniauth)
+#      self.login = omniauth['user_info']['name'] if login.blank?
+#      self.login = omniauth['user_info']['nickname'] if login.blank?
+#      user_tokens.build(:provider => omniauth['provider'],
+#                        :token => omniauth['credentials']['token'],
+#                        :secret => omniauth['credentials']['secret'],
+#                        :uid => omniauth['uid'])
+#    end
+
+#    def password_required?
+#      new_record? && user_tokens.empty?
+#    end
+
+#    def twitter_user_tokens
+#      user_tokens.where(:provider => 'twitter').first
+#    end
+
+#    def tweets
+#      if twitter_user_tokens
+#        twitter_user_tokens.tweets
+#      else
+#        []
+#      end
+#    end
+
+#  end
+
+#  class UserToken
+#    include Mongoid::Document
+
+#    field :provider, :type => String
+#    field :uid, :type => String
+#    field :token, :type => String
+#    field :secret, :type => String
+
+#    embedded_in :user
+
+#    validate :should_be_uniq
+
+#    def should_be_uniq
+#      errors.add(:base, 'need to be uniq') if User.where('user_tokens.provider' => self.provider,
+#                                                         'user_tokens.uid' => self.uid).first
+#    end
+
+#    def tweets
+#      Twitter.configure do |config|
+#        config.consumer_key = BaseApp::Application.config.twitter['app_id']
+#        config.consumer_secret = BaseApp::Application.config.twitter['app_secret']
+#        config.oauth_token = self.token
+#        config.oauth_token_secret = self.secret
+#      end
+#      Twitter.user_timeline
+#    end
+
+#  end
 

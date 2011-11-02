@@ -2,7 +2,9 @@ require 'rubygems'
 
 def start_simplecov
   require 'simplecov'
-  SimpleCov.start 'rails' unless ENV["SKIP_COV"]
+  SimpleCov.start 'rails' do
+    add_filter "/factories/"
+  end unless ENV["SKIP_COV"]
 end
 
 def spork?
@@ -10,7 +12,6 @@ def spork?
 end
 
 def setup_environment
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
 
   start_simplecov unless spork?
@@ -25,40 +26,30 @@ def setup_environment
   require File.expand_path("../../config/environment", __FILE__)
 
   require 'rspec/rails'
-  require 'capybara/rspec'
 
-  require 'factory_girl'
-  FactoryGirl.find_definitions
+  require 'capybara/rspec'
+  require 'capybara/mechanize'
+  Capybara.javascript_driver = :webkit
 
   Rails.backtrace_cleaner.remove_silencers!
 
   require 'database_cleaner'
 
-  DatabaseCleaner.orm = "mongoid"
-  DatabaseCleaner.strategy = :truncation
-
   RSpec.configure do |config|
-
     config.mock_with :rspec
-
-    config.before(:suite) do
-      DatabaseCleaner.clean_with(:truncation)
-    end
-
-    config.before(:each) do
-      DatabaseCleaner.clean
-    end
-
-    config.include Mongoid::Matchers
-    config.include Devise::TestHelpers, :type => :controller
+    config.treat_symbols_as_metadata_keys_with_true_values = true
+    config.filter_run :focus => true
+    config.run_all_when_everything_filtered = true
   end
 
-  Capybara.javascript_driver = :webkit
 end
 
 def each_run
   if spork?
     ActiveSupport::Dependencies.clear
+    # Be sure to load each factory's model before defining
+    # the factory to ensure compatibility with Spork
+    # ex. load "#{Rails.root}/app/models/user.rb"
     FactoryGirl.reload
   end
 

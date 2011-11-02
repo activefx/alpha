@@ -14,9 +14,9 @@ module Extensions
       end
 
       # Define Mongoid indexes for Devise
-      index :email,               :unique => true if database_authenticatable?
-      index :confirmation_token,  :unique => true if confirmable?
-      index :unlock_token,        :unique => true if has_unlock_token?
+      index :email,               unique: true if database_authenticatable?
+      index :confirmation_token,  unique: true if confirmable?
+      index :unlock_token,        unique: true if has_unlock_token?
 
     end
 

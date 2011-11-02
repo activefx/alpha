@@ -34,3 +34,7 @@ production:
   #   - host: slave2.local
   #     port: 27019
 
+# For Heroku
+# production:
+#  uri: <%= ENV['MONGOHQ_URL'] %>
+

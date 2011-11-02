@@ -199,34 +199,34 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  if configatron.github.app_id
-    config.omniauth :github, configatron.github.app_id,
-                             configatron.github.app_secret,
-                             :scope => configatron.github.app_scope
-  end
-  if configatron.linked_in.app_id
-    config.omniauth :linked_in, configatron.linked_in.app_id,
-                                configatron.linked_in.app_secret
-  end
-  if configatron.facebook.app_id
-    config.omniauth :facebook, configatron.facebook.app_id,
-                               configatron.facebook.app_secret,
-                               :scope => configatron.facebook.app_scope
-  end
-  if configatron.twitter.app_id
-    config.omniauth :twitter, configatron.twitter.app_id,
-                              configatron.twitter.app_secret
-  end
-  if configatron.google.open_id.enabled
-    config.omniauth :google, configatron.openid.storage_handler,
-                             :name => configatron.google.open_id.name,
-                             :identifier => configatron.google.open_id.identifier
-  end
-  if configatron.yahoo.open_id.enabled
-    config.omniauth :yahoo, configatron.openid.storage_handler,
-                            :name => configatron.yahoo.open_id.name,
-                            :identifier => configatron.yahoo.open_id.identifier
-  end
+#  if configatron.github.app_id
+#    config.omniauth :github, configatron.github.app_id,
+#                             configatron.github.app_secret,
+#                             :scope => configatron.github.app_scope
+#  end
+#  if configatron.linked_in.app_id
+#    config.omniauth :linked_in, configatron.linked_in.app_id,
+#                                configatron.linked_in.app_secret
+#  end
+#  if configatron.facebook.app_id
+#    config.omniauth :facebook, configatron.facebook.app_id,
+#                               configatron.facebook.app_secret,
+#                               :scope => configatron.facebook.app_scope
+#  end
+#  if configatron.twitter.app_id
+#    config.omniauth :twitter, configatron.twitter.app_id,
+#                              configatron.twitter.app_secret
+#  end
+#  if configatron.google.open_id.enabled
+#    config.omniauth :google, configatron.openid.storage_handler,
+#                             :name => configatron.google.open_id.name,
+#                             :identifier => configatron.google.open_id.identifier
+#  end
+#  if configatron.yahoo.open_id.enabled
+#    config.omniauth :yahoo, configatron.openid.storage_handler,
+#                            :name => configatron.yahoo.open_id.name,
+#                            :identifier => configatron.yahoo.open_id.identifier
+#  end
   #config.omniauth :google_apps, OpenID::Store::Filesystem.new('/tmp'), :domain => 'gmail.com'
 
   # ==> Warden configuration

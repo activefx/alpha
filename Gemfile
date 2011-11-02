@@ -15,8 +15,10 @@ gem 'configatron'
 # Database
 gem 'mongoid', '~> 2.3'
 gem 'bson_ext', '~> 1.4'
-gem 'geocoder'
-gem 'mongoid_spacial'
+# Useful Mongoid Add-ons
+# gem 'geocoder'
+# gem 'mongoid_spacial'
+# gem 'mongoid-mapreduce'
 
 # Authentication / Authorization
 gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
@@ -34,7 +36,6 @@ gem 'sass'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
-gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 
 # Javascript
 if HOST_OS =~ /linux/i
@@ -45,13 +46,15 @@ gem 'jquery-rails'
 
 # Utilities
 gem 'whenever', :require => false
+# Use Whoops for error notifications when 3.1 ready
+# gem 'whoops', :git => git://github.com/flyingmachine/whoops.git or git://github.com/technekes/whoops.git
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'compass', :git => 'https://github.com/chriseppstein/compass.git'
-  gem 'sass-rails', '  ~> 3.1.2'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails', '  ~> 3.1'
+  gem 'coffee-rails', '~> 3.1'
   gem 'uglifier'
   gem 'yui-compressor'
 end
@@ -61,19 +64,22 @@ group :development do
   gem 'ruby_parser'
   gem 'letter_opener', :git => 'git://github.com/ryanb/letter_opener.git'
   gem 'rails-footnotes'
+  gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 end
 
 group :development, :test do
   gem 'simplecov', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'capybara-mechanize', :git => 'git://github.com/jeroenvandijk/capybara-mechanize.git'
   gem 'launchy'
-  gem 'factory_girl', '~> 2.1'
+  gem 'factory_girl_rails', '~> 1.3'
   gem 'rspec-rails', '~> 2.6'
   gem 'rspec-instafail'
   gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
   gem 'fuubar'
   gem 'database_cleaner'
+  # Potential Spork alternative: https://github.com/jstorimer/spin
   gem 'spork', '>= 0.9.0.rc9'
   gem 'jasmine'
   #gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
@@ -90,6 +96,8 @@ group :development, :test do
   gem 'guard-rails-assets' #, :git => 'git://github.com/dnagir/guard-rails-assets.git'
   #gem 'guard-rails-assets', :git => 'git://github.com/mcolyer/guard-rails-assets.git', :branch => 'patch-1', :ref => '73d35d98de3b4c1f510ed666f9a16c869c2567c6'
   gem 'jasmine-headless-webkit'
+  gem 'vcr', '~> 2.0.0.beta1'
+  gem 'webmock'
   case HOST_OS
   when /darwin/i
     gem 'rb-fsevent'

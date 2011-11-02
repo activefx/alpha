@@ -8,13 +8,6 @@ describe "User authentication with Facebook" do
       OmniAuth.config.test_mode = true
     end
 
-    it "is allowed with valid credentials" do
-      visit new_user_session_path
-      fill_in "Email", :with => @user.email
-      click_button "Reset password"
-      current_path.should == new_user_session_path
-      page.has_content? "You will receive an email with instructions"
-    end
 
 #    it "enables changing password after following email link" do
 #      @user.send("generate_reset_password_token!")
