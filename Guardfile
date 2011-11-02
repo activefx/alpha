@@ -4,11 +4,16 @@ guard 'bundler' do
   watch('Gemfile')
 end
 
+#guard 'rails', :port => 5000, :start_on_start => true, :debugger => true, :timeout => 30 do
+#  watch('Gemfile.lock')
+#  watch(%r{^(config|lib)/.*})
+#end
+
 # bundle exec rake assets:precompile RAILS_ENV=development
 
 guard 'sass', :input => 'app/assets/stylesheets', :noop => true
 
-guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
+guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test', 'DRB' => 'true' }, :aggressive_kills => true, :bundler => true do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.+\.rb$})

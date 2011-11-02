@@ -12,6 +12,9 @@ Alpha::Application.routes.draw do
     resources :authentications
   end
 
+  #match '/auth/:provider/callback' => 'authentications#create'
+  #devise_for :users, controllers: {registrations: 'registrations'}
+
   devise_for :administrators
 
   match '/user' => "welcome#index", :as => :user_root
