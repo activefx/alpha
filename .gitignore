@@ -4,7 +4,6 @@ log/*.log
 tmp/
 .sass-cache/
 coverage/
-Gemfile.lock
 TODO
 NOTES
 .jhw-cache
