@@ -1,24 +1,52 @@
-OmniAuth.config.test_mode = true
-
-OmniAuth.config.mock_auth[:default] = {
-  "uid" => "1234",
-  "user_info" => {
-    "name" => "No Coverage", "email" => "no_coverage@example.com", "nickname" => "noc"
-  }
-}
-
-if RSpec.respond_to?(:configure)
-  RSpec.configure do |config|
-    config.before(:all) do
-      @uids = ["abc123", "123456", "xyz789"]
-    end
-
-    config.after do
-      # because we have a limited number of uids and there's a uniqueness constraint on them, just clear them out each run rather than run into false uniqueness violations
-      Authentication.delete_all
-    end
+Rspec.configure do |config|
+  config.before(:each, :omniauth) do
+    OmniAuth.config.test_mode = true
+    stub_facebook!
+  end
+  config.after(:each, :omniauth) do
+    OmniAuth.config.test_mode = false
   end
 end
+
+def stub_facebook!
+  OmniAuth.config.mock_auth[:facebook] = {
+    "uid" => '12345',
+    "provider" => 'facebook',
+    "user_info" => {"nickname" => 'josevalim'},
+    "credentials" => {"token" => 'plataformatec'},
+    "extra" => {
+      "user_hash" => {
+        "id" => '12345',
+        "link" => 'http://facebook.com/josevalim',
+        "email" => 'user456@example.com',
+        "first_name" => 'Jose',
+        "last_name" => 'Valim',
+        "website" => 'http://blog.plataformatec.com.br'
+      }
+    }
+  }
+end
+
+
+#OmniAuth.config.mock_auth[:default] = {
+#  "uid" => "1234",
+#  "user_info" => {
+#    "name" => "No Coverage", "email" => "no_coverage@example.com", "nickname" => "noc"
+#  }
+#}
+
+#if RSpec.respond_to?(:configure)
+#  RSpec.configure do |config|
+#    config.before(:all) do
+#      @uids = ["abc123", "123456", "xyz789"]
+#    end
+
+#    config.after do
+#      # because we have a limited number of uids and there's a uniqueness constraint on them, just clear them out each run rather than run into false uniqueness violations
+#      Authentication.delete_all
+#    end
+#  end
+#end
 
 def mock_omniauth(user, provider_type)
   if user.is_a?(User)

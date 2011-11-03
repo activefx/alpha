@@ -1,11 +1,15 @@
 require 'spec_helper'
 
-describe "User authentication with Facebook" do
+describe "Facebook" do
 
-  if User.omniauthable?
+  if User.omniauthable? && Devise.omniauth_providers.include?(:facebook)
 
-    before(:each) do
-      OmniAuth.config.test_mode = true
+    it "is allowed as a method for user registration", :omniauth do
+      visit new_user_session_path
+      click_link "Sign in with Facebook"
+      page.has_content? "Successfully authorized from facebook account."
+      page.has_content? "Signed in as josevalim"
+      User.where(:email => "user456@example.com").first.should_not be_nil
     end
 
 

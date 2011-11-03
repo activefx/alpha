@@ -26,42 +26,50 @@ GIT
 
 GIT
   remote: git://github.com/intridea/omniauth-contrib.git
-  revision: bb61386c2b1032ff7ccafd8ed7ca3ceafd3c12aa
+  revision: 48e914f905df146adf45eac635c2244625191d21
   specs:
-    omniauth-contrib (1.0.0.rc2)
+    omniauth-contrib (1.0.0)
       multi_json
-      omniauth (~> 1.0.0.rc2)
-      omniauth-oauth (~> 1.0.0.rc2)
+      omniauth (~> 1.0)
+      omniauth-oauth (~> 1.0)
+
+GIT
+  remote: git://github.com/intridea/omniauth-github.git
+  revision: fbe621f330a55bfbee30d7b77d3cbe5ea2ddef5d
+  specs:
+    omniauth-github (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
 
 GIT
   remote: git://github.com/intridea/omniauth-oauth.git
-  revision: 6da045b8d651a56b8dcc53a86022db8a3eb80a49
+  revision: a6dd2178e18b86d19b6ece5efc7cc593944e047e
   specs:
-    omniauth-oauth (1.0.0.rc2)
+    omniauth-oauth (1.0.0)
       oauth
-      omniauth (~> 1.0.0.rc2)
+      omniauth (~> 1.0)
 
 GIT
   remote: git://github.com/intridea/omniauth-oauth2.git
-  revision: 803bc3318d97b2b483fcd4f77acd7aee1136dfb6
+  revision: 4cbcd459a279f6a165cabfd00944f6d30c9d8da5
   specs:
-    omniauth-oauth2 (1.0.0.rc2)
+    omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
-      omniauth (~> 1.0.0.rc2)
+      omniauth (~> 1.0)
 
 GIT
   remote: git://github.com/intridea/omniauth-openid.git
-  revision: c37d729c42047cecdb0af22b91c0967f4b233058
+  revision: 7f00d8b22b4c44e0f09820fe309bb958e467f22c
   specs:
-    omniauth-openid (1.0.0.rc2)
-      omniauth (~> 1.0.0.rc2)
+    omniauth-openid (1.0.0)
+      omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
 
 GIT
   remote: git://github.com/intridea/omniauth.git
-  revision: b0639b313bf22454ad64d26e129f335fab3c3391
+  revision: 8534a0c9f7c8d81ea5e1d9d63a17e0a468d785b8
   specs:
-    omniauth (1.0.0.rc2)
+    omniauth (1.0.0)
       hashie (~> 1.2)
       rack
 
@@ -72,6 +80,13 @@ GIT
     capybara-mechanize (0.3.0.rc3)
       capybara (~> 1.1.0)
       mechanize (~> 2.0.0)
+
+GIT
+  remote: git://github.com/mkdynamic/omniauth-facebook.git
+  revision: 0959ab1962f7ad83248c3e87827695e6777049fc
+  specs:
+    omniauth-facebook (1.0.0.rc1)
+      omniauth-oauth2 (~> 1.0.0.rc2)
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
@@ -87,6 +102,13 @@ GIT
   specs:
     letter_opener (0.0.2)
       launchy
+
+GIT
+  remote: git://github.com/skorks/omniauth-linkedin.git
+  revision: ec6e58c701cf40cca29c71f3dc3737b27dcc8d1a
+  specs:
+    omniauth-linkedin (0.0.1)
+      omniauth-oauth (~> 1.0.0.rc2)
 
 GIT
   remote: git://github.com/stouset/twitter_bootstrap_form_for.git
@@ -458,11 +480,14 @@ DEPENDENCIES
   mongoid (~> 2.3)
   mongoid-rspec!
   multi_json
-  omniauth (= 1.0.0.rc2)!
-  omniauth-contrib (= 1.0.0.rc2)!
-  omniauth-oauth (= 1.0.0.rc2)!
-  omniauth-oauth2 (= 1.0.0.rc2)!
-  omniauth-openid (= 1.0.0.rc2)!
+  omniauth (~> 1.0)!
+  omniauth-contrib!
+  omniauth-facebook!
+  omniauth-github!
+  omniauth-linkedin!
+  omniauth-oauth!
+  omniauth-oauth2!
+  omniauth-openid!
   rails (= 3.1.1)
   rails-footnotes
   rb-inotify (>= 0.5.1)

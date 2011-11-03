@@ -22,12 +22,14 @@ gem 'bson_ext', '~> 1.4'
 
 # Authentication / Authorization
 gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
-OA_VERSION = '1.0.0.rc2'
-gem 'omniauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth.git'
-gem 'omniauth-oauth', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth.git'
-gem 'omniauth-oauth2', OA_VERSION, :git => 'git://github.com/intridea/omniauth-oauth2.git'
-gem 'omniauth-openid', OA_VERSION, :git => 'git://github.com/intridea/omniauth-openid.git'
-gem 'omniauth-contrib', OA_VERSION, :git => 'git://github.com/intridea/omniauth-contrib.git'
+gem 'omniauth', '~> 1.0', :git => 'git://github.com/intridea/omniauth.git'
+gem 'omniauth-oauth', :git => 'git://github.com/intridea/omniauth-oauth.git'
+gem 'omniauth-oauth2', :git => 'git://github.com/intridea/omniauth-oauth2.git'
+gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
+gem 'omniauth-facebook', :git => 'git://github.com/mkdynamic/omniauth-facebook.git'
+gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
+gem 'omniauth-linkedin', :git => 'git://github.com/skorks/omniauth-linkedin.git'
+gem 'omniauth-contrib', :git => 'git://github.com/intridea/omniauth-contrib.git'
 
 # Views
 gem 'kaminari'
@@ -97,7 +99,7 @@ group :development, :test do
   #gem 'guard-rails-assets', :git => 'git://github.com/mcolyer/guard-rails-assets.git', :branch => 'patch-1', :ref => '73d35d98de3b4c1f510ed666f9a16c869c2567c6'
   gem 'jasmine-headless-webkit'
   gem 'vcr', '~> 2.0.0.beta1'
-  gem 'webmock'
+  gem 'webmock', :require => false
   case HOST_OS
   when /darwin/i
     gem 'rb-fsevent'

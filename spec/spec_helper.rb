@@ -27,6 +27,8 @@ def setup_environment
 
   require 'rspec/rails'
 
+  require 'webmock'
+
   require 'capybara/rspec'
   require 'capybara/mechanize'
   Capybara.javascript_driver = :webkit
