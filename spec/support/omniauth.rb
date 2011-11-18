@@ -8,6 +8,26 @@ Rspec.configure do |config|
   end
 end
 
+def stub_invalid_credentials(provider)
+  OmniAuth.config.mock_auth[provider.to_sym] = :invalid_credentials
+end
+
+def stub_invalid_response(provider)
+  OmniAuth.config.mock_auth[provider.to_sym] = :invalid_response
+end
+
+def stub_timeout(provider)
+  OmniAuth.config.mock_auth[provider.to_sym] = :timeout
+end
+
+#def stub_facebook_invalid_credentials!
+#  OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
+#end
+
+#def stub_facebook_access_denied!
+#  OmniAuth.config.mock_auth[:facebook] = :access_denied
+#end
+
 def stub_facebook!
   OmniAuth.config.mock_auth[:facebook] = {
     "uid" => '12345',

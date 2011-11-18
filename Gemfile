@@ -19,6 +19,7 @@ gem 'bson_ext', '~> 1.4'
 # gem 'geocoder'
 # gem 'mongoid_spacial'
 # gem 'mongoid-mapreduce'
+# https://github.com/tristan622/mongoid-message
 
 # Authentication / Authorization
 gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
