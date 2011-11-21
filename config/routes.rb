@@ -1,5 +1,7 @@
 Alpha::Application.routes.draw do
 
+  resources :beta_signups
+
 #  if ["development", "test"].include? Rails.env
 #    mount Jasminerice::Engine => "/jasmine"
 #  end

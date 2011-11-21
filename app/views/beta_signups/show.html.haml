@@ -1,0 +1,8 @@
+.page-header
+  = link_to 'Back', beta_signups_path, :class => 'btn', :class => 'btn primary'
+  = link_to 'Edit', edit_beta_signup_path(@beta_signup)
+  %h1 Listing beta_signups
+
+%dl
+  %dt Email:
+  %dd= @beta_signup.email

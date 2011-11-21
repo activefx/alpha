@@ -1,7 +1,8 @@
 !!!
 %html
   %head
-    %title Alpha
+    %title
+      = content_for?(:title) ? yield(:title) : "Alpha"
     // HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       %script{ :src => "http://html5shim.googlecode.com/svn/trunk/html5.js" }

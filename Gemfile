@@ -3,7 +3,7 @@ HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.3'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ gem 'bson_ext', '~> 1.4'
 # https://github.com/tristan622/mongoid-message
 
 # Authentication / Authorization
-gem 'devise', :git => 'git://github.com/dkastner/devise.git', :branch => 'omniauth-1.0'
+gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'omniauth', '~> 1.0', :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-oauth', :git => 'git://github.com/intridea/omniauth-oauth.git'
 gem 'omniauth-oauth2', :git => 'git://github.com/intridea/omniauth-oauth2.git'
@@ -35,7 +35,9 @@ gem 'omniauth-contrib', :git => 'git://github.com/intridea/omniauth-contrib.git'
 # Views
 gem 'kaminari'
 gem 'haml'
+gem 'haml-rails'
 gem 'sass'
+gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
@@ -51,6 +53,10 @@ gem 'jquery-rails'
 gem 'whenever', :require => false
 # Use Whoops for error notifications when 3.1 ready
 # gem 'whoops', :git => git://github.com/flyingmachine/whoops.git or git://github.com/technekes/whoops.git
+
+group :production do
+  #gem 'therubyracer-heroku'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

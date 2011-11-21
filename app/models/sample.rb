@@ -8,6 +8,11 @@ class Sample
   field :agree
   field :spam
   field :spammer
+  field :email_pref
+  field :interest_1
+  field :interest_2
+  field :interest_3
+  field :born_on
 
 end
 

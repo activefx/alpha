@@ -5,31 +5,41 @@
     .span4
       %h2 Form Builder
     .span12
-      = twitter_bootstrap_form_for Sample.new do |user|
-        // wraps a section in a fieldset with the provided legend text
-        = user.inputs 'Sign up' do
-          // generates a standard email field
-          = user.email_field :email, :placeholder => 'me@example.com'
-          // generates a password field with a descriptive aside
-          = user.password_field :password do
+      = twitter_bootstrap_form_for Sample.new do |sample|
+        / wraps a section in a fieldset with the provided legend text
+        = sample.inputs 'Sign up', :class => 'sign_up' do
+          / generates a standard email field
+          = sample.email_field :email, :placeholder => 'me@example.com'
+          / generates a password field with a descriptive aside
+          = sample.password_field :password do
             %span.help-block
               Must be no larger than 6 characters<br/>
               Must contain only the letters 'x' or 'p'
-          // a field with a custom label
-          = user.password_field :password_confirmation, 'Confirm Password'
-          // input fields with custom add-ons
-          = user.text_field :twitter_id, 'Twitter', :class => 'medium', :add_on => :prepend do
+          / a field with a custom label
+          = sample.password_field :password_confirmation, 'Confirm Password'
+          / input fields with custom add-ons
+          = sample.text_field :twitter_id, 'Twitter', :class => 'medium', :add_on => :prepend do
             %span.add-on @
-          // lists of checkboxes / radio buttons
-          = user.toggles 'Agreements' do
-            = user.check_box :agree,   'I agree to the abusive Terms and Conditions'
-            = user.check_box :spam,    'I agree to receive all sorts of spam'
-            = user.check_box :spammer, 'I agree to let the site spam others through my Twitter account'
-        // wraps buttons in a distinctive style
-        = user.actions do
-          = user.submit 'Sign up'
+          / select fields now have the second parameter as a label
+          = sample.date_select :born_on, 'Born on', {}, :class => 'small'
+          / inline inputs are not automatically labeled
+          = sample.inline 'Interests' do |inline|
+            #{inline.text_field :interest_1, :class => 'small'},
+            #{inline.text_field :interest_2, :class => 'small'}, and
+            #{inline.text_field :interest_3, :class => 'small'}
+          / group of radio buttons
+          = sample.toggles 'Email Preferences' do
+            = sample.radio_button :email_pref, 'HTML Email', :html, :checked => true
+            = sample.radio_button :email_pref, 'Plain Text', :plain
+          / group of checkboxes
+          = sample.toggles 'Agreements' do
+            = sample.check_box :agree,   'I agree to the abusive Terms and Conditions'
+            = sample.check_box :spam,    'I agree to receive all sorts of spam'
+            = sample.check_box :spammer, 'I agree to let the site spam others through my Twitter account'
+        / wraps buttons in a distinctive style
+        = sample.actions do
+          = sample.submit 'Sign up'
           = button_tag  'Cancel', :type => 'reset', :class => 'btn'
-
   .row
     .span4
       %h2 Buttons
