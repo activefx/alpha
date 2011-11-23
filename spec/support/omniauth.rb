@@ -1,4 +1,4 @@
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.before(:each, :omniauth) do
     OmniAuth.config.test_mode = true
     stub_facebook!

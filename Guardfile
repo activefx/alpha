@@ -13,19 +13,30 @@ end
 
 guard 'sass', :input => 'app/assets/stylesheets', :noop => true
 
-guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test', 'DRB' => 'true' }, :aggressive_kills => true, :bundler => true do
+guard 'spork', { :wait => 60,
+                 :rspec => true,
+                 :cucumber => false,
+                 :rspec_env => { 'RAILS_ENV' => 'test', 'DRB' => 'true' },
+                 :aggressive_kills => true,
+                 :bundler => true
+                } do
   watch('config/application.rb')
   watch('config/environment.rb')
-  watch(%r{^config/environments/.+\.rb$})
-  watch(%r{^config/initializers/.+\.rb$})
+  watch(%r{^config/environments/.*\.rb$})
+  watch(%r{^config/initializers/.*\.rb$})
+  watch('Gemfile')
+  watch('Gemfile.lock')
   watch('spec/spec_helper.rb')
 end
 
-guard 'rspec', :all_after_pass => false, :cli => '--drb --format Fuubar --color', :version => 2 do
+guard 'rspec', { :all_after_pass => false,
+                 :cli => '--drb --format Fuubar --color',
+                 :bundler => true,
+                 :version => 2
+               } do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec/" }
-
   # Rails example
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^spec/helpers/.+_spec\.rb$})

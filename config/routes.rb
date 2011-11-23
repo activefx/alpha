@@ -8,7 +8,7 @@ Alpha::Application.routes.draw do
 
   resources :samples, :only => [ :index ]
 
-  devise_for :users  #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   namespace :users do
     resources :authentications
