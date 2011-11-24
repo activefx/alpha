@@ -3,7 +3,7 @@ module Users
 
     # Ensure callback urls are created for providers
     # defined on the User / omniauth class
-    User.omniauth_providers.each do |provider|
+    Devise.omniauth_providers.each do |provider|
       class_eval("def #{provider}; create; end")
     end
 
@@ -11,7 +11,7 @@ module Users
 
       def create
         # Set a constant for the environment's omniauth data
-        omniauth = env["omniauth.auth"] # auth_hash
+        omniauth = request.env["omniauth.auth"] # auth_hash
         if current_user # If the user is already logged in...
           find_or_create_user_token_for_current_user(omniauth)
         else # If a user isn't logged in...

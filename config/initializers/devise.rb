@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = configatron.devise_mailer_sender
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -217,7 +217,7 @@ Devise.setup do |config|
   unless configatron.omniauth.twitter.app_id.nil?
     config.omniauth :twitter, configatron.omniauth.twitter.app_id,
                               configatron.omniauth.twitter.app_secret,
-                              :require => "omniauth/strategies/twitter"
+                              :require => "omniauth-twitter"
   end
   unless configatron.omniauth.google.open_id.enabled.nil? || !configatron.omniauth.google.open_id.enabled
     config.omniauth :openid, :store => configatron.open_id.storage_handler,

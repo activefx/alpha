@@ -1,4 +1,4 @@
 %li
-  - User.omniauth_providers.each do |provider|
+  - Devise.omniauth_providers.each do |provider|
     = link_to image_tag("social-icons/#{provider}_32.png", :alt => t('.sign_in_with', :provider => provider.to_s.titleize)), omniauth_authorize_path(User, provider)
 

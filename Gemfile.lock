@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/arunagw/omniauth-twitter.git
+  revision: ffd1e43c778234a1aa6b88ea945046e7ee82c615
+  specs:
+    omniauth-twitter (0.0.6)
+      omniauth-oauth (~> 1.0)
+
+GIT
   remote: git://github.com/decioferreira/bootstrap-generators.git
   revision: 402b28d52a1310592762d73207d460e3a452b425
   specs:
@@ -13,15 +20,6 @@ GIT
       mongoid (~> 2.0)
       rake
       rspec (~> 2)
-
-GIT
-  remote: git://github.com/intridea/omniauth-contrib.git
-  revision: 027be2e65077eaa123992d64cff0190f634394e8
-  specs:
-    omniauth-contrib (1.0.0)
-      multi_json
-      omniauth (~> 1.0)
-      omniauth-oauth (~> 1.0)
 
 GIT
   remote: git://github.com/intridea/omniauth-github.git
@@ -290,8 +288,7 @@ GEM
       rails (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
-    libnotify (0.1.4)
-      ffi (>= 0.6.2)
+    libnotify (0.5.9)
     libv8 (3.3.10.4)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
@@ -481,21 +478,21 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener!
-  libnotify (~> 0.1.3)
+  libnotify
   mongoid (~> 2.3)
   mongoid-rspec!
   multi_json
   omniauth (~> 1.0)!
-  omniauth-contrib!
   omniauth-facebook!
   omniauth-github!
   omniauth-linkedin!
   omniauth-oauth!
   omniauth-oauth2!
   omniauth-openid!
+  omniauth-twitter!
   rails (= 3.1.3)
   rails-footnotes
-  rb-inotify (>= 0.5.1)
+  rb-inotify
   rspec-instafail
   rspec-rails (~> 2.6)
   ruby-debug19

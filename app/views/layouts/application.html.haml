@@ -9,6 +9,7 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
     = yield :head
   %body
     .topbar{ "data-dropdown" => "dropdown" }
@@ -17,6 +18,10 @@
           = link_to "Alpha", root_path, :class => "brand"
           %ul.nav
             = login_status
+          //%form.pull-right{ :action => "" }
+          //  %input.input-small{ :type => "text", :placeholder => "Username" }
+          //  %input.input-small{ :type => "password", :placeholder => "Password" }
+          //  %button.btn{ :type => "submit" } Sign in
     .container
       .row
         .span16

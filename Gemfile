@@ -30,7 +30,7 @@ gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 gem 'omniauth-facebook', :git => 'git://github.com/mkdynamic/omniauth-facebook.git'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-linkedin', :git => 'git://github.com/skorks/omniauth-linkedin.git'
-gem 'omniauth-contrib', :git => 'git://github.com/intridea/omniauth-contrib.git'
+gem 'omniauth-twitter', :git => 'git://github.com/arunagw/omniauth-twitter.git'
 
 # Views
 gem 'kaminari'
@@ -112,8 +112,8 @@ group :development, :test do
     gem 'rb-fsevent'
     gem 'growl'
   when /linux/i
-    gem 'rb-inotify', '>= 0.5.1'
-    gem 'libnotify', '~> 0.1.3'
+    gem 'rb-inotify' #, '>= 0.5.1'
+    gem 'libnotify' #, '~> 0.1.3'
   when /mswin|windows/i
     gem 'rb-fchange'
     gem 'win32console'
