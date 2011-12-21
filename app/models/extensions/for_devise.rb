@@ -38,15 +38,14 @@ module Extensions
 
     end
 
-    module InstanceMethods
+    # Instance Methods
 
-      protected
+    protected
 
-      def deviseable?(method_name)
-        devise_modules.include?(method_name)
-      end
-
+    def deviseable?(method_name)
+      devise_modules.include?(method_name)
     end
+
 
   end
 end

@@ -1,0 +1,2 @@
+ActiveSupport::Deprecation.silenced = true
+

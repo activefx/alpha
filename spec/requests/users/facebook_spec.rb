@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Facebook" do
-  debugger
+  #debugger
   if User.omniauthable? && Devise.omniauth_providers.include?(:facebook)
 
     it "is allowed as a method for user registration", :omniauth do
