@@ -14,6 +14,10 @@ Alpha::Application.routes.draw do
     resources :authentications
   end
 
+  namespace :admin do
+    resources :beta_signups
+  end
+
   #match '/auth/:provider/callback' => 'authentications#create'
   #devise_for :users, controllers: {registrations: 'registrations'}
 

@@ -3,7 +3,7 @@ HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.0.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -20,9 +20,10 @@ gem 'bson_ext', '~> 1.4'
 # gem 'mongoid_spacial'
 # gem 'mongoid-mapreduce'
 # https://github.com/tristan622/mongoid-message
+# mongoid_search
 
 # Authentication / Authorization
-gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
+gem 'devise', '~> 2.0.0.rc'
 gem 'omniauth', '~> 1.0', :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-oauth', :git => 'git://github.com/intridea/omniauth-oauth.git'
 gem 'omniauth-oauth2', :git => 'git://github.com/intridea/omniauth-oauth2.git'
@@ -73,7 +74,7 @@ group :development do
   gem 'ruby_parser'
   gem 'letter_opener', :git => 'git://github.com/ryanb/letter_opener.git'
   gem 'rails-footnotes'
-  gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
+  gem 'bootstrap-generators', :git => 'git://github.com/activefx/bootstrap-generators.git'
 end
 
 group :development, :test do
@@ -85,6 +86,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 1.3'
   gem 'rspec-rails', '~> 2.6'
   gem 'rspec-instafail'
+  gem 'mocha'
   gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
   gem 'fuubar'
   gem 'database_cleaner'
@@ -107,6 +109,9 @@ group :development, :test do
   gem 'jasmine-headless-webkit'
   gem 'vcr', '~> 2.0.0.beta1'
   gem 'webmock', :require => false
+  platforms :ruby do
+    gem 'rb-readline'
+  end
   case HOST_OS
   when /darwin/i
     gem 'rb-fsevent'
@@ -119,6 +124,8 @@ group :development, :test do
     gem 'win32console'
     gem 'rb-notifu'
   end
+  gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
