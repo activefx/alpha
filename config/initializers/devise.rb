@@ -9,6 +9,9 @@ Devise.setup do |config|
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
 
+  # Automatically apply schema changes in tableless databases
+  config.apply_schema = false
+
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -59,6 +62,10 @@ Devise.setup do |config|
   # Does not affect registerable.
   # config.paranoid = true
 
+  # By default Devise will store the user in session. You can skip storage for
+  # :http_auth and :token_auth by adding those symbols to the array below.
+  config.skip_session_storage = [:http_auth]
+
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
@@ -69,6 +76,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
+  # SecureRandom.hex(64).inspect to regenerate
   # config.pepper = "42d4222d99f569d99a0ecca80d1af5509ea5034b470e081c5bad114f22d9136c03809174f60916fc38ebebb895644fec932f32d66731a3d32e77ab07f9c42d83"
 
   # ==> Configuration for :confirmable
@@ -78,7 +86,13 @@ Devise.setup do |config|
   # You can use this to let your user access some features of your application
   # without confirming the account, but blocking it after a certain period
   # (ie 2 days).
-  # config.confirm_within = 2.days
+  # config.allow_unconfirmed_access_for = 2.days
+
+  # If true, requires any email changes to be confirmed (exctly the same way as
+  # initial account confirmation) to be applied. Requires additional unconfirmed_email
+  # db field (see migrations). Until confirmed new email is stored in
+  # unconfirmed email column, and copied to email column on successful confirmation.
+  config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -86,9 +100,6 @@ Devise.setup do |config|
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
   # config.remember_for = 2.weeks
-
-  # If true, a valid remember token can be re-used between multiple browsers.
-  # config.remember_across_browsers = true
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -146,7 +157,7 @@ Devise.setup do |config|
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
   # change their passwords.
-  config.reset_password_within = 2.hours
+  config.reset_password_within = 6.hours
 
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use
@@ -159,10 +170,6 @@ Devise.setup do |config|
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
   # config.token_authentication_key = :auth_token
-
-  # If true, authentication through token does not store user in session and needs
-  # to be supplied on each request. Useful if you are using the token as API token.
-  # config.stateless_token = false
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
