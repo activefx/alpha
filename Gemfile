@@ -51,6 +51,7 @@ gem 'jquery-rails'
 # gem 'rails-backbone'
 
 # Utilities
+gem 'foreman'
 gem 'whenever', :require => false
 # Use Whoops for error notifications when 3.1 ready
 # gem 'whoops', :git => git://github.com/flyingmachine/whoops.git or git://github.com/technekes/whoops.git
