@@ -206,24 +206,24 @@ Devise.setup do |config|
   # up on your models and hooks.
   unless configatron.omniauth.github.app_id.nil?
     config.omniauth :github, configatron.omniauth.github.app_id,
-                             configatron.omniauth.github.app_secret,
-                             :scope => configatron.omniauth.github.app_scope,
+                             configatron.omniauth.github.app_key,
+                             :scope => "user,public_repo",
                              :require => "omniauth-github"
   end
   unless configatron.omniauth.linked_in.app_id.nil?
     config.omniauth :linked_in, configatron.omniauth.linked_in.app_id,
-                                configatron.omniauth.linked_in.app_secret,
+                                configatron.omniauth.linked_in.app_key,
                                 :require => "omniauth-linkedin"
   end
   unless configatron.omniauth.facebook.app_id.nil?
     config.omniauth :facebook, configatron.omniauth.facebook.app_id,
-                               configatron.omniauth.facebook.app_secret,
-                               :scope => configatron.omniauth.facebook.app_scope,
+                               configatron.omniauth.facebook.app_key,
+                               :scope => "email,user_about_me,offline_access",
                                :require => "omniauth-facebook"
   end
   unless configatron.omniauth.twitter.app_id.nil?
     config.omniauth :twitter, configatron.omniauth.twitter.app_id,
-                              configatron.omniauth.twitter.app_secret,
+                              configatron.omniauth.twitter.app_key,
                               :require => "omniauth-twitter"
   end
   unless configatron.omniauth.google.open_id.enabled.nil? || !configatron.omniauth.google.open_id.enabled

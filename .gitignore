@@ -7,5 +7,5 @@ coverage/
 TODO
 NOTES
 .jhw-cache
-config/configatron/defaults.rb
+environment_variables.rb
 
