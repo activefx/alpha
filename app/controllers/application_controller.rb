@@ -7,6 +7,18 @@ class ApplicationController < ActionController::Base
   #              ActionView::MissingTemplate,
   #              :with => :error_404
 
+  def nobody_signed_in?
+    !user_signed_in? && !administrator_signed_in?
+  end
+
+  def anybody_signed_in?
+    user_signed_in? || administrator_signed_in?
+  end
+
+  def not_a_landing_page?
+    %w(beta_signups).exclude?(controller_name)
+  end
+
   def home_page?
     root_path == request.path
   end
@@ -15,7 +27,7 @@ class ApplicationController < ActionController::Base
     Rails.env.development? or request.remote_ip =~ /(::1)|(127.0.0.1)|((192.168).*)/
   end
 
-  def in_beta?
+  def site_in_beta?
     configatron.in_beta == true
   end
 
@@ -23,11 +35,15 @@ class ApplicationController < ActionController::Base
     /administrator_/.match(controller_name) || /admin\//.match(controller_path)
   end
 
+  def not_an_administrative_request?
+    !administrative_request?
+  end
+
   protected
 
-  # TODO: Add exceptions for log in page and logged in user
+  # Add exceptions for log in page and logged in user
   def show_beta_page?
-    if in_beta? && !administrative_request? && %w(beta_signups).exclude?(controller_name)
+    if site_in_beta? && nobody_signed_in? && not_an_administrative_request? && not_a_landing_page?
       redirect_to beta_signups_path
     end
   end

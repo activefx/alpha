@@ -2,6 +2,8 @@ class BetaSignupsController < ApplicationController
 
   layout "landing_page"
 
+  skip_before_filter :show_beta_page?
+
   def index
     if referred_by_code = (params[:referred_by] || params[:fb_ref])
       @referred_by = BetaSignup.where(:referral_code => referred_by_code).first
