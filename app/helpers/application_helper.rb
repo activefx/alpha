@@ -33,5 +33,9 @@ module ApplicationHelper
     end
   end
 
+  def site_in_beta?
+    configatron.in_beta == true
+  end
+
 end
 

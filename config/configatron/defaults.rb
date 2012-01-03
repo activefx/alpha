@@ -6,7 +6,7 @@ require 'openid/store/filesystem'
 #   configatron.emails.sales_reciept.subject = 'Thanks for your order'
 #
 #   configatron.file.storage = :s3
-  configatron.in_beta = false
+  configatron.in_beta = true
   configatron.devise_mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # OpenID config

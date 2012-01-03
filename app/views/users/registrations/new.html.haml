@@ -7,6 +7,8 @@
     = f.input :email, :required => true, :autofocus => true
     = f.input :password, :required => true
     = f.input :password_confirmation, :label => "Confirm password", :required => true
+    - if site_in_beta?
+      = f.input :invite_code, :required => true
 
   .actions
     = f.button :submit, "Sign up"

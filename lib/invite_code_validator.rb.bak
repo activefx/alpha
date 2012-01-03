@@ -1,0 +1,9 @@
+class InviteCodeValidator < ActiveModel::EachValidator
+  def validate_each(object, attribute, value)
+    invite_code = InviteCode.where(token: value).first
+    unless invite_code && invite_code.invitation_accepted_at.nil?
+      object.errors[attribute] << (options[:message] || "was not valid")
+    end
+  end
+end
+

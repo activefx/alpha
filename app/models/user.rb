@@ -78,7 +78,10 @@ class User
   ## Omniauthable
   field :created_by_omniauth, :type => Boolean, :default => false
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  field :invite_code, :type => String
+
+  attr_accessible :email, :password, :password_confirmation,
+                  :remember_me, :invite_code
 
   #has_many :user_tokens, :autosave => true
 
@@ -92,6 +95,33 @@ class User
   # modules have been defined for the class
   include Extensions::ForDevise
 
+  validates :invite_code, :presence => true, :if => :beta_user_signup?
+
+  validate :invitation_token_validity
+
+  protected
+
+  def beta_user_signup?
+    site_in_beta? && !persisted?
+  end
+
+  def site_in_beta?
+    configatron.in_beta == true
+  end
+
+  def invitation_token_validity
+    if beta_user_signup?
+      token = InviteCode.where(token: invite_code).first
+      unless token && token.invitation_accepted_at.nil?
+        errors[:invite_code] << "was not valid"
+      end
+      if token && token.invitation_sent_to == email
+        skip_confirmation!
+      end
+    end
+  end
+
+end
 #  has_many :user_tokens, autosave: true
 
 #  class << self
@@ -357,7 +387,7 @@ class User
 #   user_hash - A hash of all information gathered about a user in the format it was gathered. For example, for Twitter users this is a hash representing the JSON hash returned from the Twitter API.
 
 
-end
+
 
 
 

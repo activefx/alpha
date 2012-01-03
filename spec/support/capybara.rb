@@ -5,6 +5,21 @@ def login_user(user)
   click_button "Sign in"
 end
 
+def register(username, password, options = {})
+  visit new_user_registration_path
+  fill_in "Email", :with => username
+  fill_in "Password", :with => password
+  fill_in "Confirm password", :with => password
+  if options[:invite_code]
+    fill_in "Invite code", :with => options[:invite_code]
+  end
+  click_button "Sign up"
+end
+
+def invite_code(options = {})
+  InviteCode.create(options).token
+end
+
 
 ## fill_in_fields :user_email   => 'bob@smith.com'
 ## fill_in_fields :user, :email => 'bob@smith.com'

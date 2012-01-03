@@ -2,17 +2,33 @@ require 'spec_helper'
 
 describe "User sign in" do
 
-  before(:each) do
-    @user = Factory(:user)
+  describe do
+
+    before(:each) do
+      @user = Factory(:user)
+    end
+
+    it "is allowed with valid information" do
+      login_user(@user)
+      current_path.should == user_root_path
+      page.should have_content "Signed in successfully"
+    end
+
   end
 
-  it "is allowed with valid information" do
-    visit new_user_session_path
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => @user.password
-    click_button "Sign in"
-    current_path.should == user_root_path
-    page.has_content? "Signed in successfully"
+  describe "in beta", :beta do
+
+    before(:each) do
+      @invite_code = Factory.create(:invite_code)
+      @user = Factory(:user, :invite_code => @invite_code.token)
+    end
+
+    it "is allowed with valid information" do
+      login_user(@user)
+      current_path.should == user_root_path
+      page.should have_content "Signed in successfully"
+    end
+
   end
 
 end

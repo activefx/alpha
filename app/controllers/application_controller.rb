@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
     user_signed_in? || administrator_signed_in?
   end
 
-  def not_a_landing_page?
-    %w(beta_signups).exclude?(controller_name)
+  def landing_page?
+    %w(beta_signups).include?(controller_name)
   end
 
   def home_page?
@@ -35,15 +35,26 @@ class ApplicationController < ActionController::Base
     /administrator_/.match(controller_name) || /admin\//.match(controller_path)
   end
 
-  def not_an_administrative_request?
-    !administrative_request?
+  def user_registration_page?
+    controller_path == "devise/registrations"
+  end
+
+  def user_sign_in_page?
+    controller_path == "devise/sessions"
+  end
+
+  def not_an_allowed_page?
+    !administrative_request? &&
+    !landing_page? &&
+    !user_registration_page? &&
+    !user_sign_in_page?
   end
 
   protected
 
   # Add exceptions for log in page and logged in user
   def show_beta_page?
-    if site_in_beta? && nobody_signed_in? && not_an_administrative_request? && not_a_landing_page?
+    if site_in_beta? && nobody_signed_in? && not_an_allowed_page?
       redirect_to beta_signups_path
     end
   end

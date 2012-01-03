@@ -1,6 +1,8 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+    skip_before_filter :show_beta_page?
+
     # Ensure callback urls are created for providers
     # defined on the User / omniauth class
     Devise.omniauth_providers.each do |provider|
