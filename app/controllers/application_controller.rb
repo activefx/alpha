@@ -35,19 +35,8 @@ class ApplicationController < ActionController::Base
     /administrator_/.match(controller_name) || /admin\//.match(controller_path)
   end
 
-  def user_registration_page?
-    controller_path == "devise/registrations"
-  end
-
-  def user_sign_in_page?
-    controller_path == "devise/sessions"
-  end
-
   def not_an_allowed_page?
-    !administrative_request? &&
-    !landing_page? &&
-    !user_registration_page? &&
-    !user_sign_in_page?
+    !administrative_request? && !landing_page?
   end
 
   protected
