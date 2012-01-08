@@ -1,37 +1,108 @@
-#module OauthProvider::User
+module Extensions
+  module ForOmniauth
+    extend ActiveSupport::Concern
 
-#  def apply_oauth_data(oauth_data, opts = {})
-#    opts.reverse_merge!(set_if_blank: true)
+    included do
 
-#    provider = Provider::provider_class(oauth_data['provider'])
-#    data = provider.normalize_oauth(oauth_data)
+    end
 
-#    self.username       = data[:username]         if field_needs_data?(:username, opts)
-#    self.email          = data[:email]            if field_needs_data?(:email, opts)
-#    self.name           = data[:name]             if field_needs_data?(:name, opts)
-#    self.first_name     = data[:first_name]       if field_needs_data?(:first_name, opts)
-#    self.last_name      = data[:last_name]        if field_needs_data?(:last_name, opts)
-#    self.nickname       = data[:nickname]         if field_needs_data?(:nickname, opts)
-#    self.bio            = data[:bio]              if field_needs_data?(:bio, opts)
-#    self.image_url      = data[:image_url]        if field_needs_data?(:image_url, opts)
-#    self.location_name  = data[:location_name]    if field_needs_data?(:location_name, opts)
-#    self.verified       = data[:verified]         if field_needs_data?(:verified, set_if_blank: false)
+    module ClassMethods
 
-#    # set nickname to something user will recognize when displayed in the UI
-#    data[:nickname] = data[:nickname].presence || data[:username].presence || data[:name].presence || data[:first_name].presence
-#    auth_data = data.slice(
-#      :provider_type, :uid, :username, :nickname, :token, :secret, :expires, :profile_url, :image_url
-#    ).merge(oauth_data: oauth_data.to_json)
+      def new_with_session(params, session)
+        super.tap do |user|
+          if auth_hash = session["devise.omniauth_data"]
+            user.apply_omniauth(auth_hash)
+          end
+        end
+      end
 
-#    authentications.build(auth_data)
-#  end
+      # When enabled, allows a user to set a password during the initial
+      # registration process, otherwise they mush always use omniauth
+      # to sign in
+      def password_authentication_enabled_with_omniauth?
+        configatron.omniauth.enable_password_authentication == true
+      end
 
-#  protected
+      # Find or initialize a user if no UserToken was found
+      def omniauth_find_or_initialize(omniauth)
+        email = omniauth.recursive_find_by_key("email")
+        if email.blank?
+          user = User.new
+        else
+          user = User.find_or_initialize_by(:email => email)
+        end
+        if user.new_record?
+          user.set_omniauth_flag
+          user.apply_omniauth_initialization unless password_authentication_enabled_with_omniauth?
+        end
+        user.apply_omniauth(omniauth)
+        return user
+      end
 
-#  def field_needs_data?(field, opts)
-#    self.respond_to?(field) && self.send(field).send(opts[:set_if_blank] ? 'blank?' : 'nil?')
-#  end
-#end
+    end
+
+    # Instance Methods
+
+    def apply_omniauth(omniauth)
+      omniauth = omniauth.is_a?(Hashie::Mash) ? omniauth : Hashie::Mash.new(omniauth)
+      return false if omniauth.provider.blank? || omniauth.uid.blank?
+      #add some info about the user
+      self.apply_user_info(omniauth, omniauth.provider)
+      # Build the user token
+      omniauth_params = self.build_omniauth_params(omniauth)
+      if authentication = self.authentications.where(:provider => omniauth.provider, :uid => omniauth.uid).first
+        authentication.update_attributes(omniauth_params)
+      else
+        if self.new_record?
+          self.authentications.build(omniauth_params)
+        else
+          self.authentications.create(omniauth_params)
+        end
+
+      end
+    end
+
+    # Custom logic for adding user information from third party authentications
+    def apply_user_info(omniauth, provider = nil)
+      if omniauth_email = omniauth.recursive_find_by_key(:email)
+        if self.email.blank?
+          self.email = omniauth_email
+        end
+      end
+      self.skip_confirmation! if self.email == omniauth_email
+    end
+
+    # Sets a user password to avoid triggering the password validations
+    # Alternatively, you could overwrite Devise's password_required? method
+    def apply_omniauth_initialization
+      pass = Devise.friendly_token[0,20]
+      self.password = pass
+      self.password_confirmation = pass
+    end
+
+    def build_omniauth_params(omniauth)
+      omniauth_params = {:provider => omniauth.provider.to_s, :uid => omniauth.uid.to_s}
+      unless omniauth.credentials.blank?
+        credentials = omniauth.credentials
+        omniauth_params.merge!(:token => credentials.token) unless credentials.token.blank?
+        omniauth_params.merge!(:secret => credentials.secret) unless credentials.secret.blank?
+        omniauth_params.merge!(:expires_at => credentials.expires_at) unless credentials.expires_at.blank?
+        omniauth_params.merge!(:expires => credentials.expires) unless credentials.expires.blank?
+        omniauth_params.merge!(:refresh_token => credentials.refresh_token) unless credentials.refresh_token.blank?
+      end
+      # Store all of the data for debugging and development
+      extra = omniauth.extra.try(:except, 'access_token').try(:to_hash)
+      omniauth_params.merge!(:omniauth => extra) unless extra.blank?
+      return omniauth_params
+    end
+
+    def set_omniauth_flag
+      self.created_by_omniauth = true
+    end
+
+  end
+end
+
 
 
 #class OauthProvider::Provider

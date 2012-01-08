@@ -1,6 +1,14 @@
 RSpec.configure do |config|
   config.before(:each, :omniauth) do
     OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:default] = {
+      :provider => 'omniauth',
+      :uid => '000000',
+      :credentials => {
+        :token => 'ABCDEF',
+        :secret => '123456'
+      }
+    }
   end
   config.after(:each, :omniauth) do
     OmniAuth.config.test_mode = false
@@ -19,18 +27,10 @@ def stub_timeout(provider)
   OmniAuth.config.mock_auth[provider.to_sym] = :timeout
 end
 
-#def stub_facebook_invalid_credentials!
-#  OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
-#end
-
-#def stub_facebook_access_denied!
-#  OmniAuth.config.mock_auth[:facebook] = :access_denied
-#end
-
 def stub_facebook
   OmniAuth.config.mock_auth[:facebook] = {
     :provider => 'facebook',
-    :uid => '1234567',
+    :uid => '111111',
     :info => {
       :nickname => 'jbloggs',
       :email => 'joe@bloggs.com',
@@ -48,7 +48,7 @@ def stub_facebook
     },
     :extra => {
       :raw_info => {
-        :id => '1234567',
+        :id => '111111',
         :name => 'Joe Bloggs',
         :first_name => 'Joe',
         :last_name => 'Bloggs',
@@ -66,6 +66,41 @@ def stub_facebook
   }
 end
 
+def stub_linkedin
+  OmniAuth.config.mock_auth[:linkedin] = {
+    :provider => 'linkedin',
+    :uid => '222222',
+    :credentials => {
+      :token => 'ABCDEF',
+      :secret => '1321747205'
+    }
+  }
+end
+
+def stub_twitter
+  OmniAuth.config.mock_auth[:twitter] = {
+    'uid' => '819797',
+    'provider' => 'twitter',
+    'user_info' => {
+      'nickname' => 'episod',
+      'name' => 'Taylor Singletary',
+      'location' => 'San Francisco, CA',
+      'image' => 'http://a0.twimg.com/profile_images/1258681373/hobolumbo.jpg',
+      'description' => 'Reality Technician, Developer Advocate at Twitter, hobolumbo',
+      'urls' => {
+        'Website' => 'http://t.co/op3b03h',
+        'Twitter' => 'http://twitter.com/episod'
+      }
+    },
+    'credentials' => {
+      'token' => '819797-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw',
+      'secret' => 'J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA'
+    },
+    'extra' => {
+      'access_token' => 'oauth_token=819797-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw&oauth_token_secret=J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA&user_id=819797&screen_name=episod'
+    }
+  }
+end
 
 #OmniAuth.config.mock_auth[:default] = {
 #  "uid" => "1234",
