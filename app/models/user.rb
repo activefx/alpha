@@ -83,6 +83,7 @@ class User
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :invite_code
 
+  has_many :authentications, :autosave => true
   #has_many :user_tokens, :autosave => true
 
   # Include default devise modules. Others available are:
@@ -98,6 +99,90 @@ class User
   validates :invite_code, :presence => true, :if => :beta_user_signup?
 
   validate :invitation_token_validity
+
+  def apply_omniauth(omniauth)
+    omniauth = omniauth.is_a?(Hashie::Mash) ? omniauth : Hashie::Mash.new(omniauth)
+    return false if omniauth.provider.blank? || omniauth.uid.blank?
+    #add some info about the user
+    self.apply_user_info(omniauth, omniauth.provider)
+    # Build the user token
+    omniauth_params = self.build_omniauth_params(omniauth)
+    if authentication = self.authentications.where(:provider => omniauth.provider, :uid => omniauth.uid).first
+      authentication.update_attributes(omniauth_params)
+    else
+      if self.new_record?
+        self.authentications.build(omniauth_params)
+      else
+        self.authentications.create(omniauth_params)
+      end
+    end
+  end
+
+  # Find or initialize a user if no UserToken was found
+  def self.omniauth_find_or_initialize(omniauth)
+    email = omniauth.recursive_find_by_key("email")
+    if email.blank?
+      user = User.new
+    else
+      user = User.find_or_initialize_by(:email => email)
+    end
+    if user.new_record?
+      user.set_omniauth_flag
+      user.apply_omniauth_initialization unless password_authentication_enabled_with_omniauth?
+    end
+    user.apply_omniauth(omniauth)
+    return user
+  end
+
+  def set_omniauth_flag
+    self.created_by_omniauth = true
+  end
+
+  # When enabled, allows a user to set a password during the initial
+  # registration process, otherwise they mush always use omniauth
+  # to sign in
+  def self.password_authentication_enabled_with_omniauth?
+    configatron.omniauth.enable_password_authentication == true
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if auth_hash = session["devise.omniauth_data"]
+        user.apply_omniauth(auth_hash)
+      end
+    end
+  end
+
+  # Sets a user password to avoid triggering the password validations
+  # Alternatively, you could overwrite Devise's password_required? method
+  def apply_omniauth_initialization
+    pass = Devise.friendly_token[0,20]
+    self.password = pass
+    self.password_confirmation = pass
+  end
+
+  # Custom logic for adding user information from third party authentications
+  def apply_user_info(omniauth, provider = nil)
+    if omniauth_email = omniauth.recursive_find_by_key(:email)
+      if self.email.blank?
+        self.email = omniauth_email
+      end
+    end
+    self.skip_confirmation! if self.email == omniauth_email
+  end
+
+  def build_omniauth_params(omniauth)
+    omniauth_params = {:provider => omniauth['provider'].to_s, :uid => omniauth['uid'].to_s}
+    unless omniauth['credentials'].blank?
+      credentials = omniauth['credentials']
+      omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
+      omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
+    end
+    # Store all of the data for debugging and development
+    extra = omniauth['extra'].try(:except, 'access_token')
+    omniauth_params.merge!(:omniauth => extra) unless extra.blank?
+    return omniauth_params
+  end
 
   protected
 
@@ -120,6 +205,79 @@ class User
       end
     end
   end
+
+
+#  def apply_omniauth(omniauth)
+#    #add some info about the user
+#    #self.name = omniauth['user_info']['name'] if name.blank?
+#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
+#    self.email = omniauth['user_info']['email'] if self.email.blank?
+#    unless omniauth['credentials'].blank?
+#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#      #user_tokens.build(:provider => omniauth['provider'],
+#      #                  :uid => omniauth['uid'],
+#      #                  :token => omniauth['credentials']['token'],
+#      #                  :secret => omniauth['credentials']['secret'])
+#    else
+#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#    end
+#    #self.confirm!# unless user.email.blank?
+#  end
+
+#  def apply_omniauth(omniauth)
+#    self.login = omniauth['user_info']['name'] if login.blank?
+#    self.login = omniauth['user_info']['nickname'] if login.blank?
+#    user_tokens.build(:provider => omniauth['provider'],
+#                      :token => omniauth['credentials']['token'],
+#                      :secret => omniauth['credentials']['secret'],
+#                      :uid => omniauth['uid'])
+#  end
+
+#  def apply_omniauth(omniauth)
+#    #add some info about the user
+
+#    fbinfo = ::Hashie::Mash.new((omniauth["user_info"] rescue {}))
+
+#    access_token = omniauth["credentials"]["token"] rescue nil
+
+#    #raise "Can't authorize!" unless valid_facebook_auth? fbinfo
+
+#    #self.facebok_id = fbinfo.id
+#    self.email ||= fbinfo.email
+#    self.first_name ||= fbinfo.first_name
+#    self.last_name ||= fbinfo.last_name
+#    #self.password ||= Devise.friendly_token[0,40]
+#    #self.birthday = Date.parse(fbinfo.birthday) rescue nil
+#    if changed? && !email.blank? && self.save(:validate => false)
+#      Rails.logger.warn "Persisting user failed: #{self.to_s} with errors:\n#{self.errors.full_messages.join("\n")}\n\n"
+#    end
+
+#    #self.name = omniauth['user_info']['name'] if name.blank?
+#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
+#    save(:validate => false)
+#    t = UserToken.find_or_initialize_by(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#    t.apply_omniauth(omniauth)
+#    t
+#  end
+
+#  def apply_omniauth(omniauth)
+#    return if omniauth['provider'].blank? || omniauth['uid'].blank?
+#    #add some info about the user
+#    self.apply_user_info(omniauth, omniauth['provider'])
+#    # Build the user token
+#    omniauth_params = self.build_omniauth_params(omniauth)
+#    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
+#      token.update_attributes(omniauth_params)
+#    else
+#      if self.new_record?
+#        self.user_tokens.build(omniauth_params)
+#      else
+#        self.user_tokens.create(omniauth_params)
+#      end
+#    end
+#  end
+
+
 
 end
 #  has_many :user_tokens, autosave: true
@@ -206,101 +364,11 @@ end
 #    self.user_tokens.find_by_provider(name.to_s)
 #  end
 
-#  def apply_omniauth(omniauth)
-#    return if omniauth['provider'].blank? || omniauth['uid'].blank?
-#    #add some info about the user
-#    self.apply_user_info(omniauth, omniauth['provider'])
-#    # Build the user token
-#    omniauth_params = self.build_omniauth_params(omniauth)
-#    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
-#      token.update_attributes(omniauth_params)
-#    else
-#      if self.new_record?
-#        self.user_tokens.build(omniauth_params)
-#      else
-#        self.user_tokens.create(omniauth_params)
-#      end
-#    end
-#  end
 
-#  # Custom logic for adding user information from third party authentications
-#  def apply_user_info(omniauth, provider = nil)
-#    if omniauth_username = omniauth.recursive_find_by_key('nickname')
-#      # set username to third party nickname if available
-#      self.username = omniauth_username if self.username.blank?
-#    end
-#    if omniauth_email = omniauth.recursive_find_by_key('email')
-#      self.email = omniauth_email if self.email.blank?
-#      # otherwise just set username to email addre
-#      self.username = omniauth_email if self.username.blank?
-#    end
-#  end
 
-#  def build_omniauth_params(omniauth)
-#    omniauth_params = {:provider => omniauth['provider'].to_s, :uid => omniauth['uid'].to_s}
-#    unless omniauth['credentials'].blank?
-#      credentials = omniauth['credentials']
-#      omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
-#      omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
-#    end
-#    # Store all of the data for debugging and development
-#    extra = omniauth['extra'].try(:except, 'access_token')
-#    omniauth_params.merge!(:omniauth => extra) unless extra.blank?
-#    return omniauth_params
-#  end
 
-#  def apply_omniauth(omniauth)
-#    #add some info about the user
-#    #self.name = omniauth['user_info']['name'] if name.blank?
-#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
-#    self.email = omniauth['user_info']['email'] if self.email.blank?
-#    unless omniauth['credentials'].blank?
-#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#      #user_tokens.build(:provider => omniauth['provider'],
-#      #                  :uid => omniauth['uid'],
-#      #                  :token => omniauth['credentials']['token'],
-#      #                  :secret => omniauth['credentials']['secret'])
-#    else
-#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#    end
-#    #self.confirm!# unless user.email.blank?
-#  end
 
-#  def apply_omniauth(omniauth)
-#    self.login = omniauth['user_info']['name'] if login.blank?
-#    self.login = omniauth['user_info']['nickname'] if login.blank?
-#    user_tokens.build(:provider => omniauth['provider'],
-#                      :token => omniauth['credentials']['token'],
-#                      :secret => omniauth['credentials']['secret'],
-#                      :uid => omniauth['uid'])
-#  end
 
-#  def apply_omniauth(omniauth)
-#    #add some info about the user
-
-#    fbinfo = ::Hashie::Mash.new((omniauth["user_info"] rescue {}))
-
-#    access_token = omniauth["credentials"]["token"] rescue nil
-
-#    #raise "Can't authorize!" unless valid_facebook_auth? fbinfo
-
-#    #self.facebok_id = fbinfo.id
-#    self.email ||= fbinfo.email
-#    self.first_name ||= fbinfo.first_name
-#    self.last_name ||= fbinfo.last_name
-#    #self.password ||= Devise.friendly_token[0,40]
-#    #self.birthday = Date.parse(fbinfo.birthday) rescue nil
-#    if changed? && !email.blank? && self.save(:validate => false)
-#      Rails.logger.warn "Persisting user failed: #{self.to_s} with errors:\n#{self.errors.full_messages.join("\n")}\n\n"
-#    end
-
-#    #self.name = omniauth['user_info']['name'] if name.blank?
-#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
-#    save(:validate => false)
-#    t = UserToken.find_or_initialize_by(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#    t.apply_omniauth(omniauth)
-#    t
-#  end
 
 #  def password_required?
 #    (user_tokens.empty? || !password.blank?) && super

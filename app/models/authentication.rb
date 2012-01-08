@@ -2,6 +2,36 @@ class Authentication
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :provider, :type => String
+  field :uid, :type => String
+  field :token, :type => String
+  field :secret, :type => String
+  field :omniauth, :type => Hash
+
+  belongs_to :user
+
+  index( [ [:provider, Mongo::ASCENDING],
+           [:uid, Mongo::ASCENDING] ] )
+
+  validates_presence_of   :uid, :provider
+  validates_uniqueness_of :uid, :scope => :provider
+
+  def self.find_by_provider_and_uid(provider, uid)
+    where(:provider => provider, :uid => uid).first
+  end
+
+  def self.find_by_provider(provider)
+    desc(:updated_at).where(:provider => provider).first
+  end
+
+  def provider_name
+    if provider == 'open_id'
+      "OpenID"
+    else
+      provider.titleize
+    end
+  end
+
 #  # provider_type: facebook, linked_in, twitter, etc.
 #  field :provider_type, type: String, index: true
 #  # uid of profile on provider network; e.g. facebook uid
@@ -28,27 +58,6 @@ class Authentication
 #  default_scope without(:oauth_data)
 
 
-  field :provider, :type => String
-  field :uid, :type => String
-  field :token, :type => String
-  field :secret, :type => String
-  field :omniauth, :type => Hash
-
-  referenced_in :user, :inverse_of => :user_tokens
-
-  index( [ [:provider, Mongo::ASCENDING],
-           [:uid, Mongo::ASCENDING] ] )
-
-  validates_presence_of   :uid, :provider
-  validates_uniqueness_of :uid, :scope => :provider
-
-  def self.find_by_provider_and_uid(provider, uid)
-    where(:provider => provider, :uid => uid).first
-  end
-
-  def self.find_by_provider(provider)
-    desc(:updated_at).where(:provider => provider).first
-  end
 
 #  def self.find_from_hash(hash)
 #    find_by_provider_and_uid(hash['provider'], hash['uid'])
@@ -72,12 +81,6 @@ class Authentication
 #    self.save
 #  end
 
-  def provider_name
-    if provider == 'open_id'
-      "OpenID"
-    else
-      provider.titleize
-    end
-  end
+
 end
 

@@ -1,3 +1,10 @@
 .page-header
   %h1 Welcome
 
+  = simple_form_for(@beta_signup) do |f|
+    .inputs
+      = f.input :email, :required => false, :autofocus => true
+
+    .actions
+      = f.button :submit, "Sign up"
+
