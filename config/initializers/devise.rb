@@ -204,38 +204,39 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  unless configatron.omniauth.github.app_id.nil?
-    config.omniauth :github, configatron.omniauth.github.app_id,
-                             configatron.omniauth.github.app_key,
+  unless configatron.github.app_id.nil?
+    config.omniauth :github, configatron.github.app_id,
+                             configatron.github.app_key,
                              :scope => "user,public_repo",
                              :require => "omniauth-github"
   end
-  unless configatron.omniauth.linked_in.app_id.nil?
-    config.omniauth :linked_in, configatron.omniauth.linked_in.app_id,
-                                configatron.omniauth.linked_in.app_key,
+  unless configatron.linked_in.app_id.nil?
+    config.omniauth :linked_in, configatron.linked_in.app_id,
+                                configatron.linked_in.app_key,
                                 :require => "omniauth-linkedin"
   end
-  unless configatron.omniauth.facebook.app_id.nil?
-    config.omniauth :facebook, configatron.omniauth.facebook.app_id,
-                               configatron.omniauth.facebook.app_key,
+  unless configatron.facebook.app_id.nil?
+    config.omniauth :facebook, configatron.facebook.app_id,
+                               configatron.facebook.app_key,
                                :scope => "email,user_about_me,offline_access",
+                               :display => "page",
                                :require => "omniauth-facebook"
   end
-  unless configatron.omniauth.twitter.app_id.nil?
-    config.omniauth :twitter, configatron.omniauth.twitter.app_id,
-                              configatron.omniauth.twitter.app_key,
+  unless configatron.twitter.app_id.nil?
+    config.omniauth :twitter, configatron.twitter.app_id,
+                              configatron.twitter.app_key,
                               :require => "omniauth-twitter"
   end
-  unless configatron.omniauth.google.open_id.enabled.nil? || !configatron.omniauth.google.open_id.enabled
+  unless configatron.google.open_id.enabled.nil? || !configatron.google.open_id.enabled
     config.omniauth :openid, :store => configatron.open_id.storage_handler,
-                              :name => configatron.omniauth.google.open_id.name,
+                              :name => configatron.google.open_id.name,
                               :identifier => configatron.omniauth.google.open_id.identifier,
                               :require => "omniauth-openid"
   end
-  unless configatron.omniauth.yahoo.open_id.enabled.nil? || !configatron.omniauth.yahoo.open_id.enabled
+  unless configatron.yahoo.open_id.enabled.nil? || !configatron.yahoo.open_id.enabled
     config.omniauth :openid, :store => configatron.open_id.storage_handler,
-                              :name => configatron.omniauth.yahoo.open_id.name,
-                              :identifier => configatron.omniauth.yahoo.open_id.identifier,
+                              :name => configatron.yahoo.open_id.name,
+                              :identifier => configatron.yahoo.open_id.identifier,
                               :require => "omniauth-openid"
   end
 

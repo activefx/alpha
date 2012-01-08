@@ -1,7 +1,14 @@
 RSpec.configure do |config|
   config.before(:each, :omniauth) do
     OmniAuth.config.test_mode = true
-    stub_facebook!
+    OmniAuth.config.mock_auth[:default] = {
+      :provider => 'omniauth',
+      :uid => '000000',
+      :credentials => {
+        :token => 'ABCDEF',
+        :secret => '123456'
+      }
+    }
   end
   config.after(:each, :omniauth) do
     OmniAuth.config.test_mode = false
@@ -20,33 +27,80 @@ def stub_timeout(provider)
   OmniAuth.config.mock_auth[provider.to_sym] = :timeout
 end
 
-#def stub_facebook_invalid_credentials!
-#  OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
-#end
-
-#def stub_facebook_access_denied!
-#  OmniAuth.config.mock_auth[:facebook] = :access_denied
-#end
-
-def stub_facebook!
+def stub_facebook
   OmniAuth.config.mock_auth[:facebook] = {
-    "uid" => '12345',
-    "provider" => 'facebook',
-    "user_info" => {"nickname" => 'josevalim'},
-    "credentials" => {"token" => 'plataformatec'},
-    "extra" => {
-      "user_hash" => {
-        "id" => '12345',
-        "link" => 'http://facebook.com/josevalim',
-        "email" => 'user456@example.com',
-        "first_name" => 'Jose',
-        "last_name" => 'Valim',
-        "website" => 'http://blog.plataformatec.com.br'
+    :provider => 'facebook',
+    :uid => '111111',
+    :info => {
+      :nickname => 'jbloggs',
+      :email => 'joe@bloggs.com',
+      :name => 'Joe Bloggs',
+      :first_name => 'Joe',
+      :last_name => 'Bloggs',
+      :image => 'http://graph.facebook.com/1234567/picture?type=square',
+      :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
+      :location => 'Palo Alto, California'
+    },
+    :credentials => {
+      :token => 'ABCDEF', # OAuth 2.0 access_token, which you may wish to store
+      :expires_at => 1321747205, # when the access token expires (if it expires)
+      :expires => false # if you request `offline_access` this will be false
+    },
+    :extra => {
+      :raw_info => {
+        :id => '111111',
+        :name => 'Joe Bloggs',
+        :first_name => 'Joe',
+        :last_name => 'Bloggs',
+        :link => 'http://www.facebook.com/jbloggs',
+        :username => 'jbloggs',
+        :location => { :id => '123456789', :name => 'Palo Alto, California' },
+        :gender => 'male',
+        :email => 'joe@bloggs.com',
+        :timezone => -8,
+        :locale => 'en_US',
+        :verified => true,
+        :updated_time => '2011-11-11T06:21:03+0000'
       }
     }
   }
 end
 
+def stub_linkedin
+  OmniAuth.config.mock_auth[:linkedin] = {
+    :provider => 'linkedin',
+    :uid => '222222',
+    :credentials => {
+      :token => 'ABCDEF',
+      :secret => '1321747205'
+    }
+  }
+end
+
+def stub_twitter
+  OmniAuth.config.mock_auth[:twitter] = {
+    'uid' => '819797',
+    'provider' => 'twitter',
+    'user_info' => {
+      'nickname' => 'episod',
+      'name' => 'Taylor Singletary',
+      'location' => 'San Francisco, CA',
+      'image' => 'http://a0.twimg.com/profile_images/1258681373/hobolumbo.jpg',
+      'description' => 'Reality Technician, Developer Advocate at Twitter, hobolumbo',
+      'urls' => {
+        'Website' => 'http://t.co/op3b03h',
+        'Twitter' => 'http://twitter.com/episod'
+      }
+    },
+    'credentials' => {
+      'token' => '819797-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw',
+      'secret' => 'J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA'
+    },
+    'extra' => {
+      'access_token' => 'oauth_token=819797-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw&oauth_token_secret=J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA&user_id=819797&screen_name=episod'
+    }
+  }
+end
 
 #OmniAuth.config.mock_auth[:default] = {
 #  "uid" => "1234",

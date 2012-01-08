@@ -20,6 +20,9 @@ def invite_code(options = {})
   InviteCode.create(options).token
 end
 
+def soap
+  save_and_open_page
+end
 
 ## fill_in_fields :user_email   => 'bob@smith.com'
 ## fill_in_fields :user, :email => 'bob@smith.com'
@@ -56,9 +59,5 @@ end
 
 #def use_javascript
 #  Capybara.current_driver = :selenium
-#end
-
-#def soap
-#  save_and_open_page
 #end
 

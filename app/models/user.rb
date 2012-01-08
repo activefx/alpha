@@ -41,49 +41,51 @@ class User
   include Mongoid::Timestamps
 
   ## Database authenticatable
-  field :email,              :type => String, :null => false
-  field :encrypted_password, :type => String, :null => false
+  field :email,                   :type => String, :null => false
+  field :encrypted_password,      :type => String, :null => false
 
   ## Recoverable
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
+  field :reset_password_token,    :type => String
+  field :reset_password_sent_at,  :type => Time
 
   ## Rememberable
-  field :remember_created_at, :type => Time
+  field :remember_created_at,     :type => Time
 
   ## Trackable
-  field :sign_in_count,      :type => Integer
-  field :current_sign_in_at, :type => Time
-  field :last_sign_in_at,    :type => Time
-  field :current_sign_in_ip, :type => String
-  field :last_sign_in_ip,    :type => String
+  field :sign_in_count,           :type => Integer
+  field :current_sign_in_at,      :type => Time
+  field :last_sign_in_at,         :type => Time
+  field :current_sign_in_ip,      :type => String
+  field :last_sign_in_ip,         :type => String
 
   ## Encryptable
-  # field :password_salt, :type => String
+  # field :password_salt,           :type => String
 
   ## Confirmable
-  field :confirmation_token,   :type => String
-  field :confirmed_at,         :type => Time
-  field :confirmation_sent_at, :type => Time
-  field :unconfirmed_email,    :type => String # Only if using reconfirmable
+  field :confirmation_token,      :type => String
+  field :confirmed_at,            :type => Time
+  field :confirmation_sent_at,    :type => Time
+  field :unconfirmed_email,       :type => String # Only if using reconfirmable
 
   ## Lockable
-  field :failed_attempts, :type => Integer # Only if lock strategy is :failed_attempts
-  field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
-  field :locked_at,       :type => Time
+  field :failed_attempts,         :type => Integer # Only if lock strategy is :failed_attempts
+  field :unlock_token,            :type => String # Only if unlock strategy is :email or :both
+  field :locked_at,               :type => Time
 
   ## Token authenticatable
-  # field :authentication_token, :type => String
+  # field :authentication_token,    :type => String
 
   ## Omniauthable
-  field :created_by_omniauth, :type => Boolean, :default => false
+  field :created_by_omniauth,     :type => Boolean, :default => false
 
-  field :invite_code, :type => String
+  field :invite_code,             :type => String
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :invite_code
 
-  #has_many :user_tokens, :autosave => true
+  has_many :authentications, :dependent => :destroy,
+                             :autosave => true,
+                             :validate => false
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :timeoutable
@@ -94,6 +96,7 @@ class User
   # Devise extensions must be included after devise
   # modules have been defined for the class
   include Extensions::ForDevise
+  include Extensions::ForOmniauth
 
   validates :invite_code, :presence => true, :if => :beta_user_signup?
 
@@ -120,6 +123,79 @@ class User
       end
     end
   end
+
+
+#  def apply_omniauth(omniauth)
+#    #add some info about the user
+#    #self.name = omniauth['user_info']['name'] if name.blank?
+#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
+#    self.email = omniauth['user_info']['email'] if self.email.blank?
+#    unless omniauth['credentials'].blank?
+#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#      #user_tokens.build(:provider => omniauth['provider'],
+#      #                  :uid => omniauth['uid'],
+#      #                  :token => omniauth['credentials']['token'],
+#      #                  :secret => omniauth['credentials']['secret'])
+#    else
+#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#    end
+#    #self.confirm!# unless user.email.blank?
+#  end
+
+#  def apply_omniauth(omniauth)
+#    self.login = omniauth['user_info']['name'] if login.blank?
+#    self.login = omniauth['user_info']['nickname'] if login.blank?
+#    user_tokens.build(:provider => omniauth['provider'],
+#                      :token => omniauth['credentials']['token'],
+#                      :secret => omniauth['credentials']['secret'],
+#                      :uid => omniauth['uid'])
+#  end
+
+#  def apply_omniauth(omniauth)
+#    #add some info about the user
+
+#    fbinfo = ::Hashie::Mash.new((omniauth["user_info"] rescue {}))
+
+#    access_token = omniauth["credentials"]["token"] rescue nil
+
+#    #raise "Can't authorize!" unless valid_facebook_auth? fbinfo
+
+#    #self.facebok_id = fbinfo.id
+#    self.email ||= fbinfo.email
+#    self.first_name ||= fbinfo.first_name
+#    self.last_name ||= fbinfo.last_name
+#    #self.password ||= Devise.friendly_token[0,40]
+#    #self.birthday = Date.parse(fbinfo.birthday) rescue nil
+#    if changed? && !email.blank? && self.save(:validate => false)
+#      Rails.logger.warn "Persisting user failed: #{self.to_s} with errors:\n#{self.errors.full_messages.join("\n")}\n\n"
+#    end
+
+#    #self.name = omniauth['user_info']['name'] if name.blank?
+#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
+#    save(:validate => false)
+#    t = UserToken.find_or_initialize_by(:provider => omniauth['provider'], :uid => omniauth['uid'])
+#    t.apply_omniauth(omniauth)
+#    t
+#  end
+
+#  def apply_omniauth(omniauth)
+#    return if omniauth['provider'].blank? || omniauth['uid'].blank?
+#    #add some info about the user
+#    self.apply_user_info(omniauth, omniauth['provider'])
+#    # Build the user token
+#    omniauth_params = self.build_omniauth_params(omniauth)
+#    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
+#      token.update_attributes(omniauth_params)
+#    else
+#      if self.new_record?
+#        self.user_tokens.build(omniauth_params)
+#      else
+#        self.user_tokens.create(omniauth_params)
+#      end
+#    end
+#  end
+
+
 
 end
 #  has_many :user_tokens, autosave: true
@@ -206,101 +282,11 @@ end
 #    self.user_tokens.find_by_provider(name.to_s)
 #  end
 
-#  def apply_omniauth(omniauth)
-#    return if omniauth['provider'].blank? || omniauth['uid'].blank?
-#    #add some info about the user
-#    self.apply_user_info(omniauth, omniauth['provider'])
-#    # Build the user token
-#    omniauth_params = self.build_omniauth_params(omniauth)
-#    if token = self.user_tokens.where(:provider => omniauth['provider'], :uid => omniauth['uid']).first
-#      token.update_attributes(omniauth_params)
-#    else
-#      if self.new_record?
-#        self.user_tokens.build(omniauth_params)
-#      else
-#        self.user_tokens.create(omniauth_params)
-#      end
-#    end
-#  end
 
-#  # Custom logic for adding user information from third party authentications
-#  def apply_user_info(omniauth, provider = nil)
-#    if omniauth_username = omniauth.recursive_find_by_key('nickname')
-#      # set username to third party nickname if available
-#      self.username = omniauth_username if self.username.blank?
-#    end
-#    if omniauth_email = omniauth.recursive_find_by_key('email')
-#      self.email = omniauth_email if self.email.blank?
-#      # otherwise just set username to email addre
-#      self.username = omniauth_email if self.username.blank?
-#    end
-#  end
 
-#  def build_omniauth_params(omniauth)
-#    omniauth_params = {:provider => omniauth['provider'].to_s, :uid => omniauth['uid'].to_s}
-#    unless omniauth['credentials'].blank?
-#      credentials = omniauth['credentials']
-#      omniauth_params.merge!(:token => credentials['token']) unless credentials['token'].blank?
-#      omniauth_params.merge!(:secret => credentials['secret']) unless credentials['secret'].blank?
-#    end
-#    # Store all of the data for debugging and development
-#    extra = omniauth['extra'].try(:except, 'access_token')
-#    omniauth_params.merge!(:omniauth => extra) unless extra.blank?
-#    return omniauth_params
-#  end
 
-#  def apply_omniauth(omniauth)
-#    #add some info about the user
-#    #self.name = omniauth['user_info']['name'] if name.blank?
-#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
-#    self.email = omniauth['user_info']['email'] if self.email.blank?
-#    unless omniauth['credentials'].blank?
-#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#      #user_tokens.build(:provider => omniauth['provider'],
-#      #                  :uid => omniauth['uid'],
-#      #                  :token => omniauth['credentials']['token'],
-#      #                  :secret => omniauth['credentials']['secret'])
-#    else
-#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#    end
-#    #self.confirm!# unless user.email.blank?
-#  end
 
-#  def apply_omniauth(omniauth)
-#    self.login = omniauth['user_info']['name'] if login.blank?
-#    self.login = omniauth['user_info']['nickname'] if login.blank?
-#    user_tokens.build(:provider => omniauth['provider'],
-#                      :token => omniauth['credentials']['token'],
-#                      :secret => omniauth['credentials']['secret'],
-#                      :uid => omniauth['uid'])
-#  end
 
-#  def apply_omniauth(omniauth)
-#    #add some info about the user
-
-#    fbinfo = ::Hashie::Mash.new((omniauth["user_info"] rescue {}))
-
-#    access_token = omniauth["credentials"]["token"] rescue nil
-
-#    #raise "Can't authorize!" unless valid_facebook_auth? fbinfo
-
-#    #self.facebok_id = fbinfo.id
-#    self.email ||= fbinfo.email
-#    self.first_name ||= fbinfo.first_name
-#    self.last_name ||= fbinfo.last_name
-#    #self.password ||= Devise.friendly_token[0,40]
-#    #self.birthday = Date.parse(fbinfo.birthday) rescue nil
-#    if changed? && !email.blank? && self.save(:validate => false)
-#      Rails.logger.warn "Persisting user failed: #{self.to_s} with errors:\n#{self.errors.full_messages.join("\n")}\n\n"
-#    end
-
-#    #self.name = omniauth['user_info']['name'] if name.blank?
-#    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
-#    save(:validate => false)
-#    t = UserToken.find_or_initialize_by(:provider => omniauth['provider'], :uid => omniauth['uid'])
-#    t.apply_omniauth(omniauth)
-#    t
-#  end
 
 #  def password_required?
 #    (user_tokens.empty? || !password.blank?) && super
