@@ -18,8 +18,8 @@ require 'openid/store/filesystem'
   configatron.github.app_key = nil
   configatron.github.app_scope = 'user,public_repo'
   # LinkedIn omniauth config
-  configatron.linked_in.app_id = nil
-  configatron.linked_in.app_secret = nil
+  configatron.linkedin.app_id = nil
+  configatron.linkedin.app_secret = nil
   # Facebook omniauth config
   configatron.facebook.app_id = nil
   configatron.facebook.app_key = nil

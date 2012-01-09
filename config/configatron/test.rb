@@ -11,8 +11,8 @@
   configatron.github.app_key = 'XXXX'
   configatron.github.app_scope = 'user,public_repo'
   # LinkedIn omniauth config
-  configatron.linked_in.app_id = 'XXXX'
-  configatron.linked_in.app_secret = 'XXXX'
+  configatron.linkedin.app_id = 'XXXX'
+  configatron.linkedin.app_secret = 'XXXX'
   # Facebook omniauth config
   configatron.facebook.app_id = 'XXXX'
   configatron.facebook.app_key = 'XXXX'

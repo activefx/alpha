@@ -210,9 +210,9 @@ Devise.setup do |config|
                              :scope => "user,public_repo",
                              :require => "omniauth-github"
   end
-  unless configatron.linked_in.app_id.nil?
-    config.omniauth :linked_in, configatron.linked_in.app_id,
-                                configatron.linked_in.app_key,
+  unless configatron.linkedin.app_id.nil?
+    config.omniauth :linkedin, configatron.linkedin.app_id,
+                                configatron.linkedin.app_key,
                                 :require => "omniauth-linkedin"
   end
   unless configatron.facebook.app_id.nil?

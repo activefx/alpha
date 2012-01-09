@@ -18,8 +18,8 @@ require 'openid/store/filesystem'
   configatron.github.app_id = ENV['GITHUB_APP_ID']
   configatron.github.app_key = ENV['GITHUB_APP_KEY']
   # LinkedIn omniauth config
-  configatron.linked_in.app_id = ENV['LINKED_IN_APP_ID']
-  configatron.linked_in.app_key = ENV['LINKED_IN_APP_SECRET']
+  configatron.linkedin.app_id = ENV['LINKED_IN_APP_ID']
+  configatron.linkedin.app_key = ENV['LINKED_IN_APP_SECRET']
   # Facebook omniauth config
   configatron.facebook.app_id = ENV['FACEBOOK_APP_ID']
   configatron.facebook.app_key = ENV['FACEBOOK_APP_KEY']
