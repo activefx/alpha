@@ -163,11 +163,12 @@ GIT
 
 GIT
   remote: http://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 5e62b21c8f258010af7f5bc858b89a24f16936a9
-  branch: static
+  revision: 7389015df48ad2c6bba1e20fc45be90e3080bb84
   specs:
-    twitter-bootstrap-rails (1.4.0)
+    twitter-bootstrap-rails (1.4.3)
       actionpack
+      jquery-rails (>= 1.0)
+      less-rails (~> 2.1.0)
       railties
 
 GIT
@@ -221,6 +222,8 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     columnize (0.3.6)
+    commonjs (0.2.0)
+      therubyracer (~> 0.9.9)
     configatron (2.9.0)
       yamler (>= 0.1.0)
     crack (0.3.1)
@@ -318,6 +321,12 @@ GEM
       railties (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
+    less (2.0.8)
+      commonjs (~> 0.2.0)
+      therubyracer (~> 0.9.9)
+    less-rails (2.1.2)
+      actionpack (>= 3.1)
+      less (~> 2.0.7)
     libnotify (0.7.0)
     libv8 (3.3.10.4)
     mail (2.3.0)

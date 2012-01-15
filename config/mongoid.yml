@@ -37,4 +37,6 @@ production:
 # For Heroku
 # production:
 #  uri: <%= ENV['MONGOHQ_URL'] %>
+# or
+#  uri: <%= ENV['MONGOLAB_URI'] %>
 

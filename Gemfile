@@ -40,7 +40,7 @@ gem 'haml-rails'
 gem 'sass'
 gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' #, :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
 
 # Javascript

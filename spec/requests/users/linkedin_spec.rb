@@ -21,7 +21,7 @@ describe "Linkedin authentication" do
       page.should have_content "Sign In"
       user = User.where(:email => "user@example.com").first
       user.should_not be_nil
-      user.authentications.where(:provider => "linkedin", :uid => "222222").count.should == 1
+      user.authentications.where(:provider => "linkedin", :uid => "D9CZBaecKW").count.should == 1
     end
 
   end

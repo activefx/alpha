@@ -75,26 +75,38 @@ end
 def stub_linked_in
   OmniAuth.config.mock_auth[:linkedin] = {
     "provider" => "linkedin",
-    "uid" => "222222",
+    "uid" => "D9CZBaecKW",
     "credentials" => {
-      "token" => "ABCDEF",
-      "secret" => "1321747205"
+      "token" => "aa431794-0ecf-3eb0-54c2-8a1c3a53bed1",
+      "secret" => "a3d6aa31-e082-4fee-97a7-49dda7c2dffa"
+    },
+    "raw_info" => {
+      "firstName" => "John",
+      "headline" => "Linkedin User Headline",
+      "id" => "D9CZBaecKW",
+      "industry"=>"Renewables & Environment",
+      "lastName"=>"Doe",
+      "publicProfileUrl"=>"http://www.linkedin.com/in/johndoe"
     },
     "info" => {
       "first_name" => "John",
+      "headline" => "Linkedin User Headline",
+      "image" => nil,
+      "industry" => "Renewables & Environment",
       "last_name" => "Doe",
-      "location" => "San Francisco Bay Area",
-      "image" => "http://media01.linkedin.com/mpr/mpr/shrink_80_80/p/1/000/06d/2e1/162b903.jpg",
-      "description" => "My bio on LinkedIn.",
+      "name" => "John Doe",
       "urls" => {
-        "Company Website" => "http://example.com/",
-        "LinkedIn" => "http://www.linkedin.com/in/john.doe"
-      },
-      "name" => "John Doe"
+        "public_profile" => "http://www.linkedin.com/in/johndoe"
+      }
     },
     "extra" => {
-      "user_hash" => {
-        "screen_name" => "john.doe"
+      "access_token" => {
+        "token" => "aa431794-0ecf-3eb0-54c2-8a1c3a53bed1",
+        "secret" => "a3d6aa31-e082-4fee-97a7-49dda7c2dffa",
+        "consumer" => {
+          "key" => "tewdec6irote",
+          "secret" => "2dAG1E6icxrojCJK"
+        }
       }
     }
   }

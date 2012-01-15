@@ -1,3 +1,5 @@
+# TODO: Change name in app layout
+
 namespace :development do
   desc "Substitute application name for Alpha"
   task :install => :environment do
