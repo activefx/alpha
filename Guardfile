@@ -9,8 +9,6 @@ end
 #  watch(%r{^(config|lib)/.*})
 #end
 
-# bundle exec rake assets:precompile RAILS_ENV=development
-
 guard 'sass', :input => 'app/assets/stylesheets', :noop => true
 
 guard 'spork', { :wait => 60,
@@ -53,29 +51,9 @@ guard 'rspec', { :all_after_pass => false,
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
 end
 
-#guard 'coffeescript', :input => 'app/assets/javascripts', :output => 'public/javascripts'
-
-#guard 'rails-assets' do
-#  watch(%r{^app/assets/.+$})
-#  watch('config/application.rb')
-#end
-
-## Run JS and CoffeeScript files in a typical Rails 3.1 fashion, placing Underscore templates in app/views/*.jst
-## Your spec files end with _spec.{js,coffee}.
-
-#spec_location = "spec/javascripts/%s_spec"
-
-## uncomment if you use NerdCapsSpec.js
-## spec_location = "spec/javascripts/%sSpec"
-
-#guard 'jasmine-headless-webkit' do
-#  watch(%r{^app/views/.*\.jst$})
-#  watch(%r{^public/javascripts/(.*)\.js$}) { |m| newest_js_file(spec_location % m[1]) }
-#  watch(%r{^app/assets/javascripts/(.*)\.(js|coffee)$}) { |m| newest_js_file(spec_location % m[1]) }
-#  watch(%r{^spec/javascripts/(.*)_spec\..*}) { |m| newest_js_file(spec_location % m[1]) }
-#end
-
-##guard 'uglify', :destination_file => "public/javascripts/application.js" do
-##  watch (%r{app/assets/javascripts/application.js})
-##end
+guard 'jasmine', :phantomjs_bin => '~/phantomjs/bin/phantomjs' do
+  watch(%r{app/assets/javascripts/(.+)\.(js\.coffee|js|coffee)$}) { |m| "spec/javascripts/#{m[1]}_spec.#{m[2]}" }
+  watch(%r{spec/javascripts/(.+)_spec\.(js\.coffee|js|coffee)$})  { |m| puts m.inspect; "spec/javascripts/#{m[1]}_spec.#{m[2]}" }
+  watch(%r{spec/javascripts/spec\.(js\.coffee|js|coffee)$})       { "spec/javascripts" }
+end
 

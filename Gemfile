@@ -57,7 +57,8 @@ gem 'whenever', :require => false
 # gem 'whoops', :git => git://github.com/flyingmachine/whoops.git or git://github.com/technekes/whoops.git
 
 group :production do
-  #gem 'therubyracer-heroku'
+  # For heroku:
+  # gem 'pg'
 end
 
 # Gems used only for assets and not required
@@ -93,21 +94,19 @@ group :development, :test do
   gem 'database_cleaner'
   # Potential Spork alternative: https://github.com/jstorimer/spin
   gem 'spork', '>= 0.9.0.rc9'
-  gem 'jasmine'
-  #gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
+  gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
-  #gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
-  gem 'guard-jasmine-headless-webkit' #, :git => 'git://github.com/johnbintz/guard-jasmine-headless-webkit.git'
+  gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
   gem 'guard-sass'
   gem 'guard-uglify'
   gem 'guard-process'
-  gem 'guard-rails-assets' #, :git => 'git://github.com/dnagir/guard-rails-assets.git'
-  #gem 'guard-rails-assets', :git => 'git://github.com/mcolyer/guard-rails-assets.git', :branch => 'patch-1', :ref => '73d35d98de3b4c1f510ed666f9a16c869c2567c6'
-  gem 'jasmine-headless-webkit'
+  gem 'guard-rails-assets'
+  gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
+  gem 'jasmine'
   gem 'vcr', '~> 2.0.0.beta1'
   gem 'webmock', :require => false
   platforms :ruby do

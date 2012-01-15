@@ -4,7 +4,7 @@ def start_simplecov
   require 'simplecov'
   SimpleCov.start 'rails' do
     add_filter "/factories/"
-  end unless ENV["SKIP_COV"]
+  end
 end
 
 def spork?
@@ -14,7 +14,7 @@ end
 def setup_environment
   ENV["RAILS_ENV"] ||= 'test'
 
-  start_simplecov unless spork?
+  start_simplecov unless spork? || ENV["SKIP_COV"]
 
   if spork?
     ENV['DRB'] = 'true'
