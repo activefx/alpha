@@ -3,7 +3,7 @@ HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'http://rubygems.org'
 
-gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-2-stable'
+gem 'rails', '~> 3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -23,7 +23,7 @@ gem 'bson_ext', '~> 1.4'
 # mongoid_search
 
 # Authentication / Authorization
-gem 'devise', '~> 2.0.0.rc'
+gem 'devise', '~> 2.0'
 gem 'omniauth', '~> 1.0', :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-oauth', :git => 'git://github.com/intridea/omniauth-oauth.git'
 gem 'omniauth-oauth2', :git => 'git://github.com/intridea/omniauth-oauth2.git'
@@ -44,9 +44,6 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
 
 # Javascript
-if HOST_OS =~ /linux/i
-  gem 'therubyracer', :require => 'v8'
-end
 gem 'jquery-rails'
 # gem 'rails-backbone'
 
@@ -93,7 +90,7 @@ group :development, :test do
   gem 'fuubar'
   gem 'database_cleaner'
   # Potential Spork alternative: https://github.com/jstorimer/spin
-  gem 'spork', '>= 0.9.0.rc9'
+  gem 'spork-rails'
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rails'
@@ -117,6 +114,7 @@ group :development, :test do
     gem 'rb-fsevent'
     gem 'growl'
   when /linux/i
+    gem 'therubyracer', :require => 'v8'
     gem 'rb-inotify' #, '>= 0.5.1'
     gem 'libnotify' #, '~> 0.1.3'
   when /mswin|windows/i
