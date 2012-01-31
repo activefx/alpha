@@ -37,10 +37,9 @@ gem 'omniauth-twitter', :git => 'git://github.com/arunagw/omniauth-twitter.git'
 gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
-gem 'sass'
+gem 'less-rails-bootstrap', :git => 'git://github.com/shinzui/less-rails-bootstrap.git'
 gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' #, :branch => 'static'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
 
 # Javascript
@@ -48,6 +47,8 @@ gem 'jquery-rails'
 # gem 'rails-backbone'
 
 # Utilities
+gem 'capistrano'
+gem 'thin'
 gem 'foreman'
 gem 'whenever', :require => false
 # Use Whoops for error notifications when 3.1 ready
@@ -61,8 +62,6 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'compass', :git => 'https://github.com/chriseppstein/compass.git'
-  gem 'sass-rails', '  ~> 3.1'
   gem 'coffee-rails', '~> 3.1'
   gem 'uglifier'
   gem 'yui-compressor'
@@ -126,7 +125,4 @@ group :development, :test do
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
-
-# Deployment
-gem 'capistrano'
 

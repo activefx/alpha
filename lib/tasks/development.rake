@@ -1,4 +1,5 @@
 # TODO: Change name in app layout
+# TODO: Change session store and token
 
 namespace :development do
   desc "Substitute application name for Alpha"
