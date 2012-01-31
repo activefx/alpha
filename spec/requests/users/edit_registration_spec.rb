@@ -11,7 +11,7 @@ describe "User edit registration" do
   it "allows for changing the email" do
     fill_in "Email", :with => "newemail@example.com"
     click_button "Update"
-    page.has_content? "You updated your account successfully."
+    page.has_content? I18n.t('devise.registrations.updated')
   end
 
   it "allows for changing the password" do
@@ -19,15 +19,15 @@ describe "User edit registration" do
     fill_in "Confirm password", :with => "new password"
     fill_in "Current password", :with => @user.password
     click_button "Update"
-    page.has_content? "You updated your account successfully."
+    page.has_content? I18n.t('devise.registrations.updated')
   end
 
   it "allows for canceling the account" do
     click_link "Cancel my account"
     current_path.should == root_path
-    page.has_content? "Your account was successfully cancelled."
+    page.has_content? I18n.t('devise.registrations.destroyed')
     login_user(@user)
-    page.has_content? "Invalid email or password."
+    page.has_content? I18n.t('devise.failure.invalid')
   end
 
 

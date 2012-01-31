@@ -15,7 +15,7 @@ describe "User forget password" do
         fill_in "Email", :with => @user.email
         click_button "Reset password"
         current_path.should == new_user_session_path
-        page.has_content? "You will receive an email with instructions"
+        page.has_content? I18n.t('devise.passwords.send_instructions')
       end
 
       it "enables changing password after following email link" do
@@ -25,7 +25,7 @@ describe "User forget password" do
         fill_in "Confirm your new password", :with => "password"
         click_button "Change my password"
         current_path.should == user_root_path
-        page.should have_content "Your password was changed successfully. You are now signed in."
+        page.should have_content I18n.t('devise.passwords.updated')
       end
 
     end
@@ -44,7 +44,7 @@ describe "User forget password" do
         fill_in "Confirm your new password", :with => "password"
         click_button "Change my password"
         current_path.should == user_root_path
-        page.should have_content "Your password was changed successfully. You are now signed in."
+        page.should have_content I18n.t('devise.passwords.updated')
       end
 
     end

@@ -16,7 +16,7 @@ describe "User forget password" do
         fill_in "Email", :with => @user.email
         click_button "Resend unlock instructions"
         visit user_unlock_path(:unlock_token => @user.unlock_token)
-        page.should have_content "Your account was successfully unlocked. You are now signed in."
+        page.should have_content I18n.t('devise.unlocks.unlocked')
       end
 
     end
@@ -34,7 +34,7 @@ describe "User forget password" do
         fill_in "Email", :with => @user.email
         click_button "Resend unlock instructions"
         visit user_unlock_path(:unlock_token => @user.unlock_token)
-        page.should have_content "Your account was successfully unlocked. You are now signed in."
+        page.should have_content I18n.t('devise.unlocks.unlocked')
       end
 
     end

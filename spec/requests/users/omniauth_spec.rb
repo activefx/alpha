@@ -9,7 +9,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == user_root_path
-      page.should have_content "Successfully authorized from Facebook account."
+      page.should have_content I18n.t('devise.omniauth_callbacks.success', :kind => 'Facebook')
       page.should have_content "Sign Out"
       user = User.where(:email => "joe@bloggs.com").first
       user.should_not be_nil
@@ -22,7 +22,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == user_root_path
-      page.should have_content "Successfully authorized from Facebook account."
+      page.should have_content I18n.t('devise.omniauth_callbacks.success', :kind => 'Facebook')
       page.should have_content "Sign Out"
       user = User.where(:email => "joe@bloggs.com").first
       user.should_not be_nil
@@ -36,7 +36,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == user_root_path
-      page.should have_content "Successfully authorized from Facebook account."
+      page.should have_content I18n.t('devise.omniauth_callbacks.success', :kind => 'Facebook')
       page.should have_content "Sign Out"
       user = User.where(:email => "joe@bloggs.com").first
       user.should_not be_nil
@@ -56,7 +56,7 @@ describe "Omniauth authentication" do
         fill_in "Confirm password", :with => "password"
         click_button "Sign up"
         current_path.should == user_root_path
-        page.should have_content "You have signed up successfully"
+        page.should have_content I18n.t('devise.registrations.signed_up')
         user = User.where(:email => "joe@bloggs.com").first
         user.should_not be_nil
         user.authentications.where(:provider => 'facebook', :uid => "111111").count.should == 1
@@ -69,7 +69,7 @@ describe "Omniauth authentication" do
       click_link "Sign in with Facebook"
       click_link "Sign Out"
       current_path.should == root_path
-      page.should have_content "Signed out successfully."
+      page.should have_content I18n.t('devise.sessions.signed_out')
     end
 
     it "fails with invalid credentials", :omniauth do
@@ -77,7 +77,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == new_user_session_path
-      page.should have_content "Could not authorize you from Facebook because of invalid credentials."
+      page.should have_content I18n.t('devise.omniauth_callbacks.failure', :kind => 'Facebook', :reason => 'of invalid credentials')
       page.should have_content "Sign In"
     end
 
@@ -86,7 +86,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == new_user_session_path
-      page.should have_content "Could not authorize you from Facebook because of invalid response."
+      page.should have_content I18n.t('devise.omniauth_callbacks.failure', :kind => 'Facebook', :reason => 'of invalid response')
       page.should have_content "Sign In"
     end
 
@@ -95,7 +95,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == new_user_session_path
-      page.should have_content "Could not authorize you from Facebook because the service failed to respond."
+      page.should have_content I18n.t('devise.omniauth_callbacks.failure', :kind => 'Facebook', :reason => 'the service failed to respond')
       page.should have_content "Sign In"
     end
 

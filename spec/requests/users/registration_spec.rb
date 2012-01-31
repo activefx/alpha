@@ -5,7 +5,7 @@ describe "User registration" do
   it "is allowed with valid information" do
     register("user@example.com", "password")
     current_path.should == root_path
-    page.should have_content "You have signed up successfully"
+    page.should have_content I18n.t('devise.registrations.signed_up_but_unconfirmed')
   end
 
   it "fails with invalid information" do
@@ -32,7 +32,7 @@ describe "User registration" do
     it "is allowed with valid invite code" do
       register("user@example.com", "password", :invite_code => invite_code)
       current_path.should == beta_signups_path
-      page.should have_content "You have signed up successfully. However, we could not sign you in because your account is unconfirmed."
+      page.should have_content I18n.t('devise.registrations.signed_up_but_unconfirmed')
     end
 
     it "fails with an invalid invite code" do
@@ -44,7 +44,7 @@ describe "User registration" do
       token = invite_code(:invitation_sent_to => "user@example.com")
       register("user@example.com", "password", :invite_code => token)
       current_path.should == user_root_path
-      page.should have_content "You have signed up successfully"
+      page.should have_content I18n.t('devise.registrations.signed_up')
     end
 
   end

@@ -11,7 +11,7 @@ describe "Omniauth authentication" do
       visit new_user_session_path
       click_link "Sign in with Facebook"
       current_path.should == user_root_path
-      page.should have_content "Successfully authorized from Facebook account."
+      page.should have_content I18n.t('devise.omniauth_callbacks.success', :kind => 'Facebook')
       page.should have_content "Sign Out"
       user = User.where(:email => "joe@bloggs.com").first
       user.should_not be_nil
