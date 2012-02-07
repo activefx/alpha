@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/intridea/omniauth-oauth2.git
-  revision: 21fd9b0dde4b7afe052bc6a74ce32ca132078188
+  revision: 79594a131c4b5a9ffc11fb230b84805b176dc206
   specs:
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
@@ -84,6 +84,13 @@ GIT
       ruby_core_source (>= 0.1.4)
 
 GIT
+  remote: git://github.com/metaskills/less-rails-bootstrap.git
+  revision: c686bd139bf3ada6962f751641be289e6a62c9e7
+  specs:
+    less-rails-bootstrap (2.0.2)
+      less-rails (~> 2.1.0)
+
+GIT
   remote: git://github.com/mkdynamic/omniauth-facebook.git
   revision: 0a878f3520d21672772b6085442e13445e6e4784
   specs:
@@ -92,9 +99,9 @@ GIT
 
 GIT
   remote: git://github.com/netzpirat/guard-jasmine.git
-  revision: 6106daf06371b42b7de4db230b1777ab05941aa3
+  revision: 3616618d48c7db038870c5fef1ecad3149671cc2
   specs:
-    guard-jasmine (0.9.6)
+    guard-jasmine (0.9.8)
       childprocess
       guard (>= 0.8.3)
       multi_json
@@ -102,9 +109,9 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: a369f0467d1cd8827554464ac87855f65979b6b6
+  revision: da92c45953e907aed0fbb1e38477d845a7c3bc11
   specs:
-    simple_form (2.0.0.dev)
+    simple_form (2.0.0.rc)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
 
@@ -116,13 +123,6 @@ GIT
       launchy
 
 GIT
-  remote: git://github.com/shinzui/less-rails-bootstrap.git
-  revision: b379deb4faf23f0b5c9346f6901ff362aaeb41d8
-  specs:
-    less-rails-bootstrap (1.4.3)
-      less-rails (~> 2.1.0)
-
-GIT
   remote: git://github.com/skorks/omniauth-linkedin.git
   revision: ef92e0fb31a06cc8830de28172426e71d8753dc0
   specs:
@@ -131,7 +131,7 @@ GIT
 
 GIT
   remote: git://github.com/stouset/twitter_bootstrap_form_for.git
-  revision: d95b57f2880d7cb9cd3d88653d25f60bcaad8d76
+  revision: b581853d51beabe56515100fb66d83663d3fbd3c
   specs:
     twitter_bootstrap_form_for (1.0.5)
       actionpack (~> 3)
@@ -197,7 +197,7 @@ GEM
       json
     childprocess (0.3.0)
       ffi (~> 1.0.6)
-    chronic (0.6.6)
+    chronic (0.6.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -264,7 +264,7 @@ GEM
     guard-sass (0.5.4)
       guard (>= 0.4.0)
       sass (>= 3.1)
-    guard-spork (0.5.1)
+    guard-spork (0.5.2)
       guard (>= 0.10.0)
       spork (>= 0.8.4)
     guard-uglify (0.1.0)
@@ -301,7 +301,7 @@ GEM
     less (2.0.9)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
-    less-rails (2.1.3)
+    less-rails (2.1.5)
       actionpack (>= 3.1)
       less (~> 2.0.7)
     libnotify (0.7.2)
@@ -395,7 +395,7 @@ GEM
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
       ruby_core_source (>= 0.1.4)
-    ruby-debug-base19x (0.11.30.pre7)
+    ruby-debug-base19x (0.11.30.pre9)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
       rake (>= 0.8.1)
