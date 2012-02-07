@@ -37,7 +37,11 @@ gem 'omniauth-twitter', :git => 'git://github.com/arunagw/omniauth-twitter.git'
 gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
-gem 'less-rails-bootstrap', :git => 'git://github.com/metaskills/less-rails-bootstrap.git'
+# Bootstrap generators was used to set up scaffold, simple form and layouts
+# but commented out to allow twitter-bootstrap-rails to serve the Twitter Bootstrap
+# assets and avoid any conflicts
+# gem 'bootstrap-generators', '~> 2.0', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
@@ -72,7 +76,6 @@ group :development do
   gem 'ruby_parser'
   gem 'letter_opener', :git => 'git://github.com/ryanb/letter_opener.git'
   gem 'rails-footnotes'
-  gem 'bootstrap-generators', :git => 'git://github.com/activefx/bootstrap-generators.git'
 end
 
 group :development, :test do

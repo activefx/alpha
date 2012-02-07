@@ -10,8 +10,8 @@
     - if site_in_beta?
       = f.input :invite_code, :required => true
 
-  .actions
-    = f.button :submit, "Sign up"
+  .form-actions
+    = f.button :submit, "Sign up", :class => 'btn-primary'
 
 = render :partial => "devise/shared/links"
 

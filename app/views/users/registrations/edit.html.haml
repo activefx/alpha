@@ -11,8 +11,8 @@
     = f.input :password_confirmation, :label => "Confirm password", :required => false
     = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
 
-  .actions
-    = f.button :submit, "Update"
+  .form-actions
+    = f.button :submit, "Update", :class => 'btn-primary'
 
 %h3 Cancel my account
 

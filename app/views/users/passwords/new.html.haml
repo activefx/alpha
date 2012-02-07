@@ -6,8 +6,8 @@
   .inputs
     = f.input :email, :required => true
 
-  .actions
-    = f.button :submit, "Reset password"
+  .form-actions
+    = f.button :submit, "Reset password", :class => 'btn-primary'
 
 = render :partial => "devise/shared/links"
 
