@@ -5,8 +5,8 @@ FactoryGirl.define do
     sequence(:email) { |n| "admin#{n}@example.com" }
     password "password"
     password_confirmation "password"
-    after_create do |admin|
-      admin.confirm! if admin.confirmable?
+    if Administrator.confirmable?
+      confirmed_at Time.now.utc
     end
   end
 end

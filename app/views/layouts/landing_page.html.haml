@@ -9,10 +9,11 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
     = yield :head
-  %body
-    .topbar{ "data-dropdown" => "dropdown" }
-      .topbar-inner
+  %body.landing
+    .navbar.navbar-fixed-top
+      .navbar-inner
         .container
           = link_to "Alpha", root_path, :class => "brand"
           %ul.nav
@@ -21,9 +22,9 @@
           //  %input.input-small{ :type => "text", :placeholder => "Username" }
           //  %input.input-small{ :type => "password", :placeholder => "Password" }
           //  %button.btn{ :type => "submit" } Sign in
-    .container
+    .container.main-content
       .row
-        .span16
+        .span12
           = flash_messages
           = yield
       %footer

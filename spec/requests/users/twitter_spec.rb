@@ -16,7 +16,7 @@ describe "Twitter authentication" do
       fill_in "Confirm password", :with => "password"
       click_button "Sign up"
       current_path.should == root_path
-      page.should have_content "You have signed up successfully"
+      page.should have_content I18n.t('devise.registrations.signed_up_but_unconfirmed')
       # User still has to confirm their account
       page.should have_content "Sign In"
       user = User.where(:email => "user@example.com").first

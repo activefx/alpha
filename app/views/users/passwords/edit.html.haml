@@ -10,8 +10,8 @@
     = f.input :password, :label => "New password", :required => true
     = f.input :password_confirmation, :label => "Confirm your new password", :required => true
 
-  .actions
-    = f.button :submit, "Change my password"
+  .form-actions
+    = f.button :submit, "Change my password", :class => 'btn-primary'
 
 = render :partial => "devise/shared/links"
 

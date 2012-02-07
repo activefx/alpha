@@ -6,8 +6,8 @@
   .inputs
     = f.input :email, :required => true
 
-  .actions
-    = f.button :submit, "Resend confirmation instructions"
+  .form-actions
+    = f.button :submit, "Resend confirmation instructions", :class => 'btn-primary'
 
 = render :partial => "devise/shared/links"
 

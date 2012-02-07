@@ -3,6 +3,7 @@ Alpha::Application.routes.draw do
   resources :beta_signups
 
   resources :samples, :only => [ :index ]
+  resources :v2_samples, :only => [ :index ]
 
   devise_for :users, :controllers => { :confirmations => "users/confirmations",
                                        :omniauth_callbacks => "users/omniauth_callbacks",
@@ -17,6 +18,7 @@ Alpha::Application.routes.draw do
 
   namespace :admin do
     resources :beta_signups
+    resources :users
   end
 
   #match '/auth/:provider/callback' => 'authentications#create'

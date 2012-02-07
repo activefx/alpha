@@ -1,32 +1,38 @@
 !!!
 %html
   %head
-    %title
-      = content_for?(:title) ? yield(:title) : "Alpha"
-    // HTML5 shim, for IE6-8 support of HTML elements
+    %meta{:charset => "utf-8"}
+    %title= content_for?(:title) ? yield(:title) : "Alpha"
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+
+    / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       %script{ :src => "http://html5shim.googlecode.com/svn/trunk/html5.js" }
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-
     = yield :head
   %body
-    .topbar{ "data-dropdown" => "dropdown" }
-      .topbar-inner
+    .navbar.navbar-fixed-top
+      .navbar-inner
         .container
-          = link_to "Alpha", root_path, :class => "brand"
+          = link_to "Alpha", "#", :class => "brand"
           %ul.nav
+            %li.active
+              %a{:href => "#"} Home
+            %li
+              %a{:href => "#about"} About
+            %li
+              %a{:href => "#contact"} Contact
+          %ul.nav.pull-right
             = login_status
-          //%form.pull-right{ :action => "" }
-          //  %input.input-small{ :type => "text", :placeholder => "Username" }
-          //  %input.input-small{ :type => "password", :placeholder => "Password" }
-          //  %button.btn{ :type => "submit" } Sign in
     .container
       .row
-        .span16
+        .span12
           = flash_messages
-          = yield
+      = yield
+      %hr
       %footer
         %p= "&copy; #{Time.now.year}".html_safe
 
