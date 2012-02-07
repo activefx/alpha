@@ -2,9 +2,6 @@ Alpha::Application.routes.draw do
 
   resources :beta_signups
 
-  resources :samples, :only => [ :index ]
-  resources :v2_samples, :only => [ :index ]
-
   devise_for :users, :controllers => { :confirmations => "users/confirmations",
                                        :omniauth_callbacks => "users/omniauth_callbacks",
                                        :passwords => "users/passwords",
