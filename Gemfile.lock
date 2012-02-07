@@ -463,16 +463,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (~> 1.4)
+  bson_ext (~> 1.5)
   capistrano
   capybara
   capybara-mechanize!
   capybara-webkit
-  coffee-rails (~> 3.1)
+  coffee-rails (~> 3.2)
   configatron
   database_cleaner
   devise (~> 2.0)
-  factory_girl_rails (~> 1.3)
+  factory_girl_rails
   foreman
   fuubar
   guard
@@ -498,7 +498,7 @@ DEPENDENCIES
   libnotify
   linecache19!
   mocha
-  mongoid (~> 2.3)
+  mongoid (~> 2.4)
   mongoid-rspec!
   multi_json
   omniauth (~> 1.0)!
@@ -514,7 +514,7 @@ DEPENDENCIES
   rb-inotify
   rb-readline
   rspec-instafail
-  rspec-rails (~> 2.6)
+  rspec-rails (~> 2.8)
   ruby-debug-base19x (~> 0.11.30.pre4)
   ruby-debug19
   ruby_parser
