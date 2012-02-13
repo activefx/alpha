@@ -108,6 +108,7 @@ group :development, :test do
   gem 'jasmine'
   gem 'vcr', '~> 2.0.0.beta1'
   gem 'webmock', :require => false
+  gem 'timecop'
   platforms :ruby do
     gem 'rb-readline'
   end
