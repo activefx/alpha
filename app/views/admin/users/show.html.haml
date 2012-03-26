@@ -1,0 +1,28 @@
+.content
+  .page-header
+    %h1= "Details for User #{@user.email}"
+
+  %ul.breadcrumb
+    %li= link_to "Dashboard", administrator_root_path
+    %span.divider /
+    %li= link_to "Users", admin_users_path
+    %span.divider /
+    %li.active= link_to @user.email, admin_user_path(@user)
+
+  %ul.nav.nav-tabs
+    %li.icon.active
+      = link_to admin_users_path do
+        %i.icon-info-sign
+        Show
+    %li.icon
+      = link_to admin_user_path(@user), :confirm => "Are you sure?", :method => :delete do
+        %i.icon-remove
+        Delete
+
+  %h4 Basic info
+  %br
+
+  = show_for @user do |u|
+    - (@user.fields.keys - ["_id", "_type"]).each do |attribute|
+      = u.attribute attribute.to_sym
+

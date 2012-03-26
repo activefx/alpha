@@ -5,7 +5,7 @@ describe "User sign in" do
   describe do
 
     before(:each) do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
     end
 
     it "is allowed with valid information" do
@@ -19,8 +19,8 @@ describe "User sign in" do
   describe "in beta", :beta do
 
     before(:each) do
-      @invite_code = Factory.create(:invite_code)
-      @user = Factory(:user, :invite_code => @invite_code.token)
+      @invite_code = FactoryGirl.create(:invite_code)
+      @user = FactoryGirl.create(:user, :invite_code => @invite_code.token)
     end
 
     it "is allowed with valid information" do

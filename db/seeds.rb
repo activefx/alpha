@@ -11,7 +11,6 @@ require 'factory_girl_rails'
 
 25.times do
   Factory(:user)
+  Factory(:admin)
 end
-
-Factory(:admin)
 

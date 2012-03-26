@@ -7,7 +7,7 @@ describe "User forget password" do
     describe do
 
       before(:each) do
-        @user = Factory(:user)
+        @user = FactoryGirl.create(:user)
       end
 
       it "sends an email with instructions" do
@@ -33,8 +33,8 @@ describe "User forget password" do
     describe "in beta", :beta do
 
       before(:each) do
-        @invite_code = Factory.create(:invite_code)
-        @user = Factory(:user, :invite_code => @invite_code.token)
+        @invite_code = FactoryGirl.create(:invite_code)
+        @user = FactoryGirl.create(:user, :invite_code => @invite_code.token)
       end
 
       it "enables changing password after following email link" do

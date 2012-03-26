@@ -9,12 +9,16 @@ Alpha::Application.routes.draw do
                                        :sessions => "users/sessions",
                                        :unlocks => "users/unlocks" }
 
+  devise_for :administrators
+
   namespace :users do
     resources :authentications
   end
 
   namespace :admin do
+    resources :dashboard, :as => 'dashboard'
     resources :beta_signups
+    resources :administrators
     resources :users
   end
 
@@ -24,7 +28,7 @@ Alpha::Application.routes.draw do
   devise_for :administrators
 
   match '/user' => "welcome#index", :as => :user_root
-  match '/administrator' => "welcome#index", :as => :administrator_root
+  match 'admin/dashboard' => "admin/dashboard#index", :as => :administrator_root
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -6,8 +6,15 @@
 #     its(:full_name) { should == "John Doe" }
 #   end
 #
-# see https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+# see https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md &
+# http://robots.thoughtbot.com/post/19162390206/short-explicit-test-setups
+#
+# Invocation syntax
+#   create(:user)
+#   build(:user)
+#   post :create, user: attributes_for(:user)
+#
 RSpec.configure do |config|
-  config.include Factory::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
 end
 

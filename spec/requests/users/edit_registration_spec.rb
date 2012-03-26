@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "User edit registration" do
 
   before(:each) do
-    @user = Factory(:user, :password => "password", :password_confirmation => "password")
+    @user = FactoryGirl.create(:user, :password => "password", :password_confirmation => "password")
     login_user(@user)
     visit edit_user_registration_path(@user)
   end

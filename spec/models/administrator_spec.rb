@@ -4,7 +4,7 @@ describe Administrator do
 
   it { should be_mongoid_document }
   it { should be_timestamped_document }
-  it { Factory.build(:admin).should be_valid }
+  it { FactoryGirl.build(:admin).should be_valid }
 
   it_should_behave_like "a devise model"
 

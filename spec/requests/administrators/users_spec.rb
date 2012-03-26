@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "Admin users dashboard" do
 
   before(:all) do
-    @admin = Factory(:admin)
+    @admin = FactoryGirl.create(:admin)
     25.times do
-      Factory(:user)
+      FactoryGirl.create(:user)
     end
   end
 

@@ -1,4 +1,8 @@
-@import "twitter/bootstrap";
+@import "twitter/bootstrap/bootstrap";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
 // Incorporate twitter bootstrap styles
 // into elements by default
@@ -43,6 +47,22 @@ body.administration {
   }
   input[type="checkbox"] {
     margin-top: 2px;
+  }
+}
+
+#filter-form {
+  margin: 0px;
+}
+
+table {
+  width: 100%;
+}
+
+td.links {
+  max-width: none;
+  .inline {
+    margin:0px;
+    li { display:inline-block; }
   }
 }
 

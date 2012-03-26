@@ -1,0 +1,13 @@
+%h2 Sign in
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .inputs
+    = f.input :email, :required => false, :autofocus => true
+    = f.input :password, :required => false
+    = f.input :remember_me, :as => :boolean, :wrapper => :label_wrapped if devise_mapping.rememberable?
+
+  .form-actions
+    = f.button :submit, "Sign in", :class => 'btn-primary'
+
+= render :partial => "devise/shared/links"
+

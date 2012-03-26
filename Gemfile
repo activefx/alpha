@@ -15,12 +15,6 @@ gem 'configatron'
 # Database
 gem 'mongoid', '~> 2.4'
 gem 'bson_ext', '~> 1.5'
-# Useful Mongoid Add-ons
-# gem 'geocoder'
-# gem 'mongoid_spacial'
-# gem 'mongoid-mapreduce'
-# https://github.com/tristan622/mongoid-message
-# mongoid_search
 
 # Authentication / Authorization
 gem 'devise', '~> 2.0'
@@ -41,7 +35,6 @@ gem 'haml-rails'
 # but commented out to allow twitter-bootstrap-rails to serve the Twitter Bootstrap
 # assets and avoid any conflicts
 # gem 'bootstrap-generators', '~> 2.0', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'twitter_bootstrap_form_for', :git => 'git://github.com/stouset/twitter_bootstrap_form_for.git'
@@ -58,6 +51,11 @@ gem 'whenever', :require => false
 # Use Whoops for error notifications when 3.1 ready
 # gem 'whoops', :git => git://github.com/flyingmachine/whoops.git or git://github.com/technekes/whoops.git
 
+# Web Services
+# gem 'typhoeus'
+# gem 'em-http-request', :git => 'git://github.com/igrigorik/em-http-request.git'
+# gem 'em-synchrony', :git => 'git://github.com/igrigorik/em-synchrony.git'
+
 group :production do
   # For heroku:
   # gem 'pg'
@@ -66,9 +64,13 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'sass-rails','~> 3.2'
   gem 'coffee-rails', '~> 3.2'
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer'
   gem 'uglifier'
   gem 'yui-compressor'
+  gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 group :development do
@@ -85,9 +87,9 @@ group :development, :test do
   gem 'capybara-mechanize', :git => 'git://github.com/jeroenvandijk/capybara-mechanize.git'
   gem 'launchy'
   gem 'factory_girl_rails'
-  gem 'rspec-rails', '~> 2.8'
+  gem 'rspec-rails', '~> 2.9'
   gem 'rspec-instafail'
-  gem 'mocha'
+  gem 'mocha', :require => false
   gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
   gem 'fuubar'
   gem 'database_cleaner'
@@ -106,9 +108,9 @@ group :development, :test do
   gem 'guard-rails-assets'
   gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
   gem 'jasmine'
-  gem 'vcr', '~> 2.0.0.beta1'
+  gem 'vcr', '~> 2.0', :require => false
   gem 'webmock', :require => false
-  gem 'timecop'
+  gem 'timecop', :require => false
   platforms :ruby do
     gem 'rb-readline'
   end
@@ -125,8 +127,11 @@ group :development, :test do
     gem 'win32console'
     gem 'rb-notifu'
   end
-  gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'pry', :require => false
+  gem 'pry-doc', :require => false
+  # Or use ruby-debug
+  # gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+  # gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+  # gem 'ruby-debug19', :require => 'ruby-debug'
 end
 

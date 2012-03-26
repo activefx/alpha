@@ -9,7 +9,7 @@ defaults: &defaults
   persist_in_safe_mode: false
   preload_models: false
   raise_not_found_error: true
-  skip_version_skip: false
+  skip_version_check: false
   logger: true
 
 development:

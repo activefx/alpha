@@ -25,9 +25,19 @@ def setup_environment
 
   require File.expand_path("../../config/environment", __FILE__)
 
+  require 'pry'
+  require 'pry-doc'
+
   require 'rspec/rails'
 
+  require 'mocha'
+  require 'timecop'
+
+  #require 'em-synchrony'
+  #require 'em-synchrony/em-http'
   require 'webmock'
+  require 'webmock/rspec'
+  require 'vcr'
 
   require 'capybara/rspec'
   require 'capybara/mechanize'
@@ -43,11 +53,11 @@ def setup_environment
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
   end
-
 end
 
 def each_run
   if spork?
+    Rails.cache.clear
     ActiveSupport::Dependencies.clear
     # Be sure to load each factory's model before defining
     # the factory to ensure compatibility with Spork
@@ -58,6 +68,9 @@ def each_run
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
+  # Clean the log file
+  File.open("#{Rails.root}/log/test.log", 'w') { |file| file.truncate(0) }
 end
 
 # If spork is available in the Gemfile it'll be used but we don't force it.

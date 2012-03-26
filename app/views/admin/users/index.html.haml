@@ -1,0 +1,50 @@
+.content
+  .page-header
+    %h1 Users
+
+  %ul.breadcrumb
+    %li= link_to "Dashboard", administrator_root_path
+    %span.divider /
+    %li.active= link_to "Users", admin_users_path
+
+  %ul.nav.nav-tabs
+    %li.icon.active
+      = link_to admin_users_path do
+        %i.icon-th-list
+        List
+
+  .well
+    = form_tag admin_users_path, :method => 'get', :id => 'filter-form', :class => 'form-inline' do
+      = text_field_tag :search, params[:search], :placeholder => 'Filter by email'
+      = button_tag :type => 'submit', :class => 'btn btn-primary' do
+        %i.icon-white.icon-refresh
+        Refresh
+
+  %table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Email
+        %th Created At
+        %th Current Sign In At
+        %th Sign In Count
+        %th
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.email
+          %td= user.created_at
+          %td= user.current_sign_in_at
+          %td= user.sign_in_count
+          %td.links
+            %ul.inline
+              %li
+                = link_to admin_user_path(user), 'data-original-title' => 'Show', :rel => 'tooltip' do
+                  %i.icon-info-sign
+                  %span{ :style => 'display: none;' } Show
+              %li
+                = link_to admin_user_path(user), 'data-original-title' => 'Delete', :rel => 'tooltip', :confirm => "Are you sure?", :method => :delete do
+                  %i.icon-remove
+                  %span{ :style => 'display: none;' } Delete
+
+  = paginate @users
+

@@ -86,6 +86,14 @@ class User
     end
   end
 
+  def self.search(search, page)
+    if search
+      where(:email => /#{Regexp.quote(search)}/).page(page || 1).per(10)
+    else
+      page(page || 1).per(10)
+    end
+  end
+
 
 #  def apply_omniauth(omniauth)
 #    #add some info about the user

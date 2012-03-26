@@ -17,7 +17,7 @@ describe "Omniauth authentication" do
     end
 
     it "signs in an existing user if the email addresses match", :omniauth do
-      Factory(:user, :email => "joe@bloggs.com")
+      FactoryGirl.create(:user, :email => "joe@bloggs.com")
       stub_facebook
       visit new_user_session_path
       click_link "Sign in with Facebook"
@@ -30,7 +30,7 @@ describe "Omniauth authentication" do
     end
 
     it "signs in an existing user if they used this authentication before", :omniauth do
-      existing_user = Factory(:user, :email => "joe@bloggs.com")
+      existing_user = FactoryGirl.create(:user, :email => "joe@bloggs.com")
       existing_user.authentications.create(:provider => "facebook", :uid => "111111")
       stub_facebook
       visit new_user_session_path
