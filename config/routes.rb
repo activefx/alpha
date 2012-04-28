@@ -1,7 +1,5 @@
 Alpha::Application.routes.draw do
 
-  resources :beta_signups
-
   devise_for :users, :controllers => { :confirmations => "users/confirmations",
                                        :omniauth_callbacks => "users/omniauth_callbacks",
                                        :passwords => "users/passwords",
@@ -22,13 +20,16 @@ Alpha::Application.routes.draw do
     resources :users
   end
 
-  #match '/auth/:provider/callback' => 'authentications#create'
-  #devise_for :users, controllers: {registrations: 'registrations'}
-
-  devise_for :administrators
-
   match '/user' => "welcome#index", :as => :user_root
   match 'admin/dashboard' => "admin/dashboard#index", :as => :administrator_root
+
+  resources :beta_signups
+
+  #namespace :api do
+  #  namespace :v1 do
+  #    resources :users
+  #  end
+  #end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

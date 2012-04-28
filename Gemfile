@@ -91,6 +91,7 @@ group :development, :test do
   gem 'rspec-instafail'
   gem 'mocha', :require => false
   gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
+  gem 'rack-test'
   gem 'fuubar'
   gem 'database_cleaner'
   # Potential Spork alternative: https://github.com/jstorimer/spin
@@ -129,6 +130,7 @@ group :development, :test do
   end
   gem 'pry', :require => false
   gem 'pry-doc', :require => false
+  gem 'pry-rails'
   # Or use ruby-debug
   # gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   # gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
