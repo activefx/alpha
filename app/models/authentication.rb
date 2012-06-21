@@ -13,8 +13,7 @@ class Authentication
 
   belongs_to :user
 
-  index( [ [:provider, Mongo::ASCENDING],
-           [:uid, Mongo::ASCENDING] ] )
+  index({ provider: 1, uid: 1 })
 
   validates_presence_of   :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider

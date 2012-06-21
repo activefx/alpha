@@ -19,7 +19,7 @@ describe Authentication do
   it { should validate_presence_of(:provider) }
   it { should validate_uniqueness_of(:uid).scoped_to(:provider) }
 
-  it { should have_index_for([[:provider, 1], [:uid, 1]]) }
+  it { should have_index_for({ provider: 1, uid: 1}) }
 
 end
 

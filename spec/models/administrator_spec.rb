@@ -10,10 +10,10 @@ describe Administrator do
 
   context "data model" do
 
-    it { should_not allow_mass_assignment_of(:id => 1) }
-    it { should allow_mass_assignment_of(:email => "email@example.com") }
-    it { should allow_mass_assignment_of(:password => "password") }
-    it { should allow_mass_assignment_of(:password_confirmation => "password") }
+    it { should_not allow_mass_assignment_of(:id) }
+    it { should allow_mass_assignment_of(:email) }
+    it { should allow_mass_assignment_of(:password) }
+    it { should allow_mass_assignment_of(:password_confirmation) }
 
   end
 
@@ -21,7 +21,6 @@ describe Administrator do
 
     it { should_not be_confirmable }
     it { should be_database_authenticatable }
-    it { should_not be_encryptable }
     it { should be_lockable }
     it { should_not be_omniauthable }
     it { should_not be_recoverable }

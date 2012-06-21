@@ -13,7 +13,7 @@ describe InviteCode do
   it { should validate_presence_of(:token) }
   it { should validate_uniqueness_of(:token) }
 
-  it { should have_index_for(:token).with_options(:unique => true) }
+  it { should have_index_for(token: 1).with_options(:unique => true) }
 
   it "sets an invitation token before creation" do
     invite_code = InviteCode.create

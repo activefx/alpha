@@ -13,8 +13,8 @@ gem 'multi_json'
 gem 'configatron'
 
 # Database
-gem 'mongoid', '~> 2.4'
-gem 'bson_ext', '~> 1.5'
+gem 'mongoid', '~> 3.0.0.rc'
+#gem 'bson_ext', '<= 1.6.4'
 
 # Authentication / Authorization
 gem 'devise', '~> 2.0'
@@ -64,7 +64,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails','~> 3.2'
+  #gem 'sass-rails','~> 3.2'
   gem 'coffee-rails', '~> 3.2'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
@@ -103,7 +103,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-coffeescript'
   gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
-  gem 'guard-sass'
+  #gem 'guard-sass'
   gem 'guard-uglify'
   gem 'guard-process'
   gem 'guard-rails-assets'

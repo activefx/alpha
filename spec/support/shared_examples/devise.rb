@@ -17,7 +17,7 @@ shared_examples_for "a devise model" do
   if subject.call.confirmable?
     it { should have_field(:confirmation_token).of_type(String) }
     it { should_not allow_mass_assignment_of(:confirmation_token => "token") }
-    it { should have_index_for(:confirmation_token).with_options(:unique => true) }
+    it { should have_index_for(confirmation_token: 1).with_options(:unique => true) }
     it { should have_field(:confirmed_at).of_type(Time) }
     it { should_not allow_mass_assignment_of(:confirmed_at => Time.now) }
     it { should have_field(:confirmation_sent_at).of_type(Time) }
@@ -28,16 +28,9 @@ shared_examples_for "a devise model" do
 
   if subject.call.database_authenticatable?
     it { should have_field(:email).of_type(String).with_default_value_of("") }
-    it { should have_index_for(:email).with_options(:unique => true) }
+    it { should have_index_for(email: 1).with_options(:unique => true) }
     it { should have_field(:encrypted_password).of_type(String).with_default_value_of("") }
     it { should_not allow_mass_assignment_of(:encrypted_password => "encrypted_password") }
-  end
-
-  # encryptable
-
-  if subject.call.encryptable?
-    it { should have_field(:password_salt).of_type(String) }
-    it { should_not allow_mass_assignment_of(:password_salt => "password_salt") }
   end
 
   # lockable
@@ -50,7 +43,7 @@ shared_examples_for "a devise model" do
     if [:both, :email].include?(subject.call.class.unlock_strategy)
       it { should have_field(:unlock_token).of_type(String) }
       it { should_not allow_mass_assignment_of(:unlock_token => "unlock_token") }
-      it { should have_index_for(:unlock_token).with_options(:unique => true) }
+      it { should have_index_for(unlock_token: 1).with_options(:unique => true) }
     end
     it { should have_field(:locked_at).of_type(Time) }
     it { should_not allow_mass_assignment_of(:locked_at => Time.now) }
@@ -70,10 +63,8 @@ shared_examples_for "a devise model" do
   # rememberable
 
   if subject.call.rememberable?
-    unless Devise.use_salt_as_remember_token
-      it { should have_field(:remember_token).of_type(String) }
-      it { should_not allow_mass_assignment_of(:remember_token => "remember_token") }
-    end
+    it { should have_field(:remember_token).of_type(String) }
+    it { should_not allow_mass_assignment_of(:remember_token => "remember_token") }
     it { should have_field(:remember_created_at).of_type(Time) }
     it { should_not allow_mass_assignment_of(:remember_created_at => Time.now) }
   end

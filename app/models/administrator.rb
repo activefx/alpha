@@ -3,14 +3,15 @@ class Administrator
   include Mongoid::Timestamps
 
   ## Database authenticatable
-  field :email,              :type => String, :null => false
-  field :encrypted_password, :type => String, :null => false
+  field :email,              :type => String
+  field :encrypted_password, :type => String
 
   ## Recoverable
   # field :reset_password_token,   :type => String
   # field :reset_password_sent_at, :type => Time
 
   ## Rememberable
+  # field :remember_token,      :type => String
   # field :remember_created_at, :type => Time
 
   ## Trackable
@@ -19,9 +20,6 @@ class Administrator
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
-
-  ## Encryptable
-  # field :password_salt, :type => String
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -40,7 +38,7 @@ class Administrator
   attr_accessible :email, :password, :password_confirmation
 
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :registerable, :recoverable,
+  # :token_authenticatable, :registerable, :recoverable,
   # :rememberable, :omniauthable, :confirmable
   devise :database_authenticatable, :trackable,
          :validatable, :lockable, :timeoutable

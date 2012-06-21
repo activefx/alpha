@@ -15,7 +15,7 @@ class InviteCode
     document.generate_invitation_token
   end
 
-  index :token, :unique => true
+  index({ token: 1}, { unique: true })
 
   protected
 

@@ -12,12 +12,12 @@ describe User do
 
   context "data model" do
 
-    it { should_not allow_mass_assignment_of(:id => 1) }
-    it { should allow_mass_assignment_of(:email => "email@example.com") }
-    it { should allow_mass_assignment_of(:password => "password") }
-    it { should allow_mass_assignment_of(:password_confirmation => "password") }
-    it { should allow_mass_assignment_of(:remember_me => true) }
-    it { should_not allow_mass_assignment_of(:created_by_omniauth => true) }
+    it { should_not allow_mass_assignment_of(:id) }
+    it { should allow_mass_assignment_of(:email) }
+    it { should allow_mass_assignment_of(:password) }
+    it { should allow_mass_assignment_of(:password_confirmation) }
+    it { should allow_mass_assignment_of(:remember_me) }
+    it { should_not allow_mass_assignment_of(:created_by_omniauth) }
 
   end
 
@@ -25,7 +25,6 @@ describe User do
 
     it { should be_confirmable }
     it { should be_database_authenticatable }
-    it { should_not be_encryptable }
     it { should be_lockable }
     it { should be_omniauthable }
     it { should be_recoverable }
