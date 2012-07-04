@@ -96,6 +96,7 @@ group :development, :test do
   gem 'database_cleaner'
   # Potential Spork alternative: https://github.com/jstorimer/spin
   gem 'spork-rails'
+  gem 'listen', '>= 0.4.7'
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rails'
