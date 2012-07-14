@@ -1,35 +1,18 @@
 GIT
   remote: git://github.com/arunagw/omniauth-twitter.git
-  revision: 4ec7b826d171c25e62f5a3b8fcfb97bc8ce88e62
+  revision: 6ad2f2eab3a9515213ae0ea3226c18accc9d962e
   specs:
-    omniauth-twitter (0.0.11)
+    omniauth-twitter (0.0.12)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
 
 GIT
-  remote: git://github.com/bradphelan/jasminerice.git
-  revision: abeb984f9120f7064b206bdf7ec69fb2ded94b4e
-  specs:
-    jasminerice (0.0.9)
-      coffee-rails
-      haml
-
-GIT
-  remote: git://github.com/evansagge/mongoid-rspec.git
-  revision: 61a74f1ad78baeb956edfa0d8a58acc87fa29063
-  specs:
-    mongoid-rspec (1.4.6)
-      mongoid (>= 3.0.0.rc)
-      rake
-      rspec (>= 2.9)
-
-GIT
   remote: git://github.com/intridea/omniauth-github.git
-  revision: 53861273a6f2f7702b9bcbcd3416acf67b8a2061
+  revision: 2430e20843daa0acb681994d2f15fac0dbd44631
   specs:
-    omniauth-github (1.0.1)
+    omniauth-github (1.0.2)
       omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
 
 GIT
   remote: git://github.com/intridea/omniauth-oauth.git
@@ -41,10 +24,10 @@ GIT
 
 GIT
   remote: git://github.com/intridea/omniauth-oauth2.git
-  revision: 89d984ed9ff679a0f657f882afc87c7421db5f63
+  revision: e82ed5d2321ae27b6d2ff88e47244f32364bde3e
   specs:
-    omniauth-oauth2 (1.0.2)
-      oauth2 (~> 0.6.0)
+    omniauth-oauth2 (1.1.0)
+      oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
 
 GIT
@@ -57,42 +40,24 @@ GIT
 
 GIT
   remote: git://github.com/intridea/omniauth.git
-  revision: 30936dae1bff9223277cf60d52aef13b0da5a66f
+  revision: f611746401cbc07bfb59c83f248ff00b6048233e
   specs:
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
 
 GIT
-  remote: git://github.com/jeroenvandijk/capybara-mechanize.git
-  revision: 68184da411d2cbe968c3d1fbe1f02799f7499498
-  specs:
-    capybara-mechanize (0.3.0)
-      capybara (~> 1.1)
-      mechanize (~> 2.3)
-
-GIT
   remote: git://github.com/mkdynamic/omniauth-facebook.git
-  revision: f8bf90c776eb775dc346b6f40afa47e5b4e17b3a
+  revision: 6f4300b3f8bb6ac1618a33a8fc770f17eb79907d
   specs:
-    omniauth-facebook (1.3.0)
-      omniauth-oauth2 (~> 1.0.2)
-
-GIT
-  remote: git://github.com/netzpirat/guard-jasmine.git
-  revision: 0fd614d122639467ac48afee7d011ca498bfbcab
-  specs:
-    guard-jasmine (1.5.0)
-      childprocess
-      guard (>= 1.1.0)
-      multi_json
-      thor
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1)
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: 840d115d57f132dc79b2452b6437d6556158b093
+  revision: 6d4af552baaa7392988587516d15470f523a475d
   specs:
-    simple_form (2.0.2)
+    simple_form (2.1.0.dev)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
 
@@ -120,7 +85,7 @@ GIT
 
 GIT
   remote: http://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 23a4423162009ebb726ebc4fe236b713d081d0ee
+  revision: c55b4d330f45edf9f6e0593501004a9260b67249
   specs:
     twitter-bootstrap-rails (2.1.0)
       actionpack (>= 3.1)
@@ -179,13 +144,16 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    capybara-mechanize (0.3.0)
+      capybara (~> 1.1)
+      mechanize (~> 2.3)
     capybara-webkit (0.12.1)
       capybara (>= 1.0.0, < 1.2)
       json
-    childprocess (0.3.2)
+    childprocess (0.3.3)
       ffi (~> 1.0.6)
     chronic (0.6.7)
-    coderay (1.0.6)
+    coderay (1.0.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -211,21 +179,21 @@ GEM
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (3.4.2)
+    factory_girl (3.5.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (3.4.0)
-      factory_girl (~> 3.4.0)
+    factory_girl_rails (3.5.0)
+      factory_girl (~> 3.5.0)
       railties (>= 3.0.0)
     faraday (0.8.1)
       multipart-post (~> 1.1)
     ffi (1.0.11)
-    foreman (0.47.0)
+    foreman (0.51.0)
       thor (>= 0.13.6)
     fuubar (1.0.0)
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 0.0.10)
-    guard (1.2.1)
+    guard (1.2.3)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
     guard-bundler (1.0.0)
@@ -234,6 +202,11 @@ GEM
     guard-coffeescript (1.0.0)
       coffee-script (>= 2.2.0)
       guard (>= 1.1.0)
+    guard-jasmine (1.5.0)
+      childprocess
+      guard (>= 1.1.0)
+      multi_json
+      thor
     guard-process (1.0.3)
       ffi (~> 1.0.9)
       guard (>= 0.4.2)
@@ -244,7 +217,7 @@ GEM
       guard
       rails (>= 3.1.1)
       rake
-    guard-rspec (1.1.0)
+    guard-rspec (1.2.0)
       guard (>= 1.1)
     guard-spork (1.1.0)
       guard (>= 1.1)
@@ -264,17 +237,17 @@ GEM
     hpricot (0.8.6)
     httpauth (0.1)
     i18n (0.6.0)
-    jasmine (1.2.0)
-      jasmine-core (>= 1.2.0)
-      rack (~> 1.0)
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-    jasmine-core (1.2.0)
+    jasmine-sinon-rails (1.3.2.1)
+    jasminerice (0.0.9)
+      coffee-rails
+      haml
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
+    jwt (0.1.4)
+      json (>= 1.2.4)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -289,7 +262,7 @@ GEM
     libnotify (0.7.4)
       ffi (~> 1.0.11)
     libv8 (3.3.10.4)
-    libwebsocket (0.1.3)
+    libwebsocket (0.1.4)
       addressable
     listen (0.4.7)
       rb-fchange (~> 0.0.5)
@@ -308,16 +281,20 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     metaclass (0.0.1)
-    method_source (0.7.1)
+    method_source (0.8)
     mime-types (1.19)
-    mocha (0.11.4)
+    mocha (0.12.0)
       metaclass (~> 0.0.1)
-    mongoid (3.0.0.rc)
+    mongoid (3.0.1)
       activemodel (~> 3.1)
-      moped (~> 1.0.0.rc)
-      origin (~> 1.0.0.rc)
+      moped (~> 1.1.1)
+      origin (~> 1.0.3)
       tzinfo (~> 0.3.22)
-    moped (1.0.0.rc)
+    mongoid-rspec (1.4.6)
+      mongoid (>= 3.0.0.rc)
+      rake
+      rspec (>= 2.9)
+    moped (1.1.1)
     multi_json (1.3.6)
     multipart-post (1.1.5)
     net-http-digest_auth (1.2.1)
@@ -329,23 +306,25 @@ GEM
     net-ssh (2.5.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.5.4)
+    nokogiri (1.5.5)
     ntlm-http (0.1.1)
     oauth (0.4.6)
-    oauth2 (0.6.1)
-      faraday (~> 0.7)
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
       httpauth (~> 0.1)
-      multi_json (~> 1.3)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
     open4 (1.3.0)
-    origin (1.0.1)
-    orm_adapter (0.3.0)
+    origin (1.0.4)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
-    pry (0.9.9.6)
+    pry (0.9.10)
       coderay (~> 1.0.5)
-      method_source (~> 0.7.1)
-      slop (>= 2.4.4, < 3)
-    pry-doc (0.4.2)
-      pry (>= 0.9.0)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    pry-doc (0.4.4)
+      pry (>= 0.9.9.6)
       yard (~> 0.8.1)
     pry-rails (0.1.6)
       pry
@@ -385,21 +364,21 @@ GEM
     rb-readline (0.4.2)
     rdoc (3.12)
       json (~> 1.4)
-    rspec (2.10.0)
-      rspec-core (~> 2.10.0)
-      rspec-expectations (~> 2.10.0)
-      rspec-mocks (~> 2.10.0)
-    rspec-core (2.10.1)
-    rspec-expectations (2.10.0)
+    rspec (2.11.0)
+      rspec-core (~> 2.11.0)
+      rspec-expectations (~> 2.11.0)
+      rspec-mocks (~> 2.11.0)
+    rspec-core (2.11.0)
+    rspec-expectations (2.11.1)
       diff-lcs (~> 1.1.3)
     rspec-instafail (0.2.4)
-    rspec-mocks (2.10.1)
-    rspec-rails (2.10.1)
+    rspec-mocks (2.11.1)
+    rspec-rails (2.11.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec (~> 2.10.0)
-    ruby-openid (2.1.8)
+      rspec (~> 2.11.0)
+    ruby-openid (2.2.0)
     ruby-progressbar (0.0.10)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
@@ -417,7 +396,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.5.3)
     simplecov-html (0.5.3)
-    slop (2.4.4)
+    slop (3.3.2)
     spoon (0.0.1)
     spork (1.0.0rc3)
     spork-rails (3.2.0)
@@ -429,24 +408,24 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
-    thin (1.3.1)
+    thin (1.4.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.15.3)
+    thor (0.15.4)
     tilt (1.3.3)
     timecop (0.3.5)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
-    uglifier (1.2.5)
+    uglifier (1.2.6)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.5)
-    vcr (2.2.2)
+    vcr (2.2.3)
     warden (1.2.1)
       rack (>= 1.0)
     webmock (1.8.7)
@@ -469,7 +448,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capybara
-  capybara-mechanize!
+  capybara-mechanize
   capybara-webkit
   coffee-rails (~> 3.2)
   configatron
@@ -481,7 +460,7 @@ DEPENDENCIES
   guard
   guard-bundler
   guard-coffeescript
-  guard-jasmine!
+  guard-jasmine
   guard-process
   guard-rails
   guard-rails-assets
@@ -491,8 +470,8 @@ DEPENDENCIES
   haml
   haml-rails
   hpricot
-  jasmine
-  jasminerice!
+  jasmine-sinon-rails
+  jasminerice
   jquery-rails
   kaminari
   launchy
@@ -501,7 +480,7 @@ DEPENDENCIES
   listen (>= 0.4.7)
   mocha
   mongoid (~> 3.0.0.rc)
-  mongoid-rspec!
+  mongoid-rspec
   multi_json
   omniauth (~> 1.0)!
   omniauth-facebook!
@@ -520,7 +499,7 @@ DEPENDENCIES
   rb-inotify
   rb-readline
   rspec-instafail
-  rspec-rails (~> 2.9)
+  rspec-rails (~> 2.11)
   ruby_parser
   show_for
   simple_form!

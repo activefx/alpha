@@ -10,7 +10,8 @@ bundle install
 rake development:install
 git commit -a -m 'installed alpha'
 
-
+Requires PhantomJS for guard-jasmine testing
+See http://railscasts.com/episodes/261-testing-javascript-with-jasmine-revised
 
 # Build PhantomJS from source
   sudo apt-get install libqt4-dev libqtwebkit-dev qt4-qmake

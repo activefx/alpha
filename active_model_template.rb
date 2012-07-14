@@ -1,3 +1,6 @@
+# Or add gem 'active_attr to Gemfile
+require 'active_attr'
+
 class ActiveModelTemplate
   # ActiveAttr::Model
   #   includes from ActiveAttr:

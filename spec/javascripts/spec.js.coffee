@@ -1,2 +1,4 @@
-#=require application
-#=require_tree ./
+#= require application
+#= require jasmine-sinon
+#= require_tree .
+
