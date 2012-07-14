@@ -81,20 +81,22 @@ group :development do
 end
 
 group :development, :test do
+  gem 'rspec-rails', '~> 2.11'
   gem 'simplecov', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'capybara-mechanize', :git => 'git://github.com/jeroenvandijk/capybara-mechanize.git'
+  gem 'capybara-mechanize'
   gem 'launchy'
   gem 'factory_girl_rails'
-  gem 'rspec-rails', '~> 2.9'
   gem 'rspec-instafail'
   gem 'mocha', :require => false
-  gem 'mongoid-rspec', :git => 'git://github.com/evansagge/mongoid-rspec.git'
+  gem 'mongoid-rspec'
   gem 'rack-test'
   gem 'fuubar'
   gem 'database_cleaner'
-  # Potential Spork alternative: https://github.com/jstorimer/spin
+  # Potential Spork alternative:
+  #   https://github.com/jstorimer/spin
+  #   https://github.com/vizjerai/guard-spin
   gem 'spork-rails'
   gem 'listen', '>= 0.4.7'
   gem 'guard'
@@ -122,8 +124,8 @@ group :development, :test do
     gem 'growl'
   when /linux/i
     gem 'therubyracer', :require => 'v8'
-    gem 'rb-inotify' #, '>= 0.5.1'
-    gem 'libnotify' #, '~> 0.1.3'
+    gem 'rb-inotify'
+    gem 'libnotify'
   when /mswin|windows/i
     gem 'rb-fchange'
     gem 'win32console'
