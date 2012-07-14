@@ -2,7 +2,7 @@
 # TODO: Change session store and token
 
 namespace :development do
-  desc "Substitute application name for Alpha"
+  desc "Rename Alpah application based on current folder name"
   task :install => :environment do
     replace_application_names
   end

@@ -103,13 +103,13 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
-  gem 'guard-jasmine', :git => 'git://github.com/netzpirat/guard-jasmine.git'
   #gem 'guard-sass'
   gem 'guard-uglify'
   gem 'guard-process'
   gem 'guard-rails-assets'
-  gem 'jasminerice', :git => 'git://github.com/bradphelan/jasminerice.git'
-  gem 'jasmine'
+  gem 'jasminerice'
+  gem 'jasmine-sinon-rails'
+  gem 'guard-jasmine'
   gem 'vcr', '~> 2.0', :require => false
   gem 'webmock', :require => false
   gem 'timecop', :require => false

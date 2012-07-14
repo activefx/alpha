@@ -7,14 +7,6 @@ GIT
       omniauth-oauth (~> 1.0)
 
 GIT
-  remote: git://github.com/bradphelan/jasminerice.git
-  revision: abeb984f9120f7064b206bdf7ec69fb2ded94b4e
-  specs:
-    jasminerice (0.0.9)
-      coffee-rails
-      haml
-
-GIT
   remote: git://github.com/evansagge/mongoid-rspec.git
   revision: 61a74f1ad78baeb956edfa0d8a58acc87fa29063
   specs:
@@ -77,16 +69,6 @@ GIT
   specs:
     omniauth-facebook (1.3.0)
       omniauth-oauth2 (~> 1.0.2)
-
-GIT
-  remote: git://github.com/netzpirat/guard-jasmine.git
-  revision: 0fd614d122639467ac48afee7d011ca498bfbcab
-  specs:
-    guard-jasmine (1.5.0)
-      childprocess
-      guard (>= 1.1.0)
-      multi_json
-      thor
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
@@ -234,6 +216,11 @@ GEM
     guard-coffeescript (1.0.0)
       coffee-script (>= 2.2.0)
       guard (>= 1.1.0)
+    guard-jasmine (1.5.0)
+      childprocess
+      guard (>= 1.1.0)
+      multi_json
+      thor
     guard-process (1.0.3)
       ffi (~> 1.0.9)
       guard (>= 0.4.2)
@@ -264,12 +251,10 @@ GEM
     hpricot (0.8.6)
     httpauth (0.1)
     i18n (0.6.0)
-    jasmine (1.2.0)
-      jasmine-core (>= 1.2.0)
-      rack (~> 1.0)
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-    jasmine-core (1.2.0)
+    jasmine-sinon-rails (1.3.2.1)
+    jasminerice (0.0.9)
+      coffee-rails
+      haml
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -481,7 +466,7 @@ DEPENDENCIES
   guard
   guard-bundler
   guard-coffeescript
-  guard-jasmine!
+  guard-jasmine
   guard-process
   guard-rails
   guard-rails-assets
@@ -491,8 +476,8 @@ DEPENDENCIES
   haml
   haml-rails
   hpricot
-  jasmine
-  jasminerice!
+  jasmine-sinon-rails
+  jasminerice
   jquery-rails
   kaminari
   launchy
