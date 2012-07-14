@@ -69,6 +69,12 @@ capybara-*html
 .env
 .env.backup
 
+# rbenv
+.rbenv-version
+
+# Local Gemfile for developing without sharing dependencies
+.gemfile
+
 # Alpha Specific
 TODO
 NOTES

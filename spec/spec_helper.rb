@@ -18,23 +18,39 @@ def setup_environment
 
   if spork?
     ENV['DRB'] = 'true'
+    require "rails/application"
     require "rails/mongoid"
+    # Mongoid likes to preload all of your models in rails, making Spork
+    # a near worthless experience. It can be defeated with this code,
+    # in your Spork.prefork block, before loading config/environment.rb
     Spork.trap_class_method(Rails::Mongoid, :load_models)
+    # Prevent main application to eager_load in the prefork block
+    # (do not load files in autoload_paths)
+    Spork.trap_method(Rails::Application, :eager_load!)
+    # Devise likes to load your devise models. We want to avoid this.
+    # It does so in the routes file, when calling devise_for :users.
+    # Trap the the method to delay route loading.
     Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
   end
 
   require File.expand_path("../../config/environment", __FILE__)
 
-  require 'pry'
-  require 'pry-doc'
+  if spork?
+    # Load all railties files
+    Rails.application.railties.all { |r| r.eager_load! }
+  end
+
+  # Don't make pry a requirement to run the test suite
+  begin
+    require 'pry'
+    require 'pry-doc'
+  rescue LoadError; end
 
   require 'rspec/rails'
 
   require 'mocha'
   require 'timecop'
 
-  #require 'em-synchrony'
-  #require 'em-synchrony/em-http'
   require 'webmock'
   require 'webmock/rspec'
   require 'vcr'
@@ -51,17 +67,26 @@ def setup_environment
     config.mock_with :rspec
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
+    #config.filter_run :js => true if ENV['JS'] == 'true'
+    #config.filter_run :js => nil if ENV['JS'] == 'false'
     config.run_all_when_everything_filtered = true
   end
 end
 
 def each_run
   if spork?
+    # Start simplecov unless skip env variable set
+    # Solution from https://github.com/colszowka/simplecov/issues/42#issuecomment-4440284
+    start_simplecov unless ENV["SKIP_COV"]
     Rails.cache.clear
     ActiveSupport::Dependencies.clear
-    # Be sure to load each factory's model before defining
-    # the factory to ensure compatibility with Spork
-    # ex. load "#{Rails.root}/app/models/user.rb"
+    # When specifying a class for a factory, using a class constant
+    # will cause the model to be preloaded in prefork preventing
+    # reloading, whereas using a string will not
+    #
+    # Factory.define :user, class: 'MyUserClass' do |f|
+    #   ...
+    # end
     FactoryGirl.reload
   end
 
@@ -69,7 +94,7 @@ def each_run
   # in spec/support/ and its subdirectories.
   Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-  # Clean the log file
+  # Clean the log file before each run
   File.open("#{Rails.root}/log/test.log", 'w') { |file| file.truncate(0) }
 end
 
