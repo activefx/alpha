@@ -32,8 +32,8 @@ gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
 # Bootstrap generators was used to set up scaffold, simple form and layouts
-# but commented out to allow twitter-bootstrap-rails to serve the Twitter Bootstrap
-# assets and avoid any conflicts
+# but commented out to allow compass to serve the Twitter Bootstrap assets
+# and avoid any conflicts
 # gem 'bootstrap-generators', '~> 2.0', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 gem 'show_for'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
@@ -64,13 +64,14 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  #gem 'sass-rails','~> 3.2'
+  gem 'sass-rails', '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
+  gem 'compass-rails'
+  gem 'compass_twitter_bootstrap', :git => 'git://github.com/wyuenho/compass-twitter-bootstrap.git'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
   gem 'uglifier'
   gem 'yui-compressor'
-  gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 group :development do
@@ -105,10 +106,6 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-coffeescript'
-  #gem 'guard-sass'
-  gem 'guard-uglify'
-  gem 'guard-process'
-  gem 'guard-rails-assets'
   gem 'jasminerice'
   gem 'jasmine-sinon-rails'
   gem 'guard-jasmine'

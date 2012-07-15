@@ -12,18 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap/bootstrap-transition
-//= require twitter/bootstrap/bootstrap-alert
-//= require twitter/bootstrap/bootstrap-modal
-//= require twitter/bootstrap/bootstrap-dropdown
-//= require twitter/bootstrap/bootstrap-scrollspy
-//= require twitter/bootstrap/bootstrap-tab
-//= require twitter/bootstrap/bootstrap-tooltip
-//= require twitter/bootstrap/bootstrap-popover
-//= require twitter/bootstrap/bootstrap-button
-//= require twitter/bootstrap/bootstrap-collapse
-//= require twitter/bootstrap/bootstrap-carousel
-//= require twitter/bootstrap/bootstrap-typeahead
+//= require bootstrap-transition
+//= require bootstrap-alert
+//= require bootstrap-modal
+//= require bootstrap-dropdown
+//= require bootstrap-scrollspy
+//= require bootstrap-tab
+//= require bootstrap-tooltip
+//= require bootstrap-popover
+//= require bootstrap-button
+//= require bootstrap-collapse
+//= require bootstrap-carousel
+//= require bootstrap-typeahead
 //= require_tree .
 
 $(document).ready(function(){
