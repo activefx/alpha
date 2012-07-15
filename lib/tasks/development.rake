@@ -1,10 +1,16 @@
-# TODO: Change name in app layout
-# TODO: Change session store and token
-
 namespace :development do
-  desc "Rename Alpah application based on current folder name"
+  desc "Rename Alpha application based on current folder name"
   task :install => :environment do
     replace_application_names
+    generate_new_app_secret
+  end
+
+  def generate_new_app_secret
+    new_secret_token = SecureRandom.hex(64)
+    file = "#{Rails.root}/config/initializers/secret_token.rb"
+    updated_file = File.read(file).
+      gsub(/\w{128}/, new_secret_token)
+    update_file(file, updated_file)
   end
 
   def replace_application_names
@@ -12,9 +18,13 @@ namespace :development do
       updated_file = File.read(file).
         gsub("Alpha", application_class_name).
         gsub("alpha", application_name)
-      File.open(file, 'w') do |f|
-        f.write updated_file
-      end
+      update_file(file, updated_file)
+    end
+  end
+
+  def update_file(old_file, new_file)
+    File.open(old_file, 'w') do |f|
+      f.write new_file
     end
   end
 
@@ -22,18 +32,15 @@ namespace :development do
     application_name.classify
   end
 
-  # Can't use Rails.application.class.parent_name,
-  # if repo is cloned nothing would be changed so
-  # we can name the application after the folder
-  # it is stored in.
+  # Name the app after the name of the containing folder
   def application_name
-    Rails.root.to_s.split('/').last
+    Rails.root.to_s.split('/').last.underscore
   end
 
   def application_name_files
     Dir["#{Rails.root}/config/**/*.rb"] +
+    Dir["#{Rails.root}/app/views/layouts/*.haml"] +
     [ "#{Rails.root}/Rakefile",
-      "#{Rails.root}/README",
       "#{Rails.root}/config.ru",
       "#{Rails.root}/config/mongoid.yml" ]
   end
