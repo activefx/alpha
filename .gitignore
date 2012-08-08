@@ -69,6 +69,8 @@ capybara-*html
 # Enviroment Variables
 .env
 .env.backup
+local.env
+local.env.backup
 
 # rbenv
 .rbenv-version

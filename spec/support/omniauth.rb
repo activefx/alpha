@@ -1,14 +1,14 @@
 RSpec.configure do |config|
   config.before(:each, :omniauth) do
     OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:default] = {
+    OmniAuth.config.mock_auth[:default] = OmniAuth::AuthHash.new({
       :provider => "omniauth",
       :uid => "000000",
       :credentials => {
         :token => "ABCDEF",
         :secret => "123456"
       }
-    }
+    })
   end
   config.after(:each, :omniauth) do
     OmniAuth.config.test_mode = false
@@ -131,28 +131,7 @@ def stub_github
 end
 
 def stub_twitter
-  OmniAuth.config.mock_auth[:twitter] = {
-    "uid" => "444444",
-    "provider" => "twitter",
-    "info" => {
-      "nickname" => "episod",
-      "name" => "Taylor Singletary",
-      "location" => "San Francisco, CA",
-      "image" => "http://a0.twimg.com/profile_images/1258681373/hobolumbo.jpg",
-      "description" => "Reality Technician, Developer Advocate at Twitter, hobolumbo",
-      "urls" => {
-        "Website" => "http://t.co/op3b03h",
-        "Twitter" => "http://twitter.com/episod"
-      }
-    },
-    "credentials" => {
-      "token" => "444444-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw",
-      "secret" => "J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA"
-    },
-    "extra" => {
-      "access_token" => "oauth_token=444444-Jxq8aYUDRmykzVKrgoLhXSq67TEa5ruc4GJC2rWimw&oauth_token_secret=J6zix3FfA9LofH0awS24M3HcBYXO5nI1iYe8EfBA&user_id=444444&screen_name=episod"
-    }
-  }
+  OmniAuth.config.mock_auth[:twitter] = stub_service(:twitter)
 end
 
 def stub_google
@@ -204,5 +183,13 @@ def stub_yahoo
       }
     }
   }
+end
+
+def stub_service(service_name)
+  OmniAuth::AuthHash.new load_fixture("#{service_name}.yml")
+end
+
+def load_fixture(file_name)
+  YAML::load File.read(File.dirname(__FILE__) + "/../fixtures/#{file_name}")
 end
 

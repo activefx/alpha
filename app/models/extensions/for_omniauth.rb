@@ -9,8 +9,16 @@ module Extensions
     module ClassMethods
 
       def new_with_session(params, session)
+#        if session["devise.user_attributes"]
+#          new(session["devise.user_attributes"], without_protection: true) do |user|
+#            user.attributes = params
+#            user.valid?
+#          end
+#        else
+#          super
+#        end
         super.tap do |user|
-          if auth_hash = session["devise.omniauth_data"]
+          if auth_hash = session["devise.omniauth_hash"]
             user.apply_omniauth(auth_hash)
           end
         end
@@ -19,8 +27,12 @@ module Extensions
       # When enabled, allows a user to set a password during the initial
       # registration process, otherwise they mush always use omniauth
       # to sign in
-      def password_authentication_enabled_with_omniauth?
-        configatron.omniauth.enable_password_authentication == true
+      def password_required_with_omniauth?
+        configatron.omniauth.password_required == true
+      end
+
+      def email_required_with_omniauth?
+        configatron.omniauth.email_required == true
       end
 
       # Find or initialize a user if no UserToken was found
@@ -33,7 +45,7 @@ module Extensions
         end
         if user.new_record?
           user.set_omniauth_flag
-          user.apply_omniauth_initialization unless password_authentication_enabled_with_omniauth?
+          user.apply_omniauth_initialization unless password_required_with_omniauth?
         end
         user.apply_omniauth(omniauth)
         return user
@@ -58,7 +70,6 @@ module Extensions
         else
           self.authentications.create(omniauth_params)
         end
-
       end
     end
 
@@ -69,7 +80,7 @@ module Extensions
           self.email = omniauth_email
         end
       end
-      self.skip_confirmation! if self.email == omniauth_email
+      self.skip_confirmation! if self.email && self.email == omniauth_email
     end
 
     # Sets a user password to avoid triggering the password validations

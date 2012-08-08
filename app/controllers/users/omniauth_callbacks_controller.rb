@@ -3,6 +3,21 @@ module Users
 
     skip_before_filter :show_beta_page?
 
+    # /users/auth/:provider/callback
+#    def all
+#      #raise request.env['omniauth.auth'].to_yaml
+#
+#      user = User.from_provider(request.env["omniauth.auth"])
+#      if user.persisted?
+#        sign_in_and_redirect user, notice: "Signed in successfully"
+#      else
+#        redirect_to new_user_registration_url
+#      end
+#    end
+#    alias_method :twitter, :all
+
+
+
     # rescue_from, ActionController::UnknownAction
 
     # Ensure callback urls are created for providers
@@ -16,11 +31,11 @@ module Users
     # If the user is logged in, add authentication to their
     # account, otherwise create or find a user account
     def create
-      if current_user
-        find_or_create_authentication_for_current_user(omniauth)
-      else
+      #if current_user
+      #  find_or_create_authentication_for_current_user(omniauth)
+      #else
         apply_omniauth_to_new_or_existing_user(omniauth)
-      end
+      #end
     end
 
     # Apply data from the third party authentication provider into the user's account,
@@ -53,7 +68,10 @@ module Users
       if user.save # Save user if valid
         sign_in_and_redirect_user(user, omniauth.provider)
       else # Prompt for additional information if user is invalid
-        session["devise.omniauth_data"] = auth_hash
+        #binding.pry
+        #session["devise.user_attributes"] = user.attributes
+        session["devise.omniauth_hash"] = omniauth_for_session
+        #binding.pry
         redirect_to new_user_registration_url, :alert => "Please complete your registration."
       end
     end
@@ -73,6 +91,13 @@ module Users
     # Return the environment's omniauth data in a Hashie::Mash
     def omniauth
       Hashie::Mash.new auth_hash
+    end
+
+    def omniauth_for_session
+      omniauth.
+        slice("provider", "uid", "info", "credentials").
+        #merge({ "extra" => { "raw_info" => omniauth.extra.raw_info } }).
+        to_hash
     end
 
     def failure_message
