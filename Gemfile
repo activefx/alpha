@@ -2,8 +2,9 @@ require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'http://rubygems.org'
+ruby '1.9.3'
 
-gem 'rails', '~> 3.2'
+gem 'rails', '~> 3.2.8.rc2'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -13,19 +14,18 @@ gem 'multi_json'
 gem 'configatron'
 
 # Database
-gem 'mongoid', '~> 3.0.0.rc'
-#gem 'bson_ext', '<= 1.6.4'
+gem 'mongoid', '~> 3.0.0'
 
 # Authentication / Authorization
-gem 'devise', '~> 2.0'
-gem 'omniauth', '~> 1.0', :git => 'git://github.com/intridea/omniauth.git'
-gem 'omniauth-oauth', :git => 'git://github.com/intridea/omniauth-oauth.git'
-gem 'omniauth-oauth2', :git => 'git://github.com/intridea/omniauth-oauth2.git'
-gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
-gem 'omniauth-facebook', :git => 'git://github.com/mkdynamic/omniauth-facebook.git'
-gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
-gem 'omniauth-linkedin', :git => 'git://github.com/skorks/omniauth-linkedin.git'
-gem 'omniauth-twitter', :git => 'git://github.com/arunagw/omniauth-twitter.git'
+gem 'devise', '~> 2.1.2'
+gem 'omniauth', '~> 1.1.0'
+gem 'omniauth-oauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-openid'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+gem 'omniauth-linkedin'
+gem 'omniauth-twitter'
 
 # Views
 gem 'kaminari'
