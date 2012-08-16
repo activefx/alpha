@@ -9,4 +9,3 @@ if defined?(Footnotes) && Rails.env.development?
   end
   # ... other init code
 end
-
