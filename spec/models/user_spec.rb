@@ -4,7 +4,8 @@ describe User do
 
   it { should be_mongoid_document }
   it { should be_timestamped_document }
-  it { should have_field(:created_by_omniauth).of_type(Boolean).with_default_value_of(false) }
+  it { should have_field(:username).of_type(String) }
+  it { should have_field(:created_by_provider).of_type(String) }
   it { FactoryGirl.build(:user).should be_valid }
   it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
 
@@ -17,7 +18,7 @@ describe User do
     it { should allow_mass_assignment_of(:password) }
     it { should allow_mass_assignment_of(:password_confirmation) }
     it { should allow_mass_assignment_of(:remember_me) }
-    it { should_not allow_mass_assignment_of(:created_by_omniauth) }
+    it { should_not allow_mass_assignment_of(:created_by_provider) }
 
   end
 

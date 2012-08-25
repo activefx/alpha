@@ -52,6 +52,13 @@ nbproject
 # E-texteditor
 .eprj
 
+# Other
+.cache
+.config
+.fontconfig
+.local
+.pki
+
 # Backup
 *~
 
@@ -81,4 +88,3 @@ local.env.backup
 # Alpha Specific
 TODO
 NOTES
-

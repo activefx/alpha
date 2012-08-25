@@ -5,11 +5,10 @@ RSpec.configure do |config|
   config.before(:all) do
     configatron.in_beta = false
   end
-  config.before(:each, :beta) do
-    configatron.in_beta = true
-  end
-  config.after(:each, :beta) do
-    configatron.in_beta = false
+  config.around(:each, :beta) do |example|
+    configatron.temp do
+      configatron.in_beta = true
+      example.call
+    end
   end
 end
-

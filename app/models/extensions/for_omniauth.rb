@@ -4,22 +4,43 @@ module Extensions
 
     included do
 
+      after_save :auto_confirm!, :unless => :email_required?
+
     end
 
     module ClassMethods
 
+      def previously_saved_auth(omniauth)
+        Authentication.previously_saved_auth(omniauth)
+      end
+
+      def update_or_create_auth(omniauth)
+        Authentication.update_or_create_auth(omniauth)
+      end
+
+      # If validation fails and additional registration information is
+      # required, new_with_session will initialization the user object
+      # for registration with available third party information
       def new_with_session(params, session)
-#        if session["devise.user_attributes"]
-#          new(session["devise.user_attributes"], without_protection: true) do |user|
-#            user.attributes = params
-#            user.valid?
-#          end
-#        else
-#          super
-#        end
         super.tap do |user|
           if auth_hash = session["devise.omniauth_hash"]
-            user.apply_omniauth(auth_hash)
+            omniauth = Hashie::Mash.new(auth_hash)
+            user.set_omniauth_attributes(omniauth)
+            user.authentications << previously_saved_auth(omniauth)
+            user.set_omniauth_flag(omniauth.provider)
+            user.valid?
+          end
+        end
+      end
+
+      # Initialize and try to save a new user from omniauth data
+      def new_from_omniauth(omniauth)
+        auth = update_or_create_auth(omniauth)
+        new.tap do |u|
+          u.set_omniauth_attributes(omniauth)
+          u.set_omniauth_flag(omniauth.provider)
+          if u.save
+            u.authentications << auth
           end
         end
       end
@@ -28,134 +49,63 @@ module Extensions
       # registration process, otherwise they mush always use omniauth
       # to sign in
       def password_required_with_omniauth?
-        configatron.omniauth.password_required == true
+        configatron.omniauth.require_password == true
       end
 
+      # When enabled, allows a user to set an email during the initial
+      # registration process, otherwise they mush always use omniauth
+      # to sign in
       def email_required_with_omniauth?
-        configatron.omniauth.email_required == true
-      end
-
-      # Find or initialize a user if no UserToken was found
-      def omniauth_find_or_initialize(omniauth)
-        email = omniauth.recursive_find_by_key("email")
-        if email.blank?
-          user = User.new
-        else
-          user = User.find_or_initialize_by(:email => email)
-        end
-        if user.new_record?
-          user.set_omniauth_flag
-          user.apply_omniauth_initialization unless password_required_with_omniauth?
-        end
-        user.apply_omniauth(omniauth)
-        return user
+        configatron.omniauth.require_email == true
       end
 
     end
 
     # Instance Methods
 
-    def apply_omniauth(omniauth)
-      omniauth = omniauth.is_a?(Hashie::Mash) ? omniauth : Hashie::Mash.new(omniauth)
-      return false if omniauth.provider.blank? || omniauth.uid.blank?
-      #add some info about the user
-      self.apply_user_info(omniauth, omniauth.provider)
-      # Build the user token
-      omniauth_params = self.build_omniauth_params(omniauth)
-      if authentication = self.authentications.where(:provider => omniauth.provider, :uid => omniauth.uid).first
-        authentication.update_attributes(omniauth_params)
-      else
-        if self.new_record?
-          self.authentications.build(omniauth_params)
-        else
-          self.authentications.create(omniauth_params)
-        end
+    def password_required?
+      super && (no_provider? || self.class.password_required_with_omniauth?)
+    end
+
+    def email_required?
+      super && (no_provider? || self.class.email_required_with_omniauth?)
+    end
+
+    # Used to apply omniauth to existing, signed in users
+    def add_authentication(omniauth)
+      authentications << new_authentication_from_omniauth(omniauth)
+    end
+
+    def new_authentication_from_omniauth(omniauth)
+      Authentication.new_from_omniauth(omniauth)
+    end
+
+    # Use the provider classes to normalize third party data that you
+    # want saved to your user model
+    def set_omniauth_attributes(omniauth)
+      klass = begin
+        "Provider::#{omniauth.provider.titleize}".constantize
+      rescue NameError
+        Provider::Base
       end
+      omniauth_attrs = klass.attributes(omniauth)
+      self.attributes.merge!(omniauth_attrs)
     end
 
-    # Custom logic for adding user information from third party authentications
-    def apply_user_info(omniauth, provider = nil)
-      if omniauth_email = omniauth.recursive_find_by_key(:email)
-        if self.email.blank?
-          self.email = omniauth_email
-        end
-      end
-      self.skip_confirmation! if self.email && self.email == omniauth_email
+    def no_provider?
+      created_by_provider.blank?
     end
 
-    # Sets a user password to avoid triggering the password validations
-    # Alternatively, you could overwrite Devise's password_required? method
-    def apply_omniauth_initialization
-      pass = Devise.friendly_token[0,20]
-      self.password = pass
-      self.password_confirmation = pass
+    def set_omniauth_flag(provider)
+      self.created_by_provider = provider
     end
 
-    def build_omniauth_params(omniauth)
-      omniauth_params = {:provider => omniauth.provider.to_s, :uid => omniauth.uid.to_s}
-      unless omniauth.credentials.blank?
-        credentials = omniauth.credentials
-        omniauth_params.merge!(:token => credentials.token) unless credentials.token.blank?
-        omniauth_params.merge!(:secret => credentials.secret) unless credentials.secret.blank?
-        omniauth_params.merge!(:expires_at => credentials.expires_at) unless credentials.expires_at.blank?
-        omniauth_params.merge!(:expires => credentials.expires) unless credentials.expires.blank?
-        omniauth_params.merge!(:refresh_token => credentials.refresh_token) unless credentials.refresh_token.blank?
-      end
-      # Store all of the data for debugging and development
-      extra = omniauth.extra.try(:except, 'access_token').try(:to_hash)
-      omniauth_params.merge!(:omniauth => extra) unless extra.blank?
-      return omniauth_params
-    end
+    protected
 
-    def set_omniauth_flag
-      self.created_by_omniauth = true
+    def auto_confirm!
+      return unless respond_to?(:devise_modules)
+      confirm! if devise_modules.include?(:confirmable)
     end
 
   end
 end
-
-
-
-#class OauthProvider::Provider
-#  class << self
-#    def provider_class(provider_type)
-#      return "OauthProvider::Provider::#{provider_type.classify}".constantize
-#    end
-
-#    def normalize_oauth(oauth)
-#      {
-#        provider_type: oauth['provider'],
-#        uid: oauth['uid'],
-#        username: oauth['extra'].try(:[], 'user_hash').try(:[], 'screen_name'),
-#        gender: oauth['extra'].try(:[], 'user_hash').try(:[], 'gender'),
-#        nickname: oauth['user_info']['nickname'],
-#        email: oauth['user_info']['email'],
-#        name: oauth['user_info']['name'],
-#        first_name: oauth['user_info']['first_name'],
-#        last_name: oauth['user_info']['last_name'],
-#        image_url: oauth['user_info']['image'],
-#        location_name: oauth['user_info']['location'],
-#        token: oauth['credentials']['token'],
-#        secret: oauth['credentials']['secret'],
-#        expires: nil,
-#        verified: oauth['extra'].try(:[], 'user_hash').try(:[], 'verified'),
-#        profile_url: oauth['user_info'].try(:[], 'urls').try(:[], oauth['provider'].camelize),
-#        bio: oauth['user_info'].try(:[], 'description')
-#      }
-#    end
-#  end
-#end
-
-
-
-#class OauthProvider::Provider::Facebook < OauthProvider::Provider
-#  def self.normalize_oauth(oauth)
-#    super(oauth).merge({
-#      username: oauth['extra']['user_hash'].try(:[], 'username'),
-#      email: oauth['extra']['user_hash']['email'],
-#      location_name: oauth['extra']['user_hash']['location'].try(:[], 'name'),
-#      bio: oauth['extra']['user_hash'].try(:[], 'bio')
-#    })
-#  end
-#end
-

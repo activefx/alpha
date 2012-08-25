@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :username,                :type => String
+
   ## Database authenticatable
   field :email,                   :type => String
   field :encrypted_password,      :type => String
@@ -36,12 +38,13 @@ class User
   # field :authentication_token,    :type => String
 
   ## Omniauthable
-  field :created_by_omniauth,     :type => Boolean, :default => false
+  field :created_by_provider,     :type => String
 
+  ## Beta Signups
   field :invite_code,             :type => String
 
   attr_accessible :email, :password, :password_confirmation,
-                  :remember_me, :invite_code
+                  :remember_me, :invite_code, :username
 
   has_many :authentications, :dependent => :destroy,
                              :autosave => true,
@@ -452,4 +455,3 @@ end
 #    end
 
 #  end
-

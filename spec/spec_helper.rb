@@ -87,7 +87,9 @@ def each_run
     # Factory.define :user, class: 'MyUserClass' do |f|
     #   ...
     # end
-    FactoryGirl.reload
+    #FactoryGirl.reload
+    FactoryGirl.factories.clear
+    FactoryGirl.find_definitions
   end
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -115,4 +117,3 @@ else
   setup_environment
   each_run
 end
-

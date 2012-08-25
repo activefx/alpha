@@ -1,28 +1,57 @@
-def login_user(user)
-  visit new_user_session_path
-  fill_in "Email", :with => user.email
-  fill_in "Password", :with => user.password
-  click_button "Sign in"
-end
+module RequestHelpers
 
-def register(username, password, options = {})
-  visit new_user_registration_path
-  fill_in "Email", :with => username
-  fill_in "Password", :with => password
-  fill_in "Confirm password", :with => password
-  if options[:invite_code]
-    fill_in "Invite code", :with => options[:invite_code]
+  def login_user(user)
+    login_as(user, :scope => :user)
   end
-  click_button "Sign up"
+
+  def manual_user_login(user)
+    visit new_user_session_path
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
+    click_button "Sign in"
+  end
+
+  def login_admin(admin)
+    login_as(admin, :scope => :admin)
+  end
+
+  def logout_user
+    logout(:user)
+    visit destroy_user_session_path
+  end
+
+  def logout_admin
+    logout(:admin)
+    visit destroy_admin_session_path
+  end
+
+  def register(username, password, options = {})
+    visit new_user_registration_path
+    fill_in "Email", :with => username
+    fill_in "Password", :with => password
+    fill_in "Confirm password", :with => password
+    if options[:invite_code]
+      fill_in "Invite code", :with => options[:invite_code]
+    end
+    click_button "Sign up"
+  end
+
+  def invite_code(options = {})
+    InviteCode.create(options).token
+  end
+
+  def soap
+    save_and_open_page
+  end
+
 end
 
-def invite_code(options = {})
-  InviteCode.create(options).token
-end
-
-def soap
-  save_and_open_page
-end
+#def login_user(user)
+#  visit new_user_session_path
+#  fill_in "Email", :with => user.email
+#  fill_in "Password", :with => user.password
+#  click_button "Sign in"
+#end
 
 ## fill_in_fields :user_email   => 'bob@smith.com'
 ## fill_in_fields :user, :email => 'bob@smith.com'
@@ -61,3 +90,6 @@ end
 #  Capybara.current_driver = :selenium
 #end
 
+RSpec.configure do |config|
+  config.include RequestHelpers, :type => :request
+end 

@@ -50,4 +50,3 @@ describe "User registration" do
   end
 
 end
-

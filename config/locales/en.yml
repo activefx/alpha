@@ -2,4 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
+
+  devise:
+    sign_in: 'Sign In'
+    sign_out: 'Sign Out'
+    registrations:
+      finish: 'Please complete your registration.'
+    omniauth_callbacks:
+      added: 'Successfully enabled %{kind} authentication.' 

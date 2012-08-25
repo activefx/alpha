@@ -1,15 +1,32 @@
 %h2
-  Edit
-  = resource_name.to_s.humanize
+  Account Details
 
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = f.error_notification
 
   .inputs
-    = f.input :email, :required => true, :autofocus => true
-    = f.input :password, :hint => "leave it blank if you don't want to change it", :required => false
-    = f.input :password_confirmation, :label => "Confirm password", :required => false
-    = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
+
+    - if f.object.email.present?
+      %h3 Settings
+      = f.input :email, :required => true, :autofocus => true
+
+    - if f.object.encrypted_password.present?
+      %h3 Change Password
+      = f.input :password, :hint => "leave it blank if you don't want to change it", :required => false
+      = f.input :password_confirmation, :label => "Confirm password", :required => false
+      = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
+
+    - if User.omniauthable?
+      %h3 Third Party Authentications
+      %table.table
+        - User.omniauth_providers.each do |provider|
+          %tr
+            %td= provider
+      %h3 Add a Third Party Authentication
+      - User.omniauth_providers.each do |provider|
+        = link_to "Add #{provider.to_s.titleize} authentication", omniauth_authorize_path(resource_name, provider)
+        %br
+
 
   .form-actions
     = f.button :submit, "Update", :class => 'btn-primary'
@@ -21,4 +38,3 @@
   = link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete
 
 = link_to "Back", :back
-

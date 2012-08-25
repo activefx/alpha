@@ -42,4 +42,3 @@ describe "User forget password" do
   end
 
 end
-

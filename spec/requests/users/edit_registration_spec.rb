@@ -27,10 +27,9 @@ describe "User edit registration" do
     click_link "Cancel my account"
     current_path.should == root_path
     page.should have_content I18n.t('devise.registrations.destroyed')
-    login_user(@user)
+    manual_user_login(@user)
     page.should have_content I18n.t('devise.failure.invalid')
   end
 
 
 end
-
