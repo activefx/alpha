@@ -4,7 +4,16 @@ module Extensions
 
     included do
 
+      ## Omniauthable Fields
+      field :created_by_provider,     :type => String
+
+      devise :omniauthable
+
       after_save :auto_confirm!, :unless => :email_required?
+
+      has_many :authentications, :dependent => :destroy,
+                                 :autosave => true,
+                                 :validate => false
 
     end
 

@@ -37,24 +37,17 @@ class User
   ## Token authenticatable
   # field :authentication_token,    :type => String
 
-  ## Omniauthable
-  field :created_by_provider,     :type => String
-
   ## Beta Signups
   field :invite_code,             :type => String
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :invite_code, :username
 
-  has_many :authentications, :dependent => :destroy,
-                             :autosave => true,
-                             :validate => false
-
   # Include default devise modules. Others available are:
   # :token_authenticatable, :timeoutable
   devise :database_authenticatable, :registerable,  :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :lockable, :omniauthable
+         :lockable
 
   # Devise extensions must be included after devise
   # modules have been defined for the class

@@ -89,8 +89,12 @@ def each_run
     #   ...
     # end
     #FactoryGirl.reload
-    FactoryGirl.factories.clear
-    FactoryGirl.find_definitions
+    ActionDispatch::Callbacks.after do
+      unless FactoryGirl.factories.blank?
+        FactoryGirl.factories.clear
+        FactoryGirl.find_definitions
+      end
+    end
   end
 
   # Requires supporting ruby files with custom matchers and macros, etc,
