@@ -14,9 +14,6 @@ module Extensions
       end
 
       # Define Mongoid indexes for Devise
-      index({ email: 1 }, { unique: true })               if database_authenticatable?
-      index({ confirmation_token: 1 }, { unique: true })  if confirmable?
-      index({ unlock_token: 1 }, { unique: true })        if has_unlock_token?
 
     end
 
@@ -26,14 +23,6 @@ module Extensions
 
       def deviseable?(method_name)
         devise_modules.include?(method_name)
-      end
-
-      def has_unlock_token?
-        lockable? && unlock_strategy_includes_token?
-      end
-
-      def unlock_strategy_includes_token?
-        [:both, :email].include?(unlock_strategy)
       end
 
     end
@@ -49,4 +38,3 @@ module Extensions
 
   end
 end
-

@@ -1,10 +1,10 @@
 module Extensions
-  module ForOmniauth
+  module Omniauthable
     extend ActiveSupport::Concern
 
     included do
 
-      ## Omniauthable Fields
+      ## Omniauthable fields
       field :created_by_provider,     :type => String
 
       devise :omniauthable
@@ -14,6 +14,8 @@ module Extensions
       has_many :authentications, :dependent => :destroy,
                                  :autosave => true,
                                  :validate => false
+
+
 
     end
 
