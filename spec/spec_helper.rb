@@ -57,7 +57,8 @@ def setup_environment
 
   require 'capybara/rspec'
   require 'capybara/mechanize'
-  Capybara.javascript_driver = :webkit
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist # or :webkit
 
   Rails.backtrace_cleaner.remove_silencers!
 
