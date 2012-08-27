@@ -57,7 +57,8 @@ def setup_environment
 
   require 'capybara/rspec'
   require 'capybara/mechanize'
-  Capybara.javascript_driver = :webkit
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist # or :webkit
 
   Rails.backtrace_cleaner.remove_silencers!
 
@@ -87,7 +88,13 @@ def each_run
     # Factory.define :user, class: 'MyUserClass' do |f|
     #   ...
     # end
-    FactoryGirl.reload
+    #FactoryGirl.reload
+    ActionDispatch::Callbacks.after do
+      unless FactoryGirl.factories.blank?
+        FactoryGirl.factories.clear
+        FactoryGirl.find_definitions
+      end
+    end
   end
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -115,4 +122,3 @@ else
   setup_environment
   each_run
 end
-

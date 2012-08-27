@@ -85,8 +85,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.11'
   gem 'simplecov', :require => false
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'capybara-mechanize'
+  gem 'poltergeist' # or 'capybara-webkit'
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'rspec-instafail'
@@ -136,4 +136,3 @@ group :development, :test do
   # gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   # gem 'ruby-debug19', :require => 'ruby-debug'
 end
-

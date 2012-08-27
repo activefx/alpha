@@ -16,7 +16,8 @@ guard 'spork', { :wait => 60,
                  :cucumber => false,
                  :rspec_env => { 'RAILS_ENV' => 'test', 'DRB' => 'true' },
                  :aggressive_kills => true,
-                 :bundler => true
+                 :bundler => true,
+                 :foreman => true
                 } do
   watch('config/application.rb')
   watch('config/environment.rb')

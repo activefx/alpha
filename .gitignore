@@ -52,6 +52,13 @@ nbproject
 # E-texteditor
 .eprj
 
+# Other
+.cache
+.config
+.fontconfig
+.local
+.pki
+
 # Backup
 *~
 
@@ -69,6 +76,8 @@ capybara-*html
 # Enviroment Variables
 .env
 .env.backup
+local.env
+local.env.backup
 
 # rbenv
 .rbenv-version
@@ -79,4 +88,3 @@ capybara-*html
 # Alpha Specific
 TODO
 NOTES
-

@@ -8,7 +8,8 @@ require 'openid/store/filesystem'
 #   configatron.file.storage = :s3
   configatron.in_beta = false
   configatron.devise_mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
-  configatron.omniauth.enable_password_authentication = false
+  configatron.omniauth.require_password = false
+  configatron.omniauth.require_email = true
 
   # OpenID config
   # Must be './tmp' for Heroku
@@ -34,4 +35,3 @@ require 'openid/store/filesystem'
   configatron.yahoo.open_id.enabled = false
   configatron.yahoo.open_id.name = 'yahoo'
   configatron.yahoo.open_id.identifier = 'https://me.yahoo.com'
-

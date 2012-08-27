@@ -1,5 +1,5 @@
 module Extensions
-  module ForDevise
+  module DeviseHelpers
     extend ActiveSupport::Concern
 
     included do
@@ -13,11 +13,6 @@ module Extensions
         define_method(:"#{method_name}?") { deviseable?(method_name) }
       end
 
-      # Define Mongoid indexes for Devise
-      index({ email: 1 }, { unique: true })               if database_authenticatable?
-      index({ confirmation_token: 1 }, { unique: true })  if confirmable?
-      index({ unlock_token: 1 }, { unique: true })        if has_unlock_token?
-
     end
 
     module ClassMethods
@@ -26,14 +21,6 @@ module Extensions
 
       def deviseable?(method_name)
         devise_modules.include?(method_name)
-      end
-
-      def has_unlock_token?
-        lockable? && unlock_strategy_includes_token?
-      end
-
-      def unlock_strategy_includes_token?
-        [:both, :email].include?(unlock_strategy)
       end
 
     end
@@ -46,7 +33,5 @@ module Extensions
       devise_modules.include?(method_name)
     end
 
-
   end
 end
-
