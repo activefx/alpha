@@ -16,21 +16,28 @@ shared_examples_for "a devise model" do
 
   if subject.call.confirmable?
     it { should have_field(:confirmation_token).of_type(String) }
-    it { should_not allow_mass_assignment_of(:confirmation_token => "token") }
-    it { should have_index_for(confirmation_token: 1).with_options(:unique => true) }
     it { should have_field(:confirmed_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:confirmed_at => Time.now) }
     it { should have_field(:confirmation_sent_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:confirmation_sent_at => Time.now) }
+    it { should have_field(:unconfirmed_email).of_type(String) if subject.class.reconfirmable }
+    it { should_not allow_mass_assignment_of(:confirmation_token) }
+    it { should_not allow_mass_assignment_of(:confirmed_at) }
+    it { should_not allow_mass_assignment_of(:confirmation_sent_at) }
+    it { should_not allow_mass_assignment_of(:unconfirmed_email) if subject.class.reconfirmable }
+    it { should have_index_for(confirmation_token: 1).with_options(:unique => true) }
   end
 
   # database_authenticatable
 
   if subject.call.database_authenticatable?
     it { should have_field(:email).of_type(String).with_default_value_of("") }
-    it { should have_index_for(email: 1).with_options(:unique => true) }
     it { should have_field(:encrypted_password).of_type(String).with_default_value_of("") }
-    it { should_not allow_mass_assignment_of(:encrypted_password => "encrypted_password") }
+    it { should allow_mass_assignment_of(:email) }
+    it { should allow_mass_assignment_of(:password) }
+    it { should allow_mass_assignment_of(:password_confirmation) }
+    it { should_not allow_mass_assignment_of(:encrypted_password) }
+    it { should validate_presence_of(:email) if subject.send(:email_required?) }
+    it { should validate_presence_of(:encrypted_password) if subject.send(:password_required?) }
+    it { should have_index_for(email: 1).with_options(:unique => true) }
   end
 
   # lockable
@@ -38,57 +45,59 @@ shared_examples_for "a devise model" do
   if subject.call.lockable?
     if subject.call.class.lock_strategy == :failed_attempts
       it { should have_field(:failed_attempts).of_type(Integer).with_default_value_of(0) }
-      it { should_not allow_mass_assignment_of(:failed_attempts => 1) }
+      it { should_not allow_mass_assignment_of(:failed_attempts) }
     end
     if [:both, :email].include?(subject.call.class.unlock_strategy)
       it { should have_field(:unlock_token).of_type(String) }
-      it { should_not allow_mass_assignment_of(:unlock_token => "unlock_token") }
+      it { should_not allow_mass_assignment_of(:unlock_token) }
       it { should have_index_for(unlock_token: 1).with_options(:unique => true) }
+      it { subject.class.has_unlock_token?.should be_true }
     end
     it { should have_field(:locked_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:locked_at => Time.now) }
+    it { should_not allow_mass_assignment_of(:locked_at) }
   end
 
   # recoverable
 
   if subject.call.recoverable?
     it { should have_field(:reset_password_token).of_type(String) }
-    it { should_not allow_mass_assignment_of(:reset_password_token => "reset_password_token") }
+    it { should_not allow_mass_assignment_of(:reset_password_token) }
     if Devise.reset_password_within.present?
       it { should have_field(:reset_password_sent_at).of_type(Time) }
-      it { should_not allow_mass_assignment_of(:reset_password_sent_at => Time.now) }
+      it { should_not allow_mass_assignment_of(:reset_password_sent_at) }
     end
+    it { should have_index_for(reset_password_token: 1).with_options(:unique => true) }
   end
 
   # rememberable
 
   if subject.call.rememberable?
-    it { should have_field(:remember_token).of_type(String) }
-    it { should_not allow_mass_assignment_of(:remember_token => "remember_token") }
     it { should have_field(:remember_created_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:remember_created_at => Time.now) }
+    it { should_not allow_mass_assignment_of(:remember_created_at) }
+    it { should allow_mass_assignment_of(:remember_me) }
   end
 
   # token_authenticatable
 
   if subject.call.token_authenticatable?
     it { should have_field(:authentication_token).of_type(String) }
-    it { should_not allow_mass_assignment_of(:authentication_token => "authentication_token") }
+    it { should_not allow_mass_assignment_of(:authentication_token) }
+    it { should have_index_for(authentication_token: 1).with_options(:unique => true) }
   end
 
   # trackable
 
   if subject.call.trackable?
     it { should have_field(:sign_in_count).of_type(Integer).with_default_value_of(0) }
-    it { should_not allow_mass_assignment_of(:sign_in_count => 1) }
     it { should have_field(:current_sign_in_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:current_sign_in_at => Time.now) }
     it { should have_field(:last_sign_in_at).of_type(Time) }
-    it { should_not allow_mass_assignment_of(:last_sign_in_at => Time.now) }
     it { should have_field(:current_sign_in_ip).of_type(String) }
-    it { should_not allow_mass_assignment_of(:current_sign_in_ip => "current_sign_in_ip") }
     it { should have_field(:last_sign_in_ip).of_type(String) }
-    it { should_not allow_mass_assignment_of(:last_sign_in_ip => "last_sign_in_ip") }
+    it { should_not allow_mass_assignment_of(:sign_in_count) }
+    it { should_not allow_mass_assignment_of(:current_sign_in_at) }
+    it { should_not allow_mass_assignment_of(:last_sign_in_at) }
+    it { should_not allow_mass_assignment_of(:current_sign_in_ip) }
+    it { should_not allow_mass_assignment_of(:last_sign_in_ip) }
   end
 
   # validatable
@@ -105,4 +114,3 @@ shared_examples_for "a devise model" do
   end
 
 end
-

@@ -4,18 +4,21 @@ module Extensions
 
     included do
 
-      ## Omniauthable fields
+      # Omniauthable fields
       field :created_by_provider,     :type => String
 
-      devise :omniauthable
+      # Options
+      #   omniauth_providers:
+      #     Which providers are avaialble to this model.
+      #     ex. :omniauth_providers => [:twitter]
+      #
+      devise :omniauthable #,
 
       after_save :auto_confirm!, :unless => :email_required?
 
       has_many :authentications, :dependent => :destroy,
                                  :autosave => true,
                                  :validate => false
-
-
 
     end
 
@@ -114,7 +117,6 @@ module Extensions
     protected
 
     def auto_confirm!
-      return unless respond_to?(:devise_modules)
       confirm! if devise_modules.include?(:confirmable)
     end
 

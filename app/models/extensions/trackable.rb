@@ -4,7 +4,7 @@ module Extensions
 
     included do
 
-      ## Trackable fields
+      # Trackable fields
       field :sign_in_count,           :type => Integer
       field :current_sign_in_at,      :type => Time
       field :last_sign_in_at,         :type => Time

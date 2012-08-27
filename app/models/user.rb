@@ -12,15 +12,12 @@ class User
   include Extensions::Trackable
   include Extensions::Validatable
   include Extensions::Omniauthable
+  include Extensions::DeviseHelpers
   include Extensions::BetaSignups
 
   field :username,                :type => String
 
   attr_accessible :username
-
-  # Devise extensions must be included after devise
-  # modules have been defined for the class
-  include Extensions::ForDevise
 
   protected
 

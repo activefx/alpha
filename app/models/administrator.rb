@@ -11,9 +11,5 @@ class Administrator
   #include Extensions::TokenAuthenticable
   include Extensions::Trackable
   include Extensions::Validatable
-
-  # Devise extensions must be included after devise
-  # modules have been defined for the class
-  include Extensions::ForDevise
-
+  include Extensions::DeviseHelpers
 end

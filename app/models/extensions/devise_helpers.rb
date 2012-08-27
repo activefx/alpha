@@ -1,5 +1,5 @@
 module Extensions
-  module ForDevise
+  module DeviseHelpers
     extend ActiveSupport::Concern
 
     included do
@@ -12,8 +12,6 @@ module Extensions
         # Define instance methods
         define_method(:"#{method_name}?") { deviseable?(method_name) }
       end
-
-      # Define Mongoid indexes for Devise
 
     end
 
@@ -34,7 +32,6 @@ module Extensions
     def deviseable?(method_name)
       devise_modules.include?(method_name)
     end
-
 
   end
 end
