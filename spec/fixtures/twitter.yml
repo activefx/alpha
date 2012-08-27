@@ -1,0 +1,240 @@
+--- !map:OmniAuth::AuthHash
+provider: twitter
+uid: "144333836"
+info: !map:OmniAuth::AuthHash::InfoHash
+  nickname: mattsolt
+  name: Matt Solt
+  location: Bethlehem, PA / NYC
+  image: http://a0.twimg.com/profile_images/1765457431/mattsolt_normal.jpg
+  description: Cleanweb evangelist, organizer, and entrepreneur
+  urls: !map:Hashie::Mash
+    Website:
+    Twitter: http://twitter.com/mattsolt
+credentials: !map:Hashie::Mash
+  token: 154233836-jbX6RyybRAv9RrkqzfxWikRA7FY1OKRGT7APcIIn
+  secret: E2vlKdOLa1GUphkbEKb2REA7owIusfyHlfffRZ8
+extra: !map:Hashie::Mash
+  access_token: !ruby/object:OAuth::AccessToken
+    consumer: !ruby/object:OAuth::Consumer
+      http: !ruby/object:Net::HTTP
+        address: api.twitter.com
+        ca_file: /etc/ssl/certs/ca-certificates.crt
+        ca_path:
+        cert:
+        cert_store:
+        ciphers:
+        close_on_empty_response: false
+        compression:
+        continue_timeout:
+        curr_http_version: "1.1"
+        debug_output:
+        enable_post_connection_check: true
+        key:
+        no_keepalive_server: false
+        open_timeout: 30
+        port: 443
+        read_timeout: 30
+        socket:
+        ssl_context: !ruby/object:OpenSSL::SSL::SSLContext
+          ca_file: /etc/ssl/certs/ca-certificates.crt
+          ca_path:
+          cert:
+          cert_store:
+          client_ca:
+          client_cert_cb:
+          extra_chain_cert:
+          key:
+          options: 4095
+          servername_cb:
+          session_get_cb:
+          session_id_context:
+          session_new_cb:
+          session_remove_cb:
+          timeout:
+          tmp_dh_callback:
+          verify_callback:
+          verify_depth: 5
+          verify_mode: 1
+        ssl_timeout:
+        ssl_version:
+        sspi_enabled: false
+        started: false
+        use_ssl: true
+        verify_callback:
+        verify_depth: 5
+        verify_mode: 1
+      http_method: :post
+      key: FDRQ4WH3Gfgjfn8uVpT
+      options:
+        :signature_method: HMAC-SHA1
+        :request_token_path: /oauth/request_token
+        :authorize_path: /oauth/authenticate
+        :access_token_path: /oauth/access_token
+        :proxy:
+        :scheme: :header
+        :http_method: :post
+        :oauth_version: "1.0"
+        :site: https://api.twitter.com
+      secret: kAIeBjEiC6098XttuW2vvUHzJ82BvmWwv54FUscH
+      uri: !ruby/object:URI::HTTPS
+        fragment:
+        host: api.twitter.com
+        opaque:
+        parser:
+        password:
+        path: ""
+        port: 443
+        query:
+        registry:
+        scheme: https
+        user:
+    params:
+      :oauth_token: 154233836-jbX6RyybRAv9RrkqzfxWikRA7FY1OKRGT7APcIIn
+      oauth_token: 154233836-jbX6RyybRAv9RrkqzfxWikRA7FY1OKRGT7APcIIn
+      :oauth_token_secret: E2vlKdOLa1GUphkbEKb2REA7owIusfyHlfffRZ8
+      oauth_token_secret: E2vlKdOLa1GUphkbEKb2REA7owIusfyHlfffRZ8
+      :user_id: "144333836"
+      user_id: "144333836"
+      :screen_name: mattsolt
+      screen_name: mattsolt
+    response: !ruby/object:Net::HTTPOK
+      body: "{\"profile_sidebar_fill_color\":\"DAECF4\",\"id\":144333836,\"profile_image_url_https\":\"https:\\/\\/si0.twimg.com\\/profile_images\\/1765457431\\/mattsolt_normal.jpg\",\"show_all_inline_media\":false,\"follow_request_sent\":false,\"verified\":false,\"location\":\"Bethlehem, PA \\/ NYC\",\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/1765457431\\/mattsolt_normal.jpg\",\"profile_background_color\":\"C6E2EE\",\"utc_offset\":null,\"default_profile\":false,\"followers_count\":126,\"name\":\"Matt Solt\",\"notifications\":false,\"friends_count\":228,\"profile_background_image_url\":\"http:\\/\\/a0.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"screen_name\":\"mattsolt\",\"protected\":false,\"profile_link_color\":\"1F98C7\",\"listed_count\":11,\"lang\":\"en\",\"description\":\"Cleanweb evangelist, organizer, and entrepreneur\",\"profile_use_background_image\":true,\"profile_text_color\":\"663B12\",\"profile_background_image_url_https\":\"https:\\/\\/si0.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"is_translator\":false,\"statuses_count\":286,\"profile_sidebar_border_color\":\"C6E2EE\",\"default_profile_image\":false,\"contributors_enabled\":false,\"status\":{\"coordinates\":null,\"geo\":null,\"in_reply_to_status_id_str\":null,\"id_str\":\"232718859482853376\",\"in_reply_to_screen_name\":null,\"in_reply_to_status_id\":null,\"in_reply_to_user_id_str\":null,\"retweeted\":true,\"truncated\":true,\"contributors\":null,\"in_reply_to_user_id\":null,\"created_at\":\"Tue Aug 07 06:04:34 +0000 2012\",\"retweet_count\":525,\"source\":\"web\",\"id\":232718859482853376,\"retweeted_status\":{\"possibly_sensitive\":false,\"coordinates\":null,\"geo\":null,\"in_reply_to_status_id_str\":null,\"id_str\":\"232642502795079680\",\"in_reply_to_screen_name\":null,\"in_reply_to_status_id\":null,\"in_reply_to_user_id_str\":null,\"retweeted\":true,\"truncated\":false,\"contributors\":null,\"in_reply_to_user_id\":null,\"created_at\":\"Tue Aug 07 01:01:09 +0000 2012\",\"retweet_count\":525,\"source\":\"\\u003Ca href=\\\"http:\\/\\/www.awarenessnetworks.com\\\" rel=\\\"nofollow\\\"\\u003EMLB.com\\u003C\\/a\\u003E\",\"id\":232642502795079680,\"possibly_sensitive_editable\":true,\"place\":null,\"favorited\":false,\"text\":\"Phillies' sellout streak ends at 257 straight games, the longest ever in the NL and the 3rd-longest in @MLB history: http:\\/\\/t.co\\/8tw67M4d\"},\"place\":null,\"favorited\":false,\"text\":\"RT @Phillies: Phillies' sellout streak ends at 257 straight games, the longest ever in the NL and the 3rd-longest in @MLB history: http: ...\"},\"favourites_count\":5,\"geo_enabled\":false,\"following\":false,\"time_zone\":null,\"url\":null,\"id_str\":\"144333836\",\"profile_background_tile\":false,\"created_at\":\"Sun May 16 00:49:27 +0000 2010\"}"
+      body_exist: true
+      code: "200"
+      header:
+        date:
+        - Tue, 07 Aug 2012 23:38:57 GMT
+        status:
+        - 200 OK
+        last-modified:
+        - Tue, 07 Aug 2012 23:38:56 GMT
+        content-length:
+        - "2552"
+        x-ratelimit-limit:
+        - "350"
+        x-transaction-mask:
+        - a6183ffa5f8ca943ff1b53b5644ef1144d3bce9e
+        x-access-level:
+        - read-write
+        expires:
+        - Tue, 31 Mar 1981 05:00:00 GMT
+        cache-control:
+        - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+        content-type:
+        - application/json; charset=utf-8
+        x-runtime:
+        - "0.12351"
+        x-transaction:
+        - 2b6f93c3020b88ad
+        x-ratelimit-reset:
+        - "1344386326"
+        x-frame-options:
+        - SAMEORIGIN
+        etag:
+        - "\"30db9cf4bc1d09f315797e33bd53d92d\""
+        pragma:
+        - no-cache
+        x-ratelimit-class:
+        - api_identified
+        x-mid:
+        - d4d9271fe50e86b97c746740a797cc0fe5b370f0
+        x-ratelimit-remaining:
+        - "348"
+        set-cookie:
+        - k=10.35.55.137.1344382736961913; path=/; expires=Tue, 14-Aug-12 23:38:56 GMT; domain=.twitter.com
+        - guest_id=v1%3A134438273696678938; domain=.twitter.com; path=/; expires=Fri, 08-Aug-2014 11:38:56 GMT
+        - dnt=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT
+        - lang=en; path=/
+        - lang=en; path=/
+        - lang=en; path=/
+        - twid=u%3D144333836%7CIXqrY3QH%2BqBaSM1%2FVlrt6P41sSM%3D; domain=.twitter.com; path=/; secure
+        - _twitter_sess=BAh7CSDKZmxhc2hJQzonQWN0aW9uQ29udQJvbGxlcjo6Rmxhc2g6OkZsYXNo%250ASGFzaHsABjoKQHVzZWR7ADoPY3JlYXFlZF9hdGwrCFOadAM5AToHaWQiJTQ3%250AZTFhYzQ2NjhkMzI3MDAwMGJlOTUyODA0NDQwNTg5Ogxjc3JmX2lkIiU5ZGZi%250ANmFhMWI4ZDIyYTNkYWFmMDFiCTFjYWRmMTBkMw%253D%253D--b43fffc6e4a35dc89967d5e86c447c765d513b06; domain=.twitter.com; path=/; HttpOnly
+        vary:
+        - Accept-Encoding
+        server:
+        - tfe
+      http_version: "1.1"
+      message: OK
+      read: true
+      socket:
+    secret: E2vlKdOLa1GUphkbEKb2REA7owIusfyHlfffRZ8
+    token: 154233836-jbX6RyybRAv9RrkqzfxWikRA7FY1OKRGT7APcIIn
+  raw_info: !map:Hashie::Mash
+    profile_sidebar_fill_color: DAECF4
+    id: 144333836
+    profile_image_url_https: https://si0.twimg.com/profile_images/1765457431/mattsolt_normal.jpg
+    show_all_inline_media: false
+    follow_request_sent: false
+    verified: false
+    location: Bethlehem, PA / NYC
+    profile_image_url: http://a0.twimg.com/profile_images/1765457431/mattsolt_normal.jpg
+    profile_background_color: C6E2EE
+    utc_offset:
+    default_profile: false
+    followers_count: 126
+    name: Matt Solt
+    notifications: false
+    friends_count: 228
+    profile_background_image_url: http://a0.twimg.com/images/themes/theme2/bg.gif
+    screen_name: mattsolt
+    protected: false
+    profile_link_color: 1F98C7
+    listed_count: 11
+    lang: en
+    description: Cleanweb evangelist, organizer, and entrepreneur
+    profile_use_background_image: true
+    profile_text_color: 663B12
+    profile_background_image_url_https: https://si0.twimg.com/images/themes/theme2/bg.gif
+    is_translator: false
+    statuses_count: 286
+    profile_sidebar_border_color: C6E2EE
+    default_profile_image: false
+    contributors_enabled: false
+    status: !map:Hashie::Mash
+      coordinates:
+      geo:
+      in_reply_to_status_id_str:
+      id_str: "232718859482853376"
+      in_reply_to_screen_name:
+      in_reply_to_status_id:
+      in_reply_to_user_id_str:
+      retweeted: true
+      truncated: true
+      contributors:
+      in_reply_to_user_id:
+      created_at: Tue Aug 07 06:04:34 +0000 2012
+      retweet_count: 525
+      source: web
+      id: 232718859482853376
+      retweeted_status: !map:Hashie::Mash
+        possibly_sensitive: false
+        coordinates:
+        geo:
+        in_reply_to_status_id_str:
+        id_str: "232642502795079680"
+        in_reply_to_screen_name:
+        in_reply_to_status_id:
+        in_reply_to_user_id_str:
+        retweeted: true
+        truncated: false
+        contributors:
+        in_reply_to_user_id:
+        created_at: Tue Aug 07 01:01:09 +0000 2012
+        retweet_count: 525
+        source: <a href="http://www.awarenessnetworks.com" rel="nofollow">MLB.com</a>
+        id: 232642502795079680
+        possibly_sensitive_editable: true
+        place:
+        favorited: false
+        text: "Phillies' sellout streak ends at 257 straight games, the longest ever in the NL and the 3rd-longest in @MLB history: http://t.co/8tw67M4d"
+      place:
+      favorited: false
+      text: "RT @Phillies: Phillies' sellout streak ends at 257 straight games, the longest ever in the NL and the 3rd-longest in @MLB history: http: ..."
+    favourites_count: 5
+    geo_enabled: false
+    following: false
+    time_zone:
+    url:
+    id_str: "144333836"
+    profile_background_tile: false
+    created_at: Sun May 16 00:49:27 +0000 2010
