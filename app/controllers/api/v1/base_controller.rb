@@ -8,3 +8,6 @@
 #   def skip_trackable
 #     request.env['devise.skip_trackable'] = true
 #   end
+
+# API Throttling
+# http://stackoverflow.com/questions/1375501/how-do-i-throttle-my-sites-api-users

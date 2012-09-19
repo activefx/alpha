@@ -4,7 +4,7 @@ HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '~> 3.2.8.rc2'
+gem 'rails', '~> 3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -112,22 +112,12 @@ group :development, :test do
   gem 'vcr', '~> 2.0', :require => false
   gem 'webmock', :require => false
   gem 'timecop', :require => false
-  platforms :ruby do
-    gem 'rb-readline'
-  end
-  case HOST_OS
-  when /darwin/i
-    gem 'rb-fsevent'
-    gem 'growl'
-  when /linux/i
-    gem 'therubyracer', :require => 'v8'
-    gem 'rb-inotify'
-    gem 'libnotify'
-  when /mswin|windows/i
-    gem 'rb-fchange'
-    gem 'win32console'
-    gem 'rb-notifu'
-  end
+  gem 'therubyracer', :require => 'v8'
+  gem 'rb-readline', :platforms => [ :ruby ]
+  gem 'rb-fsevent', :require => HOST_OS =~ /darwin/i ? 'rb-fsevent' : false
+  gem 'growl', :require => HOST_OS =~ /darwin/i ? 'growl' : false
+  gem 'rb-inotify', :require => HOST_OS =~ /linux/i ? 'rb-inotify' : false
+  gem 'libnotify', :require => HOST_OS =~ /linux/i ? 'libnotify' : false
   gem 'pry', :require => false
   gem 'pry-doc', :require => false
   gem 'pry-rails'
