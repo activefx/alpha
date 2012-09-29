@@ -66,8 +66,8 @@ end
 group :assets do
   gem 'sass-rails', '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
+  gem 'compass_twitter_bootstrap'
   gem 'compass-rails'
-  gem 'compass_twitter_bootstrap', :git => 'git://github.com/wyuenho/compass-twitter-bootstrap.git'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
   gem 'uglifier'

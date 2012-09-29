@@ -21,13 +21,6 @@ GIT
       actionpack (~> 3)
       railties (~> 3)
 
-GIT
-  remote: git://github.com/wyuenho/compass-twitter-bootstrap.git
-  revision: a05019a303531d92b9e6a7cf2c7dfca980f67e27
-  specs:
-    compass_twitter_bootstrap (2.0.4)
-      compass
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -100,6 +93,8 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    compass_twitter_bootstrap (2.0.3)
+      compass
     configatron (2.9.1)
       yamler (>= 0.1.0)
     crack (0.3.1)
@@ -406,7 +401,7 @@ DEPENDENCIES
   capybara-mechanize
   coffee-rails (~> 3.2)
   compass-rails
-  compass_twitter_bootstrap!
+  compass_twitter_bootstrap
   configatron
   database_cleaner
   devise (~> 2.1.2)
