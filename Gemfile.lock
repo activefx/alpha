@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: aaa01f1344fb74d5e7e6dfa81700e40e54745f38
+  revision: de29633f1dba46b72c7c4f970f3dc78820f4a022
   specs:
     simple_form (2.1.0.dev)
       actionpack (~> 3.0)
@@ -8,10 +8,10 @@ GIT
 
 GIT
   remote: git://github.com/ryanb/letter_opener.git
-  revision: a289028bdfa6003c03d232887a3666b3200cefa5
+  revision: 8d9a6356528e1c42bb094dfb248539f8b4797255
   specs:
     letter_opener (0.0.2)
-      launchy
+      launchy (>= 2.0.4)
 
 GIT
   remote: git://github.com/stouset/twitter_bootstrap_form_for.git
@@ -122,15 +122,15 @@ GEM
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.1.5)
-    foreman (0.59.0)
+    foreman (0.60.0)
       thor (>= 0.13.6)
     fssm (0.2.9)
-    fuubar (1.0.0)
+    fuubar (1.1.0)
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
-      ruby-progressbar (~> 0.0.10)
+      ruby-progressbar (~> 1.0.0)
     growl (1.0.3)
-    guard (1.3.2)
+    guard (1.4.0)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
     guard-bundler (1.0.0)
@@ -139,15 +139,16 @@ GEM
     guard-coffeescript (1.2.0)
       coffee-script (>= 2.2.0)
       guard (>= 1.1.0)
-    guard-jasmine (1.8.2)
+    guard-jasmine (1.8.3)
       childprocess
       guard (>= 1.1.0)
       multi_json
       thor
     guard-rails (0.1.1)
       guard (>= 0.2.2)
-    guard-rspec (1.2.1)
+    guard-rspec (2.0.0)
       guard (>= 1.1)
+      rspec (~> 2.11)
     guard-spork (1.2.0)
       childprocess
       guard (>= 1.1)
@@ -164,16 +165,17 @@ GEM
     hike (1.2.1)
     hpricot (0.8.6)
     http_parser.rb (0.5.3)
-    httpauth (0.1)
+    httpauth (0.2.0)
     i18n (0.6.1)
     jasmine-sinon-rails (1.3.2.1)
     jasminerice (0.0.9)
       coffee-rails
       haml
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
+    jruby-pageant (1.1.1)
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
@@ -186,7 +188,7 @@ GEM
     libv8 (3.3.10.4)
     libwebsocket (0.1.5)
       addressable
-    listen (0.5.1)
+    listen (0.5.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -202,7 +204,7 @@ GEM
     metaclass (0.0.1)
     method_source (0.8)
     mime-types (1.19)
-    mocha (0.12.4)
+    mocha (0.12.6)
       metaclass (~> 0.0.1)
     mongoid (3.0.6)
       activemodel (~> 3.1)
@@ -213,7 +215,7 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.9)
-    moped (1.2.2)
+    moped (1.2.5)
     multi_json (1.3.6)
     multipart-post (1.1.5)
     net-http-digest_auth (1.2.1)
@@ -222,7 +224,8 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.5.2)
+    net-ssh (2.6.0)
+      jruby-pageant (>= 1.1.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
@@ -257,7 +260,7 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     open4 (1.3.0)
-    origin (1.0.8)
+    origin (1.0.9)
     orm_adapter (0.4.0)
     poltergeist (0.7.0)
       capybara (~> 1.1)
@@ -273,7 +276,7 @@ GEM
     pry-doc (0.4.4)
       pry (>= 0.9.9.6)
       yard (~> 0.8.1)
-    pry-rails (0.2.1)
+    pry-rails (0.2.2)
       pry (>= 0.9.10)
     rack (1.4.1)
     rack-cache (1.2)
@@ -283,7 +286,7 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.8)
       actionmailer (= 3.2.8)
@@ -303,7 +306,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
-    rb-fsevent (0.9.1)
+    rb-fsevent (0.9.2)
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
     rb-readline (0.4.2)
@@ -317,14 +320,14 @@ GEM
     rspec-expectations (2.11.3)
       diff-lcs (~> 1.1.3)
     rspec-instafail (0.2.4)
-    rspec-mocks (2.11.2)
+    rspec-mocks (2.11.3)
     rspec-rails (2.11.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.11.0)
-    ruby-openid (2.2.0)
-    ruby-progressbar (0.0.10)
+    ruby-openid (2.2.1)
+    ruby-progressbar (1.0.1)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.9)
@@ -358,13 +361,13 @@ GEM
     sys-proctable (0.9.1)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
-    thin (1.4.1)
+    thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
-    timecop (0.5.1)
+    timecop (0.5.2)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -378,7 +381,7 @@ GEM
     vcr (2.2.5)
     warden (1.2.1)
       rack (>= 1.0)
-    webmock (1.8.10)
+    webmock (1.8.11)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
     webrobots (0.0.13)
