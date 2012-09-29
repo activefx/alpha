@@ -45,7 +45,7 @@ gem 'jquery-rails'
 
 # Utilities
 gem 'capistrano'
-gem 'thin'
+gem 'unicorn'
 gem 'foreman'
 gem 'whenever', :require => false
 # Use Whoops for error notifications when 3.1 ready
