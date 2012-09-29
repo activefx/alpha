@@ -33,8 +33,7 @@ guard 'rspec', { :all_on_start => false,
                  :keep_failed => true,
                  :spec_paths => ["spec"],
                  :cli => '--drb --format Fuubar --color',
-                 :bundler => true,
-                 :version => 2
+                 :bundler => true
                } do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^spec/helpers/.+_spec\.rb$})
