@@ -66,12 +66,10 @@ end
 group :assets do
   gem 'sass-rails', '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
-  gem 'compass_twitter_bootstrap'
-  gem 'compass-rails'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
   gem 'uglifier'
   gem 'yui-compressor'
+  gem 'compass_twitter_bootstrap'
+  gem 'compass-rails'
 end
 
 group :development do
@@ -113,9 +111,9 @@ group :development, :test do
   gem 'webmock', :require => false
   gem 'timecop', :require => false
   gem 'therubyracer', :require => 'v8'
-  gem 'rb-readline', :platforms => [ :ruby ]
+  gem 'rb-readline', :platforms => :ruby
   gem 'rb-fsevent', :require => HOST_OS =~ /darwin/i ? 'rb-fsevent' : false
-  gem 'growl', :require => HOST_OS =~ /darwin/i ? 'growl' : false
+  gem 'ruby_gntp', :require => HOST_OS =~ /darwin/i ? 'ruby_gntp' : false
   gem 'rb-inotify', :require => HOST_OS =~ /linux/i ? 'rb-inotify' : false
   gem 'libnotify', :require => HOST_OS =~ /linux/i ? 'libnotify' : false
   gem 'pry', :require => false
