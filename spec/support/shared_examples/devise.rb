@@ -57,6 +57,14 @@ shared_examples_for "a devise model" do
     it { should_not allow_mass_assignment_of(:locked_at) }
   end
 
+  # omniauthable
+
+  if subject.call.omniauthable?
+    it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
+    it { should have_field(:created_by_provider).of_type(String) }
+    it { should_not allow_mass_assignment_of(:created_by_provider) }
+  end
+
   # recoverable
 
   if subject.call.recoverable?

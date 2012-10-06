@@ -4,22 +4,20 @@ describe User do
 
   it { should be_mongoid_document }
   it { should be_timestamped_document }
-  it { should have_field(:username).of_type(String) }
-  it { should have_field(:created_by_provider).of_type(String) }
-  it { FactoryGirl.build(:user).should be_valid }
-  it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
 
   it_should_behave_like "a devise model"
 
   context "data model" do
 
-    it { should_not allow_mass_assignment_of(:id) }
-    it { should allow_mass_assignment_of(:email) }
-    it { should allow_mass_assignment_of(:password) }
-    it { should allow_mass_assignment_of(:password_confirmation) }
-    it { should allow_mass_assignment_of(:remember_me) }
-    it { should_not allow_mass_assignment_of(:created_by_provider) }
+    it { should have_field(:username).of_type(String) }
 
+    it { should_not allow_mass_assignment_of(:id) }
+    it { should allow_mass_assignment_of(:username) }
+
+  end
+
+  context "validations" do
+    it { FactoryGirl.build(:user).should be_valid }
   end
 
   context "application specific devise configuration" do
@@ -38,47 +36,4 @@ describe User do
 
   end
 
-
 end
-
-
-#  describe User do
-#    it "should be valid" do
-#      Fabricate.build(:user).should be_valid
-#    end
-#    it { should have_field(:email).of_type(String) }
-#    it { should have_field(:login).of_type(String) }
-
-#    it { should embed_many(:user_tokens).of_type(UserToken) }
-
-#    it { should validate_presence_of(:login) }
-#    it { should validate_uniqueness_of(:email) }
-#    it { should validate_uniqueness_of(:login) }
-
-#    describe ".find_for_database_authentication" do
-#      let(:user) { Fabricate(:user) }
-
-#      it 'should return user by email' do
-#        User.find_for_database_authentication(:email => user.email).should == user
-#      end
-
-#      it 'should return user by login' do
-#        User.find_for_database_authentication(:email => user.login).should == user
-#      end
-#      it 'should return nothing if not good login or email' do
-#        User.find_for_database_authentication(:email => 'hello').should be_nil
-#      end
-#    end
-
-#    describe "validation" do
-#      it 'should not have 2 user with same provider/uid' do
-#        u = Fabricate(:user)
-#        u.user_tokens.create(:provider => 'twitter', :uid => '1234')
-#        u.save
-
-#        u = Fabricate(:user)
-#        u.user_tokens.build(:provider => 'twitter', :uid => '1234')
-#        u.should_not be_valid
-#      end
-#    end
-#  end

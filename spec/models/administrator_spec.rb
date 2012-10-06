@@ -4,16 +4,18 @@ describe Administrator do
 
   it { should be_mongoid_document }
   it { should be_timestamped_document }
-  it { FactoryGirl.build(:admin).should be_valid }
 
   it_should_behave_like "a devise model"
 
   context "data model" do
 
     it { should_not allow_mass_assignment_of(:id) }
-    it { should allow_mass_assignment_of(:email) }
-    it { should allow_mass_assignment_of(:password) }
-    it { should allow_mass_assignment_of(:password_confirmation) }
+
+  end
+
+  context "validations" do
+
+    it { FactoryGirl.build(:admin).should be_valid }
 
   end
 

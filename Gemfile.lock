@@ -442,7 +442,6 @@ DEPENDENCIES
   omniauth-openid
   omniauth-twitter
   poltergeist
-  pry
   pry-doc
   pry-rails
   rack-test

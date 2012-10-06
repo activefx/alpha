@@ -116,9 +116,8 @@ group :development, :test do
   gem 'ruby_gntp', :require => HOST_OS =~ /darwin/i ? 'ruby_gntp' : false
   gem 'rb-inotify', :require => HOST_OS =~ /linux/i ? 'rb-inotify' : false
   gem 'libnotify', :require => HOST_OS =~ /linux/i ? 'libnotify' : false
-  gem 'pry', :require => false
-  gem 'pry-doc', :require => false
   gem 'pry-rails'
+  gem 'pry-doc', :require => false
   # Or use ruby-debug
   # gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   # gem 'ruby-debug-base19x', '~> 0.11.30.pre4'

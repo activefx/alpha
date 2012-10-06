@@ -21,11 +21,11 @@ class User
 
   protected
 
-  def self.search(search, page)
-    if search
-      where(:email => /#{Regexp.quote(search)}/).page(page || 1).per(10)
+  def self.search(search = nil, page = 1)
+    unless search.blank?
+      where(:email => /#{Regexp.quote(search)}/).page(page).per(10)
     else
-      page(page || 1).per(10)
+      page(page).per(10)
     end
   end
 
