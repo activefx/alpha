@@ -72,7 +72,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth, :token_auth]
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -211,39 +211,39 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
   unless configatron.github.app_id.nil?
+    require "omniauth-github"
     config.omniauth :github, configatron.github.app_id,
                              configatron.github.app_key,
-                             :scope => "user,public_repo",
-                             :require => "omniauth-github"
+                             :scope => "user,public_repo"
   end
   unless configatron.linkedin.app_id.nil?
+    require "omniauth-linkedin"
     config.omniauth :linkedin, configatron.linkedin.app_id,
-                                configatron.linkedin.app_key,
-                                :require => "omniauth-linkedin"
+                                configatron.linkedin.app_key
   end
   unless configatron.facebook.app_id.nil?
+    require "omniauth-facebook"
     config.omniauth :facebook, configatron.facebook.app_id,
                                configatron.facebook.app_key,
                                :scope => "email,user_about_me,offline_access",
-                               :display => "page",
-                               :require => "omniauth-facebook"
+                               :display => "page"
   end
   unless configatron.twitter.app_id.nil?
+    require "omniauth-twitter"
     config.omniauth :twitter, configatron.twitter.app_id,
-                              configatron.twitter.app_key,
-                              :require => "omniauth-twitter"
+                              configatron.twitter.app_key
   end
   unless configatron.google.open_id.enabled.nil? || !configatron.google.open_id.enabled
+    require "omniauth-openid"
     config.omniauth :openid, :store => configatron.open_id.storage_handler,
                               :name => configatron.google.open_id.name,
-                              :identifier => configatron.omniauth.google.open_id.identifier,
-                              :require => "omniauth-openid"
+                              :identifier => configatron.omniauth.google.open_id.identifier
   end
   unless configatron.yahoo.open_id.enabled.nil? || !configatron.yahoo.open_id.enabled
+    require "omniauth-openid"
     config.omniauth :openid, :store => configatron.open_id.storage_handler,
                               :name => configatron.yahoo.open_id.name,
-                              :identifier => configatron.yahoo.open_id.identifier,
-                              :require => "omniauth-openid"
+                              :identifier => configatron.yahoo.open_id.identifier
   end
 
   # ==> Warden configuration

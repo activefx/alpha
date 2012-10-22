@@ -36,7 +36,7 @@ shared_examples_for "a devise model" do
     it { should allow_mass_assignment_of(:password_confirmation) }
     it { should_not allow_mass_assignment_of(:encrypted_password) }
     it { should validate_presence_of(:email) if subject.send(:email_required?) }
-    it { should validate_presence_of(:encrypted_password) if subject.send(:password_required?) }
+    it { should validate_presence_of(:password) if subject.send(:password_required?) }
     it { should have_index_for(email: 1).with_options(:unique => true) }
   end
 

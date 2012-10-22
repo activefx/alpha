@@ -19,18 +19,21 @@ gem 'mongoid', '~> 3.0.0'
 # Authentication / Authorization
 gem 'devise', '~> 2.1.2'
 gem 'omniauth', '~> 1.1.0'
-gem 'omniauth-oauth'
-gem 'omniauth-oauth2'
-gem 'omniauth-openid'
-gem 'omniauth-facebook'
-gem 'omniauth-github'
-gem 'omniauth-linkedin'
-gem 'omniauth-twitter'
+gem 'omniauth-oauth', :require => false
+gem 'omniauth-oauth2', :require => false
+gem 'omniauth-openid', :require => false
+gem 'omniauth-facebook', :require => false
+gem 'omniauth-github', :require => false
+gem 'omniauth-linkedin', :require => false
+gem 'omniauth-twitter', :require => false
+gem 'cancan'
 
 # Views
 gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
+gem 'rabl'
+gem 'yajl-ruby', :require => 'yajl'
 # Bootstrap generators was used to set up scaffold, simple form and layouts
 # but commented out to allow compass to serve the Twitter Bootstrap assets
 # and avoid any conflicts

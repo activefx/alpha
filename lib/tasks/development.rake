@@ -42,7 +42,8 @@ namespace :development do
     Dir["#{Rails.root}/app/views/layouts/*.haml"] +
     [ "#{Rails.root}/Rakefile",
       "#{Rails.root}/config.ru",
-      "#{Rails.root}/config/mongoid.yml" ]
+      "#{Rails.root}/config/mongoid.yml",
+      "#{Rails.root}/lib/api_constraints.rb" ]
   end
 end
 

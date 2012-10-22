@@ -1,0 +1,2 @@
+object @account
+attribute :email

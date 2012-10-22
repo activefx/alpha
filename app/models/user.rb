@@ -7,17 +7,28 @@ class User
   include Extensions::Recoverable
   include Extensions::Registerable
   include Extensions::Rememberable
-  #include Extensions::Timeoutable
-  #include Extensions::TokenAuthenticable
+  include Extensions::Timeoutable
+  include Extensions::TokenAuthenticatable
   include Extensions::Trackable
   include Extensions::Validatable
   include Extensions::Omniauthable
   include Extensions::DeviseHelpers
   include Extensions::BetaSignups
 
-  field :username,                :type => String
+  field :username,                type: String
+  field :monthly_api_rate_limit,  type: Integer
+  field :daily_api_rate_limit,    type: Integer
+  field :hourly_api_rate_limit,   type: Integer
 
   attr_accessible :username
+
+  embeds_many :api_keys, :validate => true
+
+  index({ 'api_keys.token' => 1 }, { unique: true })
+
+  def create_api_key
+    api_keys.create
+  end
 
   protected
 
