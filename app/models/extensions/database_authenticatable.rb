@@ -17,9 +17,6 @@ module Extensions
       #
       devise :database_authenticatable
 
-      validates_presence_of :email, :if => :email_required?
-      validates_presence_of :encrypted_password, :if => :password_required?
-
       attr_accessible :email, :password, :password_confirmation
 
       index({ email: 1 }, { unique: true })
@@ -42,4 +39,4 @@ module Extensions
     #  end
 
   end
-end 
+end

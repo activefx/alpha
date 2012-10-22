@@ -36,7 +36,7 @@ shared_examples_for "a devise model" do
     it { should allow_mass_assignment_of(:password_confirmation) }
     it { should_not allow_mass_assignment_of(:encrypted_password) }
     it { should validate_presence_of(:email) if subject.send(:email_required?) }
-    it { should validate_presence_of(:encrypted_password) if subject.send(:password_required?) }
+    it { should validate_presence_of(:password) if subject.send(:password_required?) }
     it { should have_index_for(email: 1).with_options(:unique => true) }
   end
 
@@ -55,6 +55,14 @@ shared_examples_for "a devise model" do
     end
     it { should have_field(:locked_at).of_type(Time) }
     it { should_not allow_mass_assignment_of(:locked_at) }
+  end
+
+  # omniauthable
+
+  if subject.call.omniauthable?
+    it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
+    it { should have_field(:created_by_provider).of_type(String) }
+    it { should_not allow_mass_assignment_of(:created_by_provider) }
   end
 
   # recoverable

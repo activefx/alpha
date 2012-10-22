@@ -1,11 +1,11 @@
 Alpha::Application.routes.draw do
 
-  devise_for :users, :controllers => { :confirmations => "users/confirmations",
-                                       :omniauth_callbacks => "users/omniauth_callbacks",
-                                       :passwords => "users/passwords",
-                                       :registrations => "users/registrations",
-                                       :sessions => "users/sessions",
-                                       :unlocks => "users/unlocks" }
+  devise_for :users, :controllers => { :confirmations => 'users/confirmations',
+                                       :omniauth_callbacks => 'users/omniauth_callbacks',
+                                       :passwords => 'users/passwords',
+                                       :registrations => 'users/registrations',
+                                       :sessions => 'users/sessions',
+                                       :unlocks => 'users/unlocks' }
 
   devise_for :administrators
 
@@ -20,16 +20,35 @@ Alpha::Application.routes.draw do
     resources :users
   end
 
-  match '/user' => "welcome#index", :as => :user_root
-  match 'admin/dashboard' => "admin/dashboard#index", :as => :administrator_root
+  match '/user' => 'welcome#index', :as => :user_root
+  match 'admin/dashboard' => 'admin/dashboard#index', :as => :administrator_root
 
   resources :beta_signups
 
-  #namespace :api do
-  #  namespace :v1 do
-  #    resources :users
-  #  end
-  #end
+  namespace 'api', default: { format: 'json' } do
+
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+
+      # Echo / Debugging / Status
+      match 'echo/index' => 'echo#index', via: :get
+      match 'echo/show' => 'echo#show', via: [ :get, :post ]
+      match 'echo/create' => 'echo#create', via: :post
+      match 'echo/update' => 'echo#update', via: :put
+      match 'echo/destroy' => 'echo#destroy', via: :delete
+      match 'echo/authenticate' => 'echo#authenticate', via: :get
+      match 'echo/:status_code' => 'echo#status', via: :get
+
+      # Account Details
+      # resources :registrations, :only => [ :create ]
+      # resources :sessions, :only => [ :create, :destroy ]
+      devise_for :users, :only => [ :registrations, :sessions ]
+      resource :account, :only => [ :show ]
+
+      match '*a', :to => 'base#routing'
+
+    end
+
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -78,11 +97,11 @@ Alpha::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   # just remember to delete public/index.html.
   root :to => 'welcome#index'
 
-  # See how all your routes lay out with "rake routes"
+  # See how all your routes lay out with 'rake routes'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

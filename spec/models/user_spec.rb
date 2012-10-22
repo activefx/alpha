@@ -4,22 +4,28 @@ describe User do
 
   it { should be_mongoid_document }
   it { should be_timestamped_document }
-  it { should have_field(:username).of_type(String) }
-  it { should have_field(:created_by_provider).of_type(String) }
-  it { FactoryGirl.build(:user).should be_valid }
-  it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
 
   it_should_behave_like "a devise model"
 
   context "data model" do
 
-    it { should_not allow_mass_assignment_of(:id) }
-    it { should allow_mass_assignment_of(:email) }
-    it { should allow_mass_assignment_of(:password) }
-    it { should allow_mass_assignment_of(:password_confirmation) }
-    it { should allow_mass_assignment_of(:remember_me) }
-    it { should_not allow_mass_assignment_of(:created_by_provider) }
+    it { should have_field(:username).of_type(String) }
 
+    it { should_not allow_mass_assignment_of(:id) }
+    it { should allow_mass_assignment_of(:username) }
+
+  end
+
+  context "associations" do
+    it { should embed_many(:api_keys) }
+  end
+
+  context "indexes" do
+    it { should have_index_for({'api_keys.token' => 1}).with_options(:unique => true) }
+  end
+
+  context "validations" do
+    it { FactoryGirl.build(:user).should be_valid }
   end
 
   context "application specific devise configuration" do
@@ -31,54 +37,23 @@ describe User do
     it { should be_recoverable }
     it { should be_registerable }
     it { should be_rememberable }
-    it { should_not be_timeoutable }
-    it { should_not be_token_authenticatable }
+    it { should be_timeoutable }
+    it { should be_token_authenticatable }
     it { should be_trackable }
     it { should be_validatable }
 
   end
 
+  context "api" do
+
+    it { should have_field(:monthly_api_rate_limit).of_type(Integer) }
+    it { should have_field(:daily_api_rate_limit).of_type(Integer) }
+    it { should have_field(:hourly_api_rate_limit).of_type(Integer) }
+
+    it { should_not allow_mass_assignment_of(:monthly_api_rate_limit) }
+    it { should_not allow_mass_assignment_of(:daily_api_rate_limit) }
+    it { should_not allow_mass_assignment_of(:hourly_api_rate_limit) }
+
+  end
 
 end
-
-
-#  describe User do
-#    it "should be valid" do
-#      Fabricate.build(:user).should be_valid
-#    end
-#    it { should have_field(:email).of_type(String) }
-#    it { should have_field(:login).of_type(String) }
-
-#    it { should embed_many(:user_tokens).of_type(UserToken) }
-
-#    it { should validate_presence_of(:login) }
-#    it { should validate_uniqueness_of(:email) }
-#    it { should validate_uniqueness_of(:login) }
-
-#    describe ".find_for_database_authentication" do
-#      let(:user) { Fabricate(:user) }
-
-#      it 'should return user by email' do
-#        User.find_for_database_authentication(:email => user.email).should == user
-#      end
-
-#      it 'should return user by login' do
-#        User.find_for_database_authentication(:email => user.login).should == user
-#      end
-#      it 'should return nothing if not good login or email' do
-#        User.find_for_database_authentication(:email => 'hello').should be_nil
-#      end
-#    end
-
-#    describe "validation" do
-#      it 'should not have 2 user with same provider/uid' do
-#        u = Fabricate(:user)
-#        u.user_tokens.create(:provider => 'twitter', :uid => '1234')
-#        u.save
-
-#        u = Fabricate(:user)
-#        u.user_tokens.build(:provider => 'twitter', :uid => '1234')
-#        u.should_not be_valid
-#      end
-#    end
-#  end

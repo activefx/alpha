@@ -12,7 +12,7 @@ module Extensions
       #     Which providers are avaialble to this model.
       #     ex. :omniauth_providers => [:twitter]
       #
-      devise :omniauthable #,
+      devise :omniauthable
 
       after_save :auto_confirm!, :unless => :email_required?
 

@@ -8,9 +8,9 @@ module Extensions
       #  timeout_in:
       #    The interval to timeout the user session without activity.
       #
-      devise :timeoutable
+      devise :timeoutable, :timeout_in => 2.days
 
     end
 
   end
-end 
+end

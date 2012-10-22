@@ -19,18 +19,21 @@ gem 'mongoid', '~> 3.0.0'
 # Authentication / Authorization
 gem 'devise', '~> 2.1.2'
 gem 'omniauth', '~> 1.1.0'
-gem 'omniauth-oauth'
-gem 'omniauth-oauth2'
-gem 'omniauth-openid'
-gem 'omniauth-facebook'
-gem 'omniauth-github'
-gem 'omniauth-linkedin'
-gem 'omniauth-twitter'
+gem 'omniauth-oauth', :require => false
+gem 'omniauth-oauth2', :require => false
+gem 'omniauth-openid', :require => false
+gem 'omniauth-facebook', :require => false
+gem 'omniauth-github', :require => false
+gem 'omniauth-linkedin', :require => false
+gem 'omniauth-twitter', :require => false
+gem 'cancan'
 
 # Views
 gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
+gem 'rabl'
+gem 'yajl-ruby', :require => 'yajl'
 # Bootstrap generators was used to set up scaffold, simple form and layouts
 # but commented out to allow compass to serve the Twitter Bootstrap assets
 # and avoid any conflicts
@@ -66,12 +69,10 @@ end
 group :assets do
   gem 'sass-rails', '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
-  gem 'compass_twitter_bootstrap'
-  gem 'compass-rails'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
   gem 'uglifier'
   gem 'yui-compressor'
+  gem 'compass_twitter_bootstrap'
+  gem 'compass-rails'
 end
 
 group :development do
@@ -113,14 +114,13 @@ group :development, :test do
   gem 'webmock', :require => false
   gem 'timecop', :require => false
   gem 'therubyracer', :require => 'v8'
-  gem 'rb-readline', :platforms => [ :ruby ]
+  gem 'rb-readline', :platforms => :ruby
   gem 'rb-fsevent', :require => HOST_OS =~ /darwin/i ? 'rb-fsevent' : false
-  gem 'growl', :require => HOST_OS =~ /darwin/i ? 'growl' : false
+  gem 'ruby_gntp', :require => HOST_OS =~ /darwin/i ? 'ruby_gntp' : false
   gem 'rb-inotify', :require => HOST_OS =~ /linux/i ? 'rb-inotify' : false
   gem 'libnotify', :require => HOST_OS =~ /linux/i ? 'libnotify' : false
-  gem 'pry', :require => false
-  gem 'pry-doc', :require => false
   gem 'pry-rails'
+  gem 'pry-doc', :require => false
   # Or use ruby-debug
   # gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   # gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
