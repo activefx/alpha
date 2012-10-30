@@ -216,6 +216,7 @@ end
 # Other examples of base controllers
 # https://github.com/teambox/teambox/blob/dev/app/controllers/api_v1/api_controller.rb
 # https://github.com/spree/spree/blob/master/api/app/controllers/spree/api/v1/base_controller.rb
+# https://github.com/gitlabhq/gitlabhq/blob/master/lib/api/helpers.rb
 
 # Devise integration
 # http://jessewolgamott.com/blog/2012/01/19/the-one-with-a-json-api-login-using-devise/
