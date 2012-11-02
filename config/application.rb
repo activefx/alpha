@@ -17,6 +17,10 @@ end
 
 module Alpha
   class Application < Rails::Application
+    # Set the default Logger in application.rb (and not just production.rb) to STDOUT
+    # in order to work with Unicorn
+    # config.logger = Logger.new(STDOUT)
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
