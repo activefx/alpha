@@ -1,6 +1,16 @@
 Alpha::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Enable LiveReload in development
+  # Sample configuration options:
+  # :min_delay => 500,
+  # :max_delay => 10000,
+  # :port => 56789,
+  # :host => 'myhost.cool.wow',
+  # :ignore => [ %r{dont/modify\.html$} ]
+  #
+  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -39,6 +49,6 @@ Alpha::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:5000' }
 end
 

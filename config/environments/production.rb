@@ -11,6 +11,14 @@ Alpha::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
+  # Ember.js specific variant in your application config in order for sprockets to locate
+  # ember's assets
+  config.ember.variant = :production
+
+  # Enable the asset pipeline
+  # Ensure assets are enabled for Cloudfront
+  config.assets.enabled = true
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
   config.assets.css_compressor = :yui
@@ -20,6 +28,7 @@ Alpha::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs
+  # Should be set to true for Cloudfront
   config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
@@ -27,7 +36,7 @@ Alpha::Application.configure do
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -46,15 +55,25 @@ Alpha::Application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = "//s3.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
+
+  # Ensure configuration setup in initializers is available by setting
+  # initialize_on_precompile to true
+  config.assets.initialize_on_precompile = false
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += [
+    'ie.css',
+    'print.css',
+    'screen.css',
+    'modernizr.js'
+  ]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
