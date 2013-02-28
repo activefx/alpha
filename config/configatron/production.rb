@@ -7,3 +7,8 @@
   # Must be './tmp' for Heroku
   configatron.open_id.storage_location = './tmp'
 
+  # Set to true to start accepting Stripe payments
+  configatron.stripe.enabled = false
+
+  # Redis
+  configatron.redis.url = ENV['OPENREDIS_URL']
