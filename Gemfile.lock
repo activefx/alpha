@@ -107,13 +107,6 @@ GIT
       actionpack (>= 3)
       railties (>= 3)
 
-PATH
-  remote: ../alpha-installer
-  specs:
-    alpha-installer (0.0.1.alpha)
-      fog
-      heroku-api
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -537,7 +530,6 @@ PLATFORMS
 DEPENDENCIES
   active_attr
   active_model_serializers!
-  alpha-installer!
   asset_sync
   better_errors
   binding_of_caller

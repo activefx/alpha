@@ -15,7 +15,7 @@ ruby '1.9.3'
 
 gem 'rails', git: 'git://github.com/rails/rails.git', branch: '3-2-stable'
 
-gem 'alpha-installer', path: '/Users/ms/Dropbox/rails/alpha-installer'
+# gem 'alpha-installer', path: '/Users/ms/Dropbox/rails/alpha-installer'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
