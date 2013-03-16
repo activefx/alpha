@@ -1,4 +1,4 @@
-if Rails.env.production? && configatron.background_workers_available
+if BACKGROUND_WORKERS_AVAILABLE
   require 'devise-async'
   Devise::Async.backend = :sidekiq
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe '/api/v1/echo', :type => :api do
+describe '/api/v1/echo', :api do
 
   context "GET show" do
     before { get '/api/echo/show' }

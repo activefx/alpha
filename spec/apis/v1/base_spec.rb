@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe 'Api', :type => :api do
+describe Api::V1::BaseController, :api do
+
+  it { api_helpers.should be :available }
 
   context "header" do
 

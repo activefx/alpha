@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  respond_to :html
+
   before_filter :show_beta_page?
 
   # rescue_from, ActionController::UnknownAction,
@@ -44,7 +46,7 @@ class ApplicationController < ActionController::Base
   # Add exceptions for log in page and logged in user
   def show_beta_page?
     if site_in_beta? && nobody_signed_in? && not_an_allowed_page?
-      redirect_to beta_signups_path
+      redirect_to comming_soon_path
     end
   end
 

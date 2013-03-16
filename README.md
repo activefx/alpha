@@ -1,5 +1,7 @@
 ## Alpha 
 
+**This is still experimental but has been working for my personal projects.**
+
 Alpha is a starting point for faster prototyping of Rails applications, web service APIs, and / or Ember.js applications, and automatically deploying them to Heroku. It is meant to serve as a rapid prototyping framework, as well as an example application for configuring and using common Rails related technologies.
 
 ## Contents

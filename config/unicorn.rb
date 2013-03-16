@@ -1,3 +1,6 @@
+require 'sidekiq'
+require 'uri'
+
 # Sample verbose configuration file for Unicorn (not Rack)
 #
 # This configuration file documents many features of Unicorn
@@ -36,8 +39,10 @@ logger Logger.new($stdout)
 # listen "/tmp/.sock", :backlog => 64
 # listen 8080, :tcp_nopush => true
 
-# nuke workers after 30 seconds instead of 60 seconds (the default)
-timeout 30
+# nuke workers after 15 seconds instead of 60 seconds (the default)
+# as per heroku documentation
+# https://devcenter.heroku.com/articles/rails-unicorn
+timeout 15
 
 # feel free to point this anywhere accessible on the filesystem
 # pid "/path/to/app/shared/pids/unicorn.pid"
@@ -51,23 +56,28 @@ timeout 30
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 preload_app true
-# GC.respond_to?(:copy_on_write_friendly=) and
-  # GC.copy_on_write_friendly = true
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
 
 before_fork do |server, worker|
+
+  # https://blog.heroku.com/archives/2013/2/27/unicorn_rails
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
 
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
   #
   # There is no need to do this with Mongoid
-  # defined?(ActiveRecord::Base) and
-  #   ActiveRecord::Base.connection.disconnect!
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
 
-  # # If you are using Redis but not Resque, change this
-  # if defined?(Resque)
-  #   Resque.redis.quit
-  #   Rails.logger.info('Disconnected from Redis')
-  # end
+  if defined?(Redis)
+    $redis.quit
+    Rails.logger.info('Disconnected from Redis')
+  end
 
   # The following is only recommended for memory/DB-constrained
   # installations.  It is not needed if your system can house
@@ -91,25 +101,39 @@ before_fork do |server, worker|
   # to the implementation of standard Unix signal handlers, this
   # helps (but does not completely) prevent identical, repeated signals
   # from being lost when the receiving process is busy.
-  # sleep 1
+  sleep 1
 end
 
 after_fork do |server, worker|
+
+  # https://blog.heroku.com/archives/2013/2/27/unicorn_rails
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to sent QUIT'
+  end
+
   # per-process listener ports for debugging/admin/migrations
   # addr = "127.0.0.1:#{9293 + worker.nr}"
   # server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)
 
-  # the following is *required* for Rails + "preload_app true",
+  # the following is *required* for Rails + "preload_app true",s
   #
   # There is no need to do this with Mongoid
-  # defined?(ActiveRecord::Base) and
-  #   ActiveRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
 
-  # # If you are using Redis but not Resque, change this
-  # if defined?(Resque)
-  #   Resque.redis = ENV['REDIS_URI']
-  #   Rails.logger.info('Connected to Redis')
-  # end
+  # When using Unicorn, you should configure the Sidekiq client within
+  # a block that runs after the child process is forked
+  if defined?(Sidekiq)
+    Sidekiq.configure_client do |config|
+      config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 1 }
+    end
+  end
+
+  if defined?(Redis)
+    redis_uri = URI.parse(configatron.redis.url)
+    $redis = Redis.new(:host => redis_uri.host, :port => redis_uri.port, :password => redis_uri.password)
+    Rails.logger.info('Connected to Redis')
+  end
 
   # if preload_app is true, then you may also want to check and
   # restart any other shared sockets/descriptors such as Memcached,

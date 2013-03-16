@@ -6,9 +6,9 @@ module RequestHelpers
 
   def manual_user_login(user)
     visit new_user_session_path
-    fill_in "Email", :with => user.email
-    fill_in "Password", :with => user.password
-    click_button "Sign in"
+    fill_in "user_email", :with => user.email
+    fill_in "user_password", :with => user.password
+    click_button I18n.t('devise.sign_in')
   end
 
   def login_admin(admin)
@@ -27,13 +27,13 @@ module RequestHelpers
 
   def register(username, password, options = {})
     visit new_user_registration_path
-    fill_in "Email", :with => username
-    fill_in "Password", :with => password
-    fill_in "Confirm password", :with => password
+    fill_in "user_email", :with => username
+    fill_in "user_password", :with => password
+    fill_in "user_password_confirmation", :with => password
     if options[:invite_code]
-      fill_in "Invite code", :with => options[:invite_code]
+      fill_in "user_invite_code", :with => options[:invite_code]
     end
-    click_button "Sign up"
+    click_button I18n.t('devise.sign_up')
   end
 
   def invite_code(options = {})
@@ -91,5 +91,7 @@ end
 #end
 
 RSpec.configure do |config|
-  config.include RequestHelpers, :type => :request
-end 
+  config.include RequestHelpers, :example_group => {
+    :file_path => config.escaped_path(%w[spec (requests|integration|features)])
+  }
+end

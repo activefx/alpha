@@ -55,7 +55,9 @@ Alpha::Application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
-  config.action_controller.asset_host = "//s3.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
+  unless ENV['FOG_DIRECTORY'].nil?
+    config.action_controller.asset_host = "//s3.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
+  end
 
   # Ensure configuration setup in initializers is available by setting
   # initialize_on_precompile to true
@@ -66,7 +68,8 @@ Alpha::Application.configure do
     'ie.css',
     'print.css',
     'screen.css',
-    'modernizr.js'
+    'modernizr.js',
+    'ember_dashboard.js'
   ]
 
   # Disable delivery errors, bad email addresses will be ignored

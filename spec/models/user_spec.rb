@@ -10,14 +10,26 @@ describe User do
   context "data model" do
 
     it { should have_field(:username).of_type(String) }
+    it { should have_field(:name).of_type(String) }
+    it { should have_field(:company).of_type(String) }
+    it { should have_field(:customer_id).of_type(String) }
+    it { should have_field(:last_4_digits).of_type(String) }
 
     it { should_not allow_mass_assignment_of(:id) }
     it { should allow_mass_assignment_of(:username) }
+    it { should allow_mass_assignment_of(:name) }
+    it { should allow_mass_assignment_of(:company) }
+    it { should allow_mass_assignment_of(:stripe_token) }
+    it { should_not allow_mass_assignment_of(:customer_id) }
+    it { should_not allow_mass_assignment_of(:last_4_digits) }
 
   end
 
   context "associations" do
+
     it { should embed_many(:api_keys) }
+    it { should have_and_belong_to_many(:roles) }
+
   end
 
   context "indexes" do
@@ -30,6 +42,7 @@ describe User do
 
   context "application specific devise configuration" do
 
+    # it { should be_async }
     it { should be_confirmable }
     it { should be_database_authenticatable }
     it { should be_lockable }
@@ -55,5 +68,24 @@ describe User do
     it { should_not allow_mass_assignment_of(:hourly_api_rate_limit) }
 
   end
+
+  # context "stripe", :vcr do
+  #   let(:user) { create(:user) }
+
+  #   it "allows for customer creation" do
+  #   end
+
+  #   context "with a customer" do
+
+  #     before { }
+
+  #     it "should be retrievable with customer_id" do
+  #       # user.customer_id =
+  #     end
+
+  #   end
+
+  # end
+
 
 end

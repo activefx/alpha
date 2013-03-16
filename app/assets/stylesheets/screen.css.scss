@@ -3,50 +3,11 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-body { padding-top: 60px; }
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-body.administration {
-  padding-bottom: 40px;
-}
-
-.page-header {
-  a.btn {
-    float: right;
-  }
-
-  a.btn + a.btn {
-    margin-right: 8px;
-  }
-}
-
-.administration .sidebar-nav {
-  padding: 9px 0;
-}
-
-.administration #filter-form {
-  margin: 0px;
-}
-
-.administration table {
-  width: 100%;
-}
-
-.administration td.links {
-  max-width: none;
-  .inline {
-    margin:0px;
-    li { display:inline-block; }
-  }
-}
-
-// Checkbox with right label
-
-.wrapped {
-  span {
-    padding-left: 4px;
-  }
-  input[type="checkbox"] {
-    margin-top: 2px;
-  }
-}
-
+@import "application";
+@import "site/sticky-footer";
+@import "site/theme";

@@ -18,3 +18,18 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
 
+FactoryGirl.define do
+
+  sequence :number do |n|
+    n
+  end
+
+  sequence :url do |n|
+    "http://example.com/#{n}"
+  end
+
+  sequence :title do |n|
+    "Title #{n}"
+  end
+
+end

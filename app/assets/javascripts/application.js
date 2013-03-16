@@ -24,9 +24,9 @@
 //= require bootstrap-collapse
 //= require bootstrap-carousel
 //= require bootstrap-typeahead
-//= require_tree .
+//= require bootstrap-initializer
+//= require credit_card
 
 $(document).ready(function(){
-
+  // JS code to executate after page load
 });
-

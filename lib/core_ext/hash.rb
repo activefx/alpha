@@ -1,4 +1,5 @@
 class Hash
+
   def recursive_find_by_key(key)
     # Create a stack of hashes to search through for the needle which
     # is initially this hash
@@ -19,5 +20,6 @@ class Hash
       end
     end
   end
+
 end
 

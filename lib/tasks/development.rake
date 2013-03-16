@@ -1,4 +1,5 @@
 namespace :development do
+
   desc "Rename Alpha application based on current folder name"
   task :install => :environment do
     replace_application_names

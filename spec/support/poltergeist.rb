@@ -1,3 +1,6 @@
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist # or :webkit
+
 # You can customize the way that Capybara sets up Poltegeist via the following code in your test setup:
 #
 #  Capybara.register_driver :poltergeist do |app|

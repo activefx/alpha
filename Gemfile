@@ -15,6 +15,8 @@ ruby '1.9.3'
 
 gem 'rails', git: 'git://github.com/rails/rails.git', branch: '3-2-stable'
 
+gem 'alpha-installer', path: '/Users/ms/Dropbox/rails/alpha-installer'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -73,10 +75,11 @@ gem 'mandrill'
 gem 'mandrill-rails'
 gem 'stripe'
 gem 'stripe_event'
-gem 'heroku-api'
+gem 'heroku-api', git: 'git://github.com/heroku/heroku.rb.git'
 gem 'fog', git: 'git://github.com/fog/fog.git'
 
 # Utilities
+gem 'stamp'
 gem 'rack-timeout'
 gem 'unicorn'
 gem 'foreman'
@@ -136,6 +139,7 @@ group :development, :test do
   gem 'rspec-instafail'
   gem 'mocha', require: false
   gem 'mongoid-rspec'
+  gem 'json_spec'
   gem 'rack-test', require: 'rack/test'
   gem 'fuubar'
   gem 'database_cleaner'

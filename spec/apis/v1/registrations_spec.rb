@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe '/api/users', :type => :api do
+describe '/api/users', :api do
 
   context "POST show" do
 

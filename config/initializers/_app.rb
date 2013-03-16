@@ -3,8 +3,15 @@
 # Determines the number of workers
 # Used for initializers and models that depend on at least
 # one background worker running
+
 HEROKU = Heroku::API.new api_key: ENV['HEROKU_API_KEY']
 HEROKU_WORKERS = HEROKU.get_app(ENV['HEROKU_APP_NAME']).try(:body).try(:[], 'workers').to_i
+
+if Rails.env.production?
+  BACKGROUND_WORKERS_AVAILABLE = HEROKU_WORKERS > 0
+else
+  BACKGROUND_WORKERS_AVAILABLE = false
+end
 
 require 'configatron'
 Configatron::Rails.init

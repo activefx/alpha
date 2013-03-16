@@ -48,7 +48,9 @@ def setup_environment
 
   require 'rspec/rails'
 
-  require 'mocha'
+  require 'active_attr/rspec'
+
+  require 'mocha/setup'
   require 'timecop'
 
   require 'webmock'
@@ -56,9 +58,10 @@ def setup_environment
   require 'vcr'
 
   require 'capybara/rspec'
-  require 'capybara/mechanize'
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist # or :webkit
+  # require 'capybara/mechanize'
+
+  # http://blog.remarkablelabs.com/2013/01/using-sidekiq-to-send-emails-asynchronously
+  require 'sidekiq/testing/inline'
 
   Rails.backtrace_cleaner.remove_silencers!
 
@@ -91,6 +94,10 @@ def each_run
     #FactoryGirl.reload
     ActionDispatch::Callbacks.after do
       unless FactoryGirl.factories.blank?
+        FactoryGirl.definition_file_paths = [
+          "#{Rails.root}/factories",
+          "#{Rails.root}/spec/factories"
+        ]
         FactoryGirl.factories.clear
         FactoryGirl.find_definitions
       end

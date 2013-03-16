@@ -14,7 +14,7 @@ shared_examples_for "a devise model" do
 
   # confirmable
 
-  if subject.call.confirmable?
+  if described_class.confirmable?
     it { should have_field(:confirmation_token).of_type(String) }
     it { should have_field(:confirmed_at).of_type(Time) }
     it { should have_field(:confirmation_sent_at).of_type(Time) }
@@ -28,7 +28,7 @@ shared_examples_for "a devise model" do
 
   # database_authenticatable
 
-  if subject.call.database_authenticatable?
+  if described_class.database_authenticatable?
     it { should have_field(:email).of_type(String).with_default_value_of("") }
     it { should have_field(:encrypted_password).of_type(String).with_default_value_of("") }
     it { should allow_mass_assignment_of(:email) }
@@ -42,12 +42,12 @@ shared_examples_for "a devise model" do
 
   # lockable
 
-  if subject.call.lockable?
-    if subject.call.class.lock_strategy == :failed_attempts
+  if described_class.lockable?
+    if described_class.lock_strategy == :failed_attempts
       it { should have_field(:failed_attempts).of_type(Integer).with_default_value_of(0) }
       it { should_not allow_mass_assignment_of(:failed_attempts) }
     end
-    if [:both, :email].include?(subject.call.class.unlock_strategy)
+    if [:both, :email].include?(described_class.unlock_strategy)
       it { should have_field(:unlock_token).of_type(String) }
       it { should_not allow_mass_assignment_of(:unlock_token) }
       it { should have_index_for(unlock_token: 1).with_options(:unique => true) }
@@ -59,7 +59,7 @@ shared_examples_for "a devise model" do
 
   # omniauthable
 
-  if subject.call.omniauthable?
+  if described_class.omniauthable?
     it { should have_many(:authentications).with_dependent(:destroy).with_autosave }
     it { should have_field(:created_by_provider).of_type(String) }
     it { should_not allow_mass_assignment_of(:created_by_provider) }
@@ -67,7 +67,7 @@ shared_examples_for "a devise model" do
 
   # recoverable
 
-  if subject.call.recoverable?
+  if described_class.recoverable?
     it { should have_field(:reset_password_token).of_type(String) }
     it { should_not allow_mass_assignment_of(:reset_password_token) }
     if Devise.reset_password_within.present?
@@ -79,7 +79,7 @@ shared_examples_for "a devise model" do
 
   # rememberable
 
-  if subject.call.rememberable?
+  if described_class.rememberable?
     it { should have_field(:remember_created_at).of_type(Time) }
     it { should_not allow_mass_assignment_of(:remember_created_at) }
     it { should allow_mass_assignment_of(:remember_me) }
@@ -87,7 +87,7 @@ shared_examples_for "a devise model" do
 
   # token_authenticatable
 
-  if subject.call.token_authenticatable?
+  if described_class.token_authenticatable?
     it { should have_field(:authentication_token).of_type(String) }
     it { should_not allow_mass_assignment_of(:authentication_token) }
     it { should have_index_for(authentication_token: 1).with_options(:unique => true) }
@@ -95,7 +95,7 @@ shared_examples_for "a devise model" do
 
   # trackable
 
-  if subject.call.trackable?
+  if described_class.trackable?
     it { should have_field(:sign_in_count).of_type(Integer).with_default_value_of(0) }
     it { should have_field(:current_sign_in_at).of_type(Time) }
     it { should have_field(:last_sign_in_at).of_type(Time) }
@@ -110,8 +110,8 @@ shared_examples_for "a devise model" do
 
   # validatable
 
-  if subject.call.validatable?
-    if subject.call.database_authenticatable?
+  if described_class.validatable?
+    if described_class.database_authenticatable?
       it { should validate_presence_of(:email) }
       it { should validate_uniqueness_of(:email) }
       it { should validate_format_of(:email) }

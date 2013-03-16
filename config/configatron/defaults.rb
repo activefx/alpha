@@ -7,8 +7,8 @@ require 'openid/store/filesystem'
 #
 #   configatron.file.storage = :s3
 
+  configatron.secret_token = ENV['SECRET_TOKEN']
   configatron.in_beta = false
-  configatron.background_workers_available = HEROKU_WORKERS > 0
   configatron.devise_mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
   configatron.omniauth.require_password = false
   configatron.omniauth.require_email = true
@@ -45,7 +45,7 @@ require 'openid/store/filesystem'
 
   configatron.mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
   configatron.mandrill.username = ENV["MANDRILL_USERNAME"]
-  configatron.mandrill.api_key = ENV['MANDRILL_API_KEY']
+  configatron.mandrill.api_key = ENV['MANDRILL_APIKEY']
 
   configatron.exceptional.api_key = ENV['EXCEPTIONAL_API_KEY']
 

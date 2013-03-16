@@ -3,10 +3,9 @@ module Api
     extend ActiveSupport::Concern
 
     included do
-      include AbstractController::AssetPaths
 
-      # Make url_for available
-      include ActionController::UrlFor
+      # Prevent asset directory path errors
+      include AbstractController::AssetPaths
 
       # Add support for helpers
       include ActionController::Helpers
@@ -42,19 +41,19 @@ module Api
       include ActionController::RequestForgeryProtection
 
       # Support for force_ssl
-      # include ActionController::ForceSSL
+      include ActionController::ForceSSL
 
       # Support for send_file and send_data
       # include ActionController::DataStreaming
 
-      # Authentication
+      # Authentication helpers
       include Devise::Controllers::Helpers
 
-      # Authorization
+      # Authorization helpers
       include CanCan::ControllerAdditions
 
       # Support for the instrumentation hooks defined by ActionController
-      # include ActionController::Instrumentation
+      include ActionController::Instrumentation
 
       # Support for rescue_from
       include ActionController::Rescue
@@ -66,9 +65,8 @@ module Api
 
       wrap_parameters format: [ :json ]
 
-      # protect_from_forgery
-
       ActiveSupport.run_load_hooks(:action_controller, self)
+
     end
 
   end

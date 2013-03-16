@@ -1,0 +1,50 @@
+body.administration {
+  padding-bottom: 40px;
+}
+
+#footer .notice {
+  margin: 20px 0;
+}
+
+.page-header a.btn {
+  float: right;
+}
+
+.page-header a.btn + a.btn {
+  margin-right: 8px;
+}
+
+.administration .sidebar-nav {
+  padding: 9px 0;
+}
+
+.administration #filter-form {
+  margin: 0px;
+}
+
+.administration table {
+  width: 100%;
+}
+
+.administration td.links {
+  max-width: none;
+}
+
+.administration td.links .inline {
+  margin: 0px;
+}
+
+.administration td.links .inline li {
+  display: inline-block;
+}
+
+// Checkbox with right label
+
+.wrapped .span {
+  padding-left: 4px;
+}
+
+.wrapped input[type="checkbox"] {
+  margin-top: 2px;
+}
+

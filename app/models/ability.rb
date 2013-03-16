@@ -26,6 +26,9 @@ class Ability
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     #
     user ||= User.new # guest user (not logged in)
-    can :manage, :all
+    can :view, :trial         if user.has_role? :trial
+    can :view, :starter       if user.has_role? :starter
+    can :view, :professional  if user.has_role? :professional
+    can :view, :enterprise    if user.has_role? :enterprise
   end
 end

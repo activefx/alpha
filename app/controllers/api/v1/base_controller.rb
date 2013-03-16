@@ -1,7 +1,13 @@
 module Api
   module V1
     class BaseController < ActionController::Metal
+
+      # Leaner controller stack for API requests
+      # See lib/api/controller_setup.rb for more information
+      #
       include Api::ControllerSetup
+
+      # protect_from_forgery
 
       attr_accessor :current_api_user
 
@@ -131,7 +137,7 @@ module Api
         user = User.where(authentication_token: auth_token).first
         if user && user.auth_token_expired?
           raise Api::Unauthorized,
-          'Your session has expired, please sign in again to reauthenticate.'
+            'Your session has expired, please sign in again to reauthenticate.'
         end
         user
       end
@@ -145,7 +151,7 @@ module Api
       end
 
       def rate_limit_api_requests!
-        # return unless Rails.env.production?
+        return if Rails.env.development?
         ENABLED_RATE_LIMITS.each{ |t| check_rate_limit(t) }
       end
 
@@ -208,21 +214,3 @@ module Api
   end
 end
 
-# TODO
-
-# JSON Optimization
-# http://brainspec.com/blog/2012/09/28/lightning-json-in-rails/
-
-# Other examples of base controllers
-# https://github.com/teambox/teambox/blob/dev/app/controllers/api_v1/api_controller.rb
-# https://github.com/spree/spree/blob/master/api/app/controllers/spree/api/v1/base_controller.rb
-# https://github.com/gitlabhq/gitlabhq/blob/master/lib/api/helpers.rb
-
-# Devise integration
-# http://jessewolgamott.com/blog/2012/01/19/the-one-with-a-json-api-login-using-devise/
-# http://code.dblock.org/grape-api-authentication-w-devise
-# https://gist.github.com/1255275
-# http://blog.joshsoftware.com/2011/12/23/designing-rails-api-using-rabl-and-devise/
-# https://github.com/domain7/devise_hash_token_authenticatable/blob/master/lib/devise_hash_token_authenticatable/model.rbS
-# http://zyphdesignco.com/blog/simple-auth-token-example-with-devise
-# http://www.strukturedkaos.com/2011/09/19/soup-to-nuts-token-authentication-for-android-using-rails-3-devise/

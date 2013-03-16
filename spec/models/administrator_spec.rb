@@ -21,6 +21,7 @@ describe Administrator do
 
   context "application specific devise configuration" do
 
+    # it { should be_async }
     it { should_not be_confirmable }
     it { should be_database_authenticatable }
     it { should be_lockable }
@@ -35,6 +36,4 @@ describe Administrator do
 
   end
 
-
 end
-

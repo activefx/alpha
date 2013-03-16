@@ -1,0 +1,18 @@
+.navbar.navbar-static-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{ "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to root_path, :class => "brand" do
+        %strong Alpha
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          %li= nav_link 'HOME', root_path
+          - if user_signed_in?
+            %li= nav_link "Account", edit_user_registration_path, :class => 'btn-header'
+            %li= nav_link t('devise.sign_out'), destroy_user_session_path, :class => 'btn-header'
+          - else
+            %li= nav_link t('devise.sign_up'), new_user_registration_path, :class => 'btn-header'
+            %li= nav_link t('devise.sign_in'), new_user_session_path, :class => 'btn-header'

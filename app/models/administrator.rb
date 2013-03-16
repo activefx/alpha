@@ -12,4 +12,7 @@ class Administrator
   include Extensions::Trackable
   include Extensions::Validatable
   include Extensions::DeviseHelpers
+  if BACKGROUND_WORKERS_AVAILABLE
+    include Extensions::Async
+  end
 end

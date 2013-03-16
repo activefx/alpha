@@ -1,38 +1,39 @@
 !!!
 %html
   %head
-    %meta{:charset => "utf-8"}
-    %title= content_for?(:title) ? yield(:title) : "Alpha"
+    %meta{ "http-equiv" => "Content-Type", "content" => "text/html; charset=utf-8" }
+    %meta{ "name" => "viewport", "content" => "width=device-width, initial-scale=1.0" }
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-
+    // Facebook open graph meta tags
+    %meta{:property => "og:title", :content => ""}
+    %meta{:property => "og:description", :content => ""}
+    %meta{:property => "og:type", :content => ""}
+    %meta{:property => "og:url", :content => ""}
+    %meta{:property => "og:image", :content => ""}
+    %title= content_for?(:title) ? yield(:title) : "Alpha"
+    = yield :stripe
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       %script{ :src => "http://html5shim.googlecode.com/svn/trunk/html5.js" }
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag    "screen",      media: "screen, projection"
+    = stylesheet_link_tag    "print",       media: "print"
+    /[if IE]
+      = stylesheet_link_tag  "ie",          media: "screen, projection"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield :head
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          = link_to "Alpha", "#", :class => "brand"
-          %ul.nav
-            %li.active
-              %a{:href => "#"} Home
-            %li
-              %a{:href => "#about"} About
-            %li
-              %a{:href => "#contact"} Contact
-          %ul.nav.pull-right
-            = login_status
-    .container
-      .row
-        .span12
-          = flash_messages
-      = yield
-      %hr
-      %footer
-        %p= "&copy; #{Time.now.year}".html_safe
+    #wrap
+      = render "layouts/partials/navigation"
+      .container
+        .row
+          .span12
+            = flash_messages
+        = yield
+        #push
+    = render "layouts/partials/footer"
+
+
+
 

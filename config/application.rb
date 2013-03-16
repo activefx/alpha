@@ -61,6 +61,10 @@ module Alpha
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
+    # Ember.js specific variant in your application config in order for sprockets to locate
+    # ember's assets
+    config.ember.variant = :development
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

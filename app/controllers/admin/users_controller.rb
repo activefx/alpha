@@ -2,7 +2,6 @@ module Admin
   class UsersController < Admin::BaseController
 
     def index
-      #@users = User.page(params[:page]).per(10)
       @users = User.search(params[:search], params[:page])
     end
 

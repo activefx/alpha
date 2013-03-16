@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Alpha::Application.routes.draw do
 
   devise_for :users, :controllers => { :confirmations => 'users/confirmations',
@@ -9,21 +11,31 @@ Alpha::Application.routes.draw do
 
   devise_for :administrators
 
+  # Administrator constraint
+  administrator = lambda do |request|
+    request.env['warden'].authenticate!({ :scope => :administrator })
+  end
+
   namespace :users do
+    resources :dashboard, :as => 'dashboard'
     resources :authentications
   end
 
   namespace :admin do
     resources :dashboard, :as => 'dashboard'
-    resources :beta_signups
     resources :administrators
     resources :users
   end
 
+  match '/coming_soon' => 'welcome#coming_soon', :as => :coming_soon
+
   match '/user' => 'welcome#index', :as => :user_root
   match 'admin/dashboard' => 'admin/dashboard#index', :as => :administrator_root
 
-  resources :beta_signups
+  # Sidekiq admin interface
+  constraints administrator do
+    mount Sidekiq::Web, at: 'admin/sidekiq'
+  end
 
   namespace 'api', default: { format: 'json' } do
 
@@ -99,7 +111,11 @@ Alpha::Application.routes.draw do
 
   # You can have the root of your site routed with 'root'
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  if configatron.in_beta
+    root :to => 'welcome#soon'
+  else
+    root :to => 'welcome#index'
+  end
 
   # See how all your routes lay out with 'rake routes'
 

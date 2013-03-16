@@ -13,6 +13,6 @@
       = f.input :invite_code, :required => true
 
   .form-actions
-    = f.button :submit, "Sign up", :class => 'btn-primary'
+    = f.button :submit, t('devise.sign_up'), :class => 'btn-primary'
 
 = render :partial => "devise/shared/links"

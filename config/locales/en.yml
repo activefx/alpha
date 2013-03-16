@@ -7,7 +7,8 @@ en:
   devise:
     sign_in: 'Sign In'
     sign_out: 'Sign Out'
+    sign_up: 'Sign Up'
     registrations:
       finish: 'Please complete your registration.'
     omniauth_callbacks:
-      added: 'Successfully enabled %{kind} authentication.' 
+      added: 'Successfully enabled %{kind} authentication.'

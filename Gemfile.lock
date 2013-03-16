@@ -11,9 +11,9 @@ GIT
 
 GIT
   remote: git://github.com/emberjs/ember-rails.git
-  revision: 247b9f43e30cca6f317d5218391c8b7a6d55e518
+  revision: acdbe5660540d4312b7a5b4b2a648085b90daf5e
   specs:
-    ember-rails (0.10.1)
+    ember-rails (0.11.1)
       active_model_serializers
       barber (>= 0.4.1)
       ember-data-source
@@ -23,11 +23,11 @@ GIT
 
 GIT
   remote: git://github.com/fog/fog.git
-  revision: a33c66493775bb918d2a96fa8e1c4e4240fefe94
+  revision: 66ecacfaf9c95a64c69ac6ef13ff535a98ff237c
   specs:
-    fog (1.9.0)
+    fog (1.10.0)
       builder
-      excon (~> 0.14)
+      excon (~> 0.20)
       formatador (~> 0.2.0)
       mime-types
       multi_json (~> 1.0)
@@ -37,15 +37,22 @@ GIT
       ruby-hmac
 
 GIT
-  remote: git://github.com/rails-api/active_model_serializers.git
-  revision: 0114e492388ff84defcd1afbbb315e547849cb96
+  remote: git://github.com/heroku/heroku.rb.git
+  revision: 5d0d7fe05e5786fdada78561552ae89b8d18bd85
   specs:
-    active_model_serializers (0.5.2)
+    heroku-api (0.3.8)
+      excon (~> 0.20.0)
+
+GIT
+  remote: git://github.com/rails-api/active_model_serializers.git
+  revision: 9fef47db4dd492e39909c0a7bc43becfea13d57b
+  specs:
+    active_model_serializers (0.7.0)
       activemodel (>= 3.0)
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 641a27d47baf4804e89d5a99ee6d843a75d868e6
+  revision: 1c2717d3f5a3ce0ea97f832d1d008e053ad47acd
   branch: 3-2-stable
   specs:
     actionmailer (3.2.12)
@@ -100,6 +107,13 @@ GIT
       actionpack (>= 3)
       railties (>= 3)
 
+PATH
+  remote: ../alpha-installer
+  specs:
+    alpha-installer (0.0.1.alpha)
+      fog
+      heroku-api
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -120,7 +134,7 @@ GEM
       execjs
       handlebars-source
     bcrypt-ruby (3.0.1)
-    better_errors (0.7.0)
+    better_errors (0.7.2)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
@@ -137,7 +151,7 @@ GEM
     celluloid (0.12.4)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
-    childprocess (0.3.8)
+    childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.1)
     chunky_png (1.2.7)
@@ -148,7 +162,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.5.0)
+    coffee-script-source (1.6.1)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -171,7 +185,7 @@ GEM
     devise-async (0.6.0)
       devise (>= 2.2)
     diff-lcs (1.2.1)
-    em-websocket (0.4.0)
+    em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
     ember-data-source (0.0.5)
@@ -182,19 +196,19 @@ GEM
     ethon (0.5.3)
       ffi (~> 1.0.11)
       mime-types (~> 1.18)
-    eventmachine (1.0.1)
+    eventmachine (1.0.3)
     exceptional (2.0.33)
       rack
-    excon (0.16.10)
+    excon (0.20.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    facter (1.6.17)
+    facter (1.6.18)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    fakeredis (0.4.1)
+    fakeredis (0.4.2)
       redis (~> 3.0.0)
     faraday (0.8.6)
       multipart-post (~> 1.1)
@@ -205,7 +219,7 @@ GEM
     ffi (1.0.11)
     font-awesome-rails (3.0.2.0)
       railties (>= 3.1)
-    foreman (0.61.0)
+    foreman (0.62.0)
       thor (>= 0.13.6)
     formatador (0.2.4)
     fssm (0.2.10)
@@ -222,10 +236,10 @@ GEM
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
-    guard-coffeescript (1.2.1)
+    guard-coffeescript (1.3.0)
       coffee-script (>= 2.2.0)
       guard (>= 1.1.0)
-    guard-jasmine (1.13.0)
+    guard-jasmine (1.13.2)
       childprocess
       guard (>= 1.1.0)
       multi_json
@@ -238,10 +252,10 @@ GEM
       ffi (~> 1.0.9)
       guard (>= 0.4.2)
       spoon (~> 0.0.1)
-    guard-rspec (2.4.1)
+    guard-rspec (2.5.1)
       guard (>= 1.1)
       rspec (~> 2.11)
-    guard-spork (1.4.2)
+    guard-spork (1.5.0)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
@@ -254,8 +268,6 @@ GEM
       railties (>= 3.1, < 4.1)
     handlebars-source (1.0.0.rc3)
     hashie (1.2.0)
-    heroku-api (0.3.8)
-      excon (~> 0.16.10)
     hike (1.2.1)
     hominid (3.0.5)
     hpricot (0.8.6)
@@ -273,8 +285,11 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
-    jwt (0.1.5)
-      multi_json (>= 1.0)
+    json_spec (1.1.0)
+      multi_json (~> 1.0)
+      rspec (~> 2.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -304,7 +319,7 @@ GEM
     metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.21)
-    mocha (0.13.2)
+    mocha (0.13.3)
       metaclass (~> 0.0.1)
     modernizr-rails (2.6.2)
     mongoid (3.0.23)
@@ -316,13 +331,13 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.9)
-    moped (1.4.2)
-    multi_json (1.6.1)
+    moped (1.4.3)
+    multi_json (1.7.0)
     multipart-post (1.2.0)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
-    net-ssh (2.6.5)
-    newrelic_rpm (3.5.7.59)
+    net-ssh (2.6.6)
+    newrelic_rpm (3.5.8.72)
     nokogiri (1.5.6)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -377,7 +392,7 @@ GEM
     rack-openid (1.3.1)
       rack (>= 1.1.0)
       ruby-openid (>= 2.1.8)
-    rack-protection (1.3.2)
+    rack-protection (1.5.0)
       rack
     rack-ssl (1.3.3)
       rack
@@ -394,7 +409,7 @@ GEM
     rb-readline (0.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.2)
+    redis (3.0.3)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
     ref (1.0.2)
@@ -405,7 +420,7 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    rspec-core (2.13.0)
+    rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-instafail (0.2.4)
@@ -424,12 +439,12 @@ GEM
     ruby_parser (3.1.1)
       sexp_processor (~> 4.1)
     rubyzip (0.9.9)
-    sass (3.2.6)
+    sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.30.0)
+    selenium-webdriver (2.31.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
       rubyzip
@@ -438,7 +453,7 @@ GEM
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    sidekiq (2.7.5)
+    sidekiq (2.8.0)
       celluloid (~> 0.12.0)
       connection_pool (~> 1.0)
       multi_json (~> 1)
@@ -451,14 +466,14 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    sinatra (1.3.5)
+    sinatra (1.3.6)
       rack (~> 1.4)
       rack-protection (~> 1.3)
       tilt (~> 1.3, >= 1.3.3)
     slim (1.3.6)
       temple (~> 0.5.5)
       tilt (~> 1.3.3)
-    slop (3.4.3)
+    slop (3.4.4)
     spoon (0.0.1)
     spork (1.0.0rc3)
     spork-rails (3.2.1)
@@ -469,6 +484,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    stamp (0.5.0)
     stripe (1.7.11)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
@@ -481,15 +497,15 @@ GEM
       libv8 (~> 3.11.8.12)
       ref
     thor (0.17.0)
-    tilt (1.3.3)
-    timecop (0.5.9.2)
+    tilt (1.3.5)
+    timecop (0.6.1)
     timers (1.1.0)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
     typhoeus (0.5.3)
       ethon (~> 0.5.3)
-    tzinfo (0.3.35)
+    tzinfo (0.3.37)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -500,7 +516,7 @@ GEM
     vcr (2.4.0)
     warden (1.2.1)
       rack (>= 1.0)
-    webmock (1.9.3)
+    webmock (1.11.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     websocket (1.0.7)
@@ -521,6 +537,7 @@ PLATFORMS
 DEPENDENCIES
   active_attr
   active_model_serializers!
+  alpha-installer!
   asset_sync
   better_errors
   binding_of_caller
@@ -554,12 +571,13 @@ DEPENDENCIES
   guard-spork
   haml
   haml-rails
-  heroku-api
+  heroku-api!
   hominid
   hpricot
   jasmine-sinon-rails
   jasminerice
   jquery-rails
+  json_spec
   kaminari
   kiqstand
   launchy
@@ -610,6 +628,7 @@ DEPENDENCIES
   sinatra
   slim
   spork-rails
+  stamp
   stripe
   stripe_event
   therubyracer

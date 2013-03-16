@@ -114,6 +114,14 @@ module Extensions
       self.created_by_provider = provider
     end
 
+    # Override to allow Omniauth signups without requiring an email
+    #
+    def send_on_create_confirmation_instructions
+      if email_required?
+        send_devise_notification(:confirmation_instructions)
+      end
+    end
+
     protected
 
     def auto_confirm!
