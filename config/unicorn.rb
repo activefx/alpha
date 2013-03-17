@@ -74,7 +74,7 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
 
-  if defined?(Redis)
+  unless configatron.redis.url.nil?
     $redis.quit
     Rails.logger.info('Disconnected from Redis')
   end
@@ -123,13 +123,13 @@ after_fork do |server, worker|
 
   # When using Unicorn, you should configure the Sidekiq client within
   # a block that runs after the child process is forked
-  if defined?(Sidekiq)
+  if defined?(Sidekiq) && !configatron.redis.url.nil?
     Sidekiq.configure_client do |config|
       config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 1 }
     end
   end
 
-  if defined?(Redis)
+  unless configatron.redis.url.nil?
     redis_uri = URI.parse(configatron.redis.url)
     $redis = Redis.new(:host => redis_uri.host, :port => redis_uri.port, :password => redis_uri.password)
     Rails.logger.info('Connected to Redis')
