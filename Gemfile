@@ -77,8 +77,11 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'heroku-api', git: 'git://github.com/heroku/heroku.rb.git'
 gem 'fog', git: 'git://github.com/fog/fog.git'
+gem 'kahana', git: 'git://github.com/activefx/kahana.git' #path: '/Users/ms/Dropbox/rails/kahana'
+gem 'em-http-request', :git => 'git://github.com/igrigorik/em-http-request.git'
 
 # Utilities
+gem 'hashie'
 gem 'stamp'
 gem 'rack-timeout'
 gem 'unicorn'
