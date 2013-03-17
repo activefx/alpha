@@ -121,10 +121,10 @@ In order to do any javascript testing with [guard-jasmine](https://github.com/ne
 git clone git://github.com:activefx/alpha.git <new_application_name>
 ```
 
-2) From the new application directory, create a named gemset and .rvmrc file to keep your project dependencies seperate and self-containted. You should use your project name instead of alpha after the @ symbol.
+2) From the new application directory, create a named gemset and .rvmrc file to keep your project dependencies seperate and self-containted. 
 
 ```
-rvm use 1.9.3-p392@alpha --create
+rvm use 1.9.3-p392@<new_application_name> --create
 ```
 
 3) Install all the required gems by running bundler
@@ -142,7 +142,8 @@ rake development:install
 5) Commit your progress to git. You know have a starting point to begin building your application.
 
 ```
-git commit -a -m 'installed alpha'
+git add .
+git commit -m 'installed alpha'
 ```
 
 ## Development
