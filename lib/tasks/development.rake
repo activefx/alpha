@@ -41,6 +41,8 @@ namespace :development do
   def application_name_files
     Dir["#{Rails.root}/config/**/*.rb"] +
     Dir["#{Rails.root}/app/views/layouts/*.haml"] +
+    Dir["#{Rails.root}/app/views/layouts/partials/*.haml"] +
+    Dir["#{Rails.root}/app/views/welcome/*.haml"] +
     [ "#{Rails.root}/Rakefile",
       "#{Rails.root}/config.ru",
       "#{Rails.root}/config/mongoid.yml",
