@@ -29,8 +29,8 @@ require 'openid/store/filesystem'
   configatron.linkedin.app_id = ENV['LINKED_IN_APP_ID']
   configatron.linkedin.app_key = ENV['LINKED_IN_APP_SECRET']
   # Facebook omniauth config
-  configatron.facebook.app_id = ENV['FACEBOOK_APP_ID']
-  configatron.facebook.app_key = ENV['FACEBOOK_APP_KEY']
+  configatron.facebook.app_id = ENV['LOCAL_FACEBOOK_APP_ID']
+  configatron.facebook.app_key = ENV['LOCAL_FACEBOOK_APP_KEY']
   # Twitter omniauth config
   configatron.twitter.app_id = ENV['TWITTER_APP_ID']
   configatron.twitter.app_key = ENV['TWITTER_APP_SECRET']

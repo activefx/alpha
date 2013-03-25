@@ -12,3 +12,7 @@
 
   # Redis
   configatron.redis.url = ENV['OPENREDIS_URL']
+
+  # Facebook omniauth config
+  configatron.facebook.app_id = ENV['FACEBOOK_APP_ID']
+  configatron.facebook.app_key = ENV['FACEBOOK_APP_KEY']

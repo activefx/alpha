@@ -118,7 +118,7 @@ In order to do any javascript testing with [guard-jasmine](https://github.com/ne
 1) Clone the repository and be sure to supply a name for the new application (using lowercase letters only and underscores if needed)
 
 ```
-git clone git://github.com:activefx/alpha.git <new_application_name>
+git clone git://github.com/activefx/alpha.git <new_application_name>
 ```
 
 2) From the new application directory, create a named gemset and .rvmrc file to keep your project dependencies seperate and self-containted. 
@@ -227,6 +227,19 @@ bundle exec guard -g js
 ## Deploying to Heroku
 
 Alpha uses [heroku-api](https://github.com/heroku/heroku.rb) and [paratrooper](https://github.com/mattpolito/paratrooper) to provision and deploy a new Heroku app.
+
+```
+heroku accounts:set <account_name>
+```
+
+```
+heroku labs:enable user-env-compile -a myapp
+```
+
+```
+heroku config:push --overwrite --interactive
+```
+
 
 ## Configuring Your Production Environment
 

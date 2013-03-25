@@ -1,20 +1,20 @@
 # Be sure to run heroku labs:enable user-env-compile -a myapp
 # to allow for ENV usage variable during rake assets:precompile
-def asset_sync_available?
-  defined?(AssetSync)
-end
+# def asset_sync_available?
+#   defined?(AssetSync)
+# end
 
-def asset_sync_keys_defined?
-  !configatron.aws.access_key_id.nil? &&
-  !configatron.aws.secret_access_key.nil? &&
-  !configatron.aws.asset_bucket?
-end
+# def asset_sync_keys_defined?
+#   !configatron.aws.access_key_id.nil? &&
+#   !configatron.aws.secret_access_key.nil? &&
+#   !configatron.aws.asset_bucket?
+# end
 
-def use_asset_sync?
-  asset_sync_available? && asset_sync_keys_defined?
-end
+# def use_asset_sync?
+#   asset_sync_available? && asset_sync_keys_defined?
+# end
 
-if use_asset_sync?
+if defined?(AssetSync)
 
   AssetSync.configure do |config|
     config.fog_provider = 'AWS'
