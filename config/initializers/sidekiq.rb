@@ -5,7 +5,7 @@ unless configatron.redis.url.nil?
 
   Sidekiq.configure_server do |config|
     config.poll_interval = 15
-    config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 27 }
+    config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 9 }
     config.server_middleware do |chain|
       chain.remove Sidekiq::Middleware::Server::ActiveRecord
       chain.add Kiqstand::Middleware
