@@ -1,4 +1,9 @@
 %footer#footer
   .container
     .notice
-      %p= "&copy; #{Time.now.year}".html_safe
+      %p
+        = "&copy; #{Time.now.year}".html_safe
+        |
+        = link_to "Privacy Policy", privacy_policy_path
+        |
+        = link_to "Terms of Service", terms_of_service_path

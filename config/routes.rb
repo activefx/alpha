@@ -27,7 +27,10 @@ Alpha::Application.routes.draw do
     resources :users
   end
 
-  match '/coming_soon' => 'welcome#coming_soon', :as => :coming_soon
+  match '/coming-soon' => 'welcome#coming_soon', :as => :coming_soon
+  match '/about' => 'welcome#about', :as => :about
+  match '/privacy-policy' => 'welcome#privacy_policy', :as => :privacy_policy
+  match '/terms-of-service' => 'welcome#terms_of_service', :as => :terms_of_service
 
   match '/user' => 'welcome#index', :as => :user_root
   match 'admin/dashboard' => 'admin/dashboard#index', :as => :administrator_root
