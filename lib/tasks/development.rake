@@ -46,7 +46,8 @@ namespace :development do
     [ "#{Rails.root}/Rakefile",
       "#{Rails.root}/config.ru",
       "#{Rails.root}/config/mongoid.yml",
-      "#{Rails.root}/lib/api_constraints.rb" ]
+      "#{Rails.root}/lib/api_constraints.rb",
+      "#{Rails.root}/config/configatron/defaults.rb" ]
   end
 end
 
