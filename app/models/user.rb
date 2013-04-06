@@ -21,9 +21,20 @@ class User
   field :username,                    type: String
   field :name,                        type: String
   field :company,                     type: String
+
+  # Facebook Info
+  field :image_url,                   type: String
+  field :first_name,                  type: String
+  field :last_name,                   type: String
+  field :facebook_identifier,         type: String
+  field :facebook_link,               type: String
+  field :facebook_location_name,      type: String
+  field :facebook_location_id,        type: String
+
   # Stripe
   field :customer_id,                 type: String
   field :last_4_digits,               type: String
+
   # API
   field :monthly_api_rate_limit,      type: Integer
   field :daily_api_rate_limit,        type: Integer

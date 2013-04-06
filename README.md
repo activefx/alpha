@@ -248,11 +248,11 @@ heroku accounts:set <account_name>
 ```
 
 ```
-heroku labs:enable user-env-compile -a myapp
+heroku labs:enable user-env-compile -a <new_application_name>
 ```
 
 ```
-heroku config:push --overwrite --interactive
+heroku config:push --overwrite -a <new_application_name>
 ```
 
 
