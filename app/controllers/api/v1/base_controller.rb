@@ -7,6 +7,10 @@ module Api
       #
       include Api::ControllerSetup
 
+      # Add NewRelic instrumentation for ActionController::Metal
+      #
+      include ::NewRelic::Agent::Instrumentation::ControllerInstrumentation
+
       # protect_from_forgery
 
       attr_accessor :current_api_user
@@ -46,13 +50,23 @@ module Api
 
       rescue_from *API_ERROR_CODES.keys, :with => :api_error
 
-      [:index, :show, :new, :create, :edit, :update, :delete ].each do |method_name|
+      [ :index, :show, :new, :create, :edit, :update, :delete ].each do |method_name|
         self.class_eval do
           define_method :"#{method_name}" do
             raise Api::NotImplemented
           end
         end
       end
+
+      # Register controller actions for NewRelic to monitor
+      #
+      add_transaction_tracer :index
+      add_transaction_tracer :show
+      add_transaction_tracer :new
+      add_transaction_tracer :create
+      add_transaction_tracer :edit
+      add_transaction_tracer :update
+      add_transaction_tracer :delete
 
       private
 
