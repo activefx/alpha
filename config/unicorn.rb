@@ -18,7 +18,7 @@ rails_env = ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'production'
 if rails_env == 'development'
   worker_processes 1
 else
-  worker_processes 3
+  worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 end
 
 logger Logger.new($stdout)

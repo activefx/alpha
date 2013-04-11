@@ -1,19 +1,9 @@
+# For optimal performance, host your assets behind a CDN to free
+# up your Heroku web dynos to serve only dynamic content.
+#
 # Be sure to run heroku labs:enable user-env-compile -a myapp
 # to allow for ENV usage variable during rake assets:precompile
-# def asset_sync_available?
-#   defined?(AssetSync)
-# end
-
-# def asset_sync_keys_defined?
-#   !configatron.aws.access_key_id.nil? &&
-#   !configatron.aws.secret_access_key.nil? &&
-#   !configatron.aws.asset_bucket?
-# end
-
-# def use_asset_sync?
-#   asset_sync_available? && asset_sync_keys_defined?
-# end
-
+#
 if defined?(AssetSync)
 
   AssetSync.configure do |config|
