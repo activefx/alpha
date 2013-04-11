@@ -46,7 +46,7 @@ module Api
 
       rescue_from *API_ERROR_CODES.keys, :with => :api_error
 
-      [:index, :show, :new, :create, :edit, :update, :delete, :routing ].each do |method_name|
+      [:index, :show, :new, :create, :edit, :update, :delete ].each do |method_name|
         self.class_eval do
           define_method :"#{method_name}" do
             raise Api::NotImplemented

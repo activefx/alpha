@@ -27,13 +27,13 @@ Alpha::Application.routes.draw do
     resources :users
   end
 
-  match '/coming-soon' => 'welcome#coming_soon', :as => :coming_soon
-  match '/about' => 'welcome#about', :as => :about
-  match '/privacy-policy' => 'welcome#privacy_policy', :as => :privacy_policy
-  match '/terms-of-service' => 'welcome#terms_of_service', :as => :terms_of_service
+  match '/coming-soon' => 'welcome#coming_soon', :as => :coming_soon, :via => :get
+  match '/about' => 'welcome#about', :as => :about, :via => :get
+  match '/privacy-policy' => 'welcome#privacy_policy', :as => :privacy_policy, :via => :get
+  match '/terms-of-service' => 'welcome#terms_of_service', :as => :terms_of_service, :via => :get
 
-  match '/user' => 'welcome#index', :as => :user_root
-  match 'admin/dashboard' => 'admin/dashboard#index', :as => :administrator_root
+  match '/user' => 'welcome#index', :as => :user_root, :via => :get
+  match 'admin/dashboard' => 'admin/dashboard#index', :as => :administrator_root, :via => :get
 
   # Sidekiq admin interface
   constraints administrator do
@@ -58,8 +58,6 @@ Alpha::Application.routes.draw do
       # resources :sessions, :only => [ :create, :destroy ]
       devise_for :users, :only => [ :registrations, :sessions ]
       resource :account, :only => [ :show ]
-
-      match '*a', :to => 'base#routing'
 
     end
 
