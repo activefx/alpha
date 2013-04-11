@@ -255,6 +255,10 @@ heroku labs:enable user-env-compile -a <new_application_name>
 heroku config:push --overwrite -a <new_application_name>
 ```
 
+```
+heroku labs:enable http-request-id -a <new_application_name>
+```
+
 Optionally add [Log2Viz](https://blog.heroku.com/archives/2013/3/19/log2viz) (recommended).
 
 ## Configuring Your Production Environment
