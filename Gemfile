@@ -86,6 +86,7 @@ gem 'hashie'
 gem 'stamp'
 gem 'rack-timeout'
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 gem 'foreman'
 gem 'whenever', require: false
 gem 'exceptional'

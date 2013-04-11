@@ -535,6 +535,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.1)
+      unicorn (~> 4)
     vcr (2.4.0)
     warden (1.2.1)
       rack (>= 1.0)
@@ -662,6 +664,7 @@ DEPENDENCIES
   typhoeus
   uglifier
   unicorn
+  unicorn-worker-killer
   vcr (~> 2.0)
   webmock (~> 1.9)
   whenever
