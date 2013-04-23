@@ -1,4 +1,4 @@
-Rabl.configure do |config|
+RablRails.configure do |config|
   # Commented as these are defaults
   # config.cache_all_output = false
   # config.cache_sources = Rails.env != 'development' # Defaults to false

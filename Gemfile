@@ -60,7 +60,7 @@ gem 'slim'
 
 # JSON
 gem 'multi_json'
-gem 'rabl'
+gem 'rabl-rails'
 gem 'yajl-ruby', require: 'yajl'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
