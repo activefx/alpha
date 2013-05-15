@@ -1,4 +1,4 @@
-module LogRequestID
+class LogRequestID
   def initialize(app); @app = app; end
 
   def call(env)
