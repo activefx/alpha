@@ -1,3 +1,5 @@
+# See http://manuel.manuelles.nl/sidekiq-heroku-redis-calc/
+
 unless configatron.redis.url.nil?
 
   require 'sidekiq'
@@ -12,9 +14,12 @@ unless configatron.redis.url.nil?
     end
   end
 
-  Sidekiq.configure_client do |config|
-    config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 1 }
-  end
+  # This goes in unicorn.rb
+  # https://github.com/mperham/sidekiq/issues/120
+  #
+  # Sidekiq.configure_client do |config|
+  #   config.redis = { :url => configatron.redis.url, :namespace => 'sidekiq', :size => 3 }
+  # end
 
   redis_uri = URI.parse(configatron.redis.url)
   # Create a global variable to access the Redis DB
