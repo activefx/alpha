@@ -350,7 +350,7 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.9)
-    moped (1.4.3)
+    moped (1.5.3)
     multi_json (1.7.0)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
