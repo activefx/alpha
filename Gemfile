@@ -34,7 +34,7 @@ gem 'mongoid', '~> 3.0.0'
 
 # Authentication / Authorization
 gem 'devise', '~> 2.2.3'
-gem 'omniauth', '~> 1.1.3'
+gem 'omniauth', '~> 1.4.2'
 gem 'omniauth-oauth', require: false
 gem 'omniauth-oauth2', require: false
 gem 'omniauth-openid', require: false
