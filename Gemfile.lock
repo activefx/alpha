@@ -66,13 +66,6 @@ GIT
       http_parser.rb (>= 0.5.3)
 
 GIT
-  remote: git://github.com/rails-api/active_model_serializers.git
-  revision: 9fef47db4dd492e39909c0a7bc43becfea13d57b
-  specs:
-    active_model_serializers (0.7.0)
-      activemodel (>= 3.0)
-
-GIT
   remote: git://github.com/rails/rails.git
   revision: 1c2717d3f5a3ce0ea97f832d1d008e053ad47acd
   branch: 3-2-stable
@@ -128,6 +121,12 @@ GIT
     twitter_bootstrap_form_for (2.0.1.0.rc1)
       actionpack (>= 3)
       railties (>= 3)
+
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: beeb216fab286537389788349c513264325393ef
+  specs:
+    active_model_serializers (1.0.0.pre.dev)
 
 GEM
   remote: https://rubygems.org/
@@ -209,8 +208,7 @@ GEM
       http_parser.rb (~> 0.5.3)
     ember-data-source (0.0.5)
       ember-source
-    ember-source (0.0.1)
-      handlebars-source (>= 1.0.0.rc3, < 1.0.0.rc4)
+    ember-source (2.18.2)
     erubis (2.7.0)
     ethon (0.5.3)
       ffi (~> 1.0.11)
@@ -285,7 +283,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
-    handlebars-source (1.0.0.rc3)
+    handlebars-source (4.7.7)
     hashie (1.2.0)
     hike (1.2.1)
     hominid (3.0.5)
